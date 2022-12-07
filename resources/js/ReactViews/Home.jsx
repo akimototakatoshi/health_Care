@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./modules/home.css";
+// import "./modules/home.css";
 import ReactApexChart from "react-apexcharts";
 
 const number = 2030;
@@ -55,25 +55,13 @@ const Home = () => {
             {/* <Doughnut data={data} width={1349} height={559}/> */}
             <ul className="na">
                 <li>
-                    <Link to="eated-list">
-                        <span class="material-symbols-outlined">
-                            restaurant
-                        </span>
-                    </Link>
+                    <span class="material-symbols-outlined">restaurant</span>
                 </li>
                 <li>
-                    <Link to="/shop-recommend">
-                        <span class="material-symbols-outlined">
-                            storefront
-                        </span>
-                    </Link>
+                    <span class="material-symbols-outlined">storefront</span>
                 </li>
                 <li>
-                    <Link to="/graph">
-                        <span class="material-symbols-outlined">
-                            show_chart
-                        </span>
-                    </Link>
+                    <span class="material-symbols-outlined">show_chart</span>
                 </li>
             </ul>
         </div>
