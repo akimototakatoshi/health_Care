@@ -40,6 +40,78 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="age" class="col-md-4 col-form-label text-md-end">{{ __('Age') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="age" class="form-select">
+                                    <option value="">選択してください</option> 
+                                    <option value="1" {{ old('age') == 1 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">~19歳</option> 
+                                    <option value="2" {{ old('age') == 2 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">20歳~29歳</option> 
+                                    <option value="3" {{ old('age') == 3 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">30歳~39歳</option> 
+                                    <option value="4" {{ old('age') == 4 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">40歳~49歳</option> 
+                                    <option value="5" {{ old('age') == 5 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">50歳~59歳</option> 
+                                    <option value="6" {{ old('age') == 6 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">60歳~</option> 
+                                </select>
+
+                                @error('age')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-md-4 col-form-label text-md-end">{{ __('Gender') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="radio" id="male" name="gender" value="0" {{ old('gender') == 0 ? 'checked' : '' }}  class="form-check-input @error('gender') is-invalid @enderror">
+                                <label class="form-check-label" for="male">
+                                    男性
+                                </label>
+                                
+                                <input type="radio" id="female" name="gender" value="1" {{ old('gender') == 1 ? 'checked' : '' }}  class="form-check-input @error('gender') is-invalid @enderror">
+                                <label class="form-check-label" for="female">
+                                    女性
+                                </label>
+
+                                @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="height" class="col-md-4 col-form-label text-md-end">{{ __('Height') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="height" type="text" class="form-control @error('height') is-invalid @enderror" name="height" value="{{ old('height') }}" required>
+
+                                @error('height')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="weight" class="col-md-4 col-form-label text-md-end">{{ __('Weight') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="weight" type="weight" class="form-control @error('weight') is-invalid @enderror" name="weight" value="{{ old('weight') }}" required>
+
+                                @error('weight')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
