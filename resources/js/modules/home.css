@@ -1,19 +1,22 @@
-/* * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "M PLUS Rounded 1c", sans-serif;
     
-} */
+}
 .na {
 
-    display:inline-flex;
-    
+    display:flex;
+    justify-content: space-around;
+    margin-top: 50px;
+
 }
 
 .na li {
     list-style: none;
     justify-content: space-between;
+
 }
 
 .material-symbols-outlined {
@@ -37,3 +40,9 @@
     width: 95vh;
     margin: auto;
    } 
+
+   .chart-style{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+   }

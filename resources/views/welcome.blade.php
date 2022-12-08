@@ -18,12 +18,12 @@
 
 <body>
     @extends('layouts.app')
-
+    
     @section('content')
     <div id="example"></div>
-    @endsection
-   
     <script src="{{ mix('js/app.js') }}"></script>
+    @endsection
+    
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "./modules/home.css";
+import "../modules/home.css";
 import ReactApexChart from "react-apexcharts";
 
 const number = 2030;
@@ -12,11 +12,14 @@ const state = {
         dataLabels: {
             enabled: false,
         },
-
-        fill: {
-            colors: ["#F44336", "#ffffff"],
-        },
+legend:{
+    show:false, //横に出てくるタグを消す
+},
+        // fill: {
+        //     colors: ["#F44336", "#ffffff"],
+        // },
         labels: ["総摂取カロリー", "残り摂取カロリー"],
+        show: false,
         chart: {
             height: 350,
             type: "donut",
@@ -51,19 +54,40 @@ const Home = () => {
                 series={state.series}
                 type="donut"
                 height={550}
+                className="chart-style"
             />
-            {/* <Doughnut data={data} width={1349} height={559}/> */}
-            <ul className="na">
-                <li>
-                    <span class="material-symbols-outlined">restaurant</span>
-                </li>
-                <li>
-                    <span class="material-symbols-outlined">storefront</span>
-                </li>
-                <li>
-                    <span class="material-symbols-outlined">show_chart</span>
-                </li>
-            </ul>
+            <div className="parent">
+                <ul className="na">
+                    <li>
+                        <Link to="/eated-list">
+                            <span className="material-symbols-outlined">
+                                restaurant
+                            </span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/shops-recommend">
+                            <span className="material-symbols-outlined">
+                                storefront
+                            </span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/graph">
+                            <span className="material-symbols-outlined">
+                                show_chart
+                            </span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/setting">
+                            <span className="material-symbols-outlined">
+                                settings
+                            </span>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
         </div>
     );
 };
