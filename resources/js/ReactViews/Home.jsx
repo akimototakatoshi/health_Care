@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../modules/home.css";
 import ReactApexChart from "react-apexcharts";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const number = 2030;
 const total = 3000;
@@ -12,9 +14,9 @@ const state = {
         dataLabels: {
             enabled: false,
         },
-legend:{
-    show:false, //横に出てくるタグを消す
-},
+        legend: {
+            show: false, //横に出てくるタグを消す
+        },
         // fill: {
         //     colors: ["#F44336", "#ffffff"],
         // },
@@ -46,9 +48,29 @@ legend:{
 };
 
 const Home = () => {
-    const number = 1000;
+    const [calorie, setCalorie] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get("calorieIntake")
+            .then((res) => {
+                setCalorie(res.data.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }, []);
+
     return (
         <div>
+            {calorie.map((todo) => {
+                return (
+                    <div key={todo.id}>
+                        {todo.food_name} {todo.calorie}
+                    </div>
+                );
+            })}
+
             <ReactApexChart
                 options={state.options}
                 series={state.series}
