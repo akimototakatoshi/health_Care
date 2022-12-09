@@ -14,7 +14,7 @@ const puppeteer = require(pModule);
     await page.goto(url);
 
     const arrayLinks = Array.from(document.querySelectorAll('a'))
-          .filter(element => element.href.match
+          .filter(element => element.href.match())
           .filter(element => element.textContent !== '')
           .map(element =>{
             const obj = {
@@ -22,9 +22,13 @@ const puppeteer = require(pModule);
                 url: element.href
             };
             return obj;
-        }));
+        });
         return arrayLinks;
           });
           
+          const pathLinks = 'output/links.txt';
+          const textlinks = JSON.stringify(arrayLinks, null, '¥t');
+          await fs.writeFile(pathLinks, textlinks, 'utf8');
 
 
+          
