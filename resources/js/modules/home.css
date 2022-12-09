@@ -3,29 +3,25 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "M PLUS Rounded 1c", sans-serif;
-    
 }
-.na {
-
-    display:flex;
+.nav-list {
+    display: flex;
     justify-content: space-around;
     margin-top: 50px;
-
 }
 
-.na li {
+.nav-list li {
     list-style: none;
     justify-content: space-between;
-
+    text-align: center;
+}
+.nav-text{
+    text-decoration: none;
 }
 
 .material-symbols-outlined {
-    background: rgb(209, 209, 58);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
     color: #fff;
-    font-size: 30px;
+    font-size: 50px;
     text-align: center;
     line-height: 50px;
 }
@@ -35,14 +31,3 @@
     background-color: white;
     border: 3px solid skyblue;
 }
-
-.chart-wrapper {
-    width: 95vh;
-    margin: auto;
-   } 
-
-   .chart-style{
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-   }
