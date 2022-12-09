@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../modules/home.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import CalrieGraph from "./components/CalrieGraph";
 
 const Home = () => {
