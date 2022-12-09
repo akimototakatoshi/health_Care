@@ -1,51 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../modules/home.css";
-import ReactApexChart from "react-apexcharts";
-import axios from "axios";
-import { useState, useEffect } from "react";
-
-const number = 2030;
-const total = 3000;
-const state = {
-    series: [number, total - number],
-
-    options: {
-        dataLabels: {
-            enabled: false,
-        },
-        legend: {
-            show: false, //横に出てくるタグを消す
-        },
-        // fill: {
-        //     colors: ["#F44336", "#ffffff"],
-        // },
-        labels: ["総摂取カロリー", "残り摂取カロリー"],
-        show: false,
-        chart: {
-            height: 350,
-            type: "donut",
-        },
-        plotOptions: {
-            pie: {
-                donut: {
-                    labels: {
-                        show: true,
-                        total: {
-                            show: true,
-                            showAlways: true,
-                            label: "総摂取カロリー",
-                            formatter: function (w) {
-                                // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                                return `${number}kcal`;
-                            },
-                        },
-                    },
-                },
-            },
-        },
-    },
-};
+import CalrieGraph from "./components/CalrieGraph";
 
 const Home = () => {
     const [calorie, setCalorie] = useState([]);
@@ -62,7 +18,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
+        <div className="container">
             {calorie.map((todo) => {
                 return (
                     <div key={todo.id}>
@@ -71,41 +27,39 @@ const Home = () => {
                 );
             })}
 
-            <ReactApexChart
-                options={state.options}
-                series={state.series}
-                type="donut"
-                height={550}
-                className="chart-style"
-            />
-            <div className="parent">
-                <ul className="na">
-                    <li>
-                        <Link to="/eated-list">
-                            <span className="material-symbols-outlined">
+            <CalrieGraph />
+            <div>
+                <ul className="nav-list row">
+                    <li className="col-3">
+                        <Link to="/eated-list" className="nav-text">
+                            <button className="material-symbols-outlined btn btn-info btn-lg">
                                 restaurant
-                            </span>
+                            </button>
+                            <p>食事を登録する</p>
                         </Link>
                     </li>
-                    <li>
-                        <Link to="/shops-recommend">
-                            <span className="material-symbols-outlined">
+                    <li className="col-3">
+                        <Link to="/shops-recommend" className="nav-text">
+                            <button className="material-symbols-outlined btn btn-info btn-lg">
                                 storefront
-                            </span>
+                            </button>
+                            <p>お店を検索する</p>
                         </Link>
                     </li>
-                    <li>
-                        <Link to="/graph">
-                            <span className="material-symbols-outlined">
+                    <li className="col-3">
+                        <Link to="/graph" className="nav-text">
+                            <button className="material-symbols-outlined btn btn-info btn-lg">
                                 show_chart
-                            </span>
+                            </button>
+                            <p>グラフを見る</p>
                         </Link>
                     </li>
-                    <li>
-                        <Link to="/setting">
-                            <span className="material-symbols-outlined">
+                    <li className="col-3">
+                        <Link to="/setting" className="nav-text">
+                            <button className="material-symbols-outlined btn btn-info btn-lg">
                                 settings
-                            </span>
+                            </button>
+                            <p>設定</p>
                         </Link>
                     </li>
                 </ul>

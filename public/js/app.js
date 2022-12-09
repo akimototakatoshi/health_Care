@@ -6939,8 +6939,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _modules_home_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/home.css */ "./resources/js/modules/home.css");
-/* harmony import */ var react_apexcharts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-apexcharts */ "./node_modules/react-apexcharts/dist/react-apexcharts.min.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var _components_CalrieGraph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/CalrieGraph */ "./resources/js/ReactViews/components/CalrieGraph.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -6956,47 +6956,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var number = 2030;
-var total = 3000;
-var state = {
-  series: [number, total - number],
-  options: {
-    dataLabels: {
-      enabled: false
-    },
-    legend: {
-      show: false //横に出てくるタグを消す
-    },
-
-    // fill: {
-    //     colors: ["#F44336", "#ffffff"],
-    // },
-    labels: ["総摂取カロリー", "残り摂取カロリー"],
-    show: false,
-    chart: {
-      height: 350,
-      type: "donut"
-    },
-    plotOptions: {
-      pie: {
-        donut: {
-          labels: {
-            show: true,
-            total: {
-              show: true,
-              showAlways: true,
-              label: "総摂取カロリー",
-              formatter: function formatter(w) {
-                // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                return "".concat(number, "kcal");
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-};
 var Home = function Home() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
@@ -7010,51 +6969,63 @@ var Home = function Home() {
     });
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+
     children: [calorie.map(function (todo) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         children: [todo.food_name, " ", todo.calorie]
       }, todo.id);
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_apexcharts__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      options: state.options,
-      series: state.series,
-      type: "donut",
-      height: 550,
-      className: "chart-style"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      className: "parent",
+    })],
+    className: "container",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_CalrieGraph__WEBPACK_IMPORTED_MODULE_2__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
-        className: "na",
+        className: "nav-list row",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+          className: "col-3",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
             to: "/eated-list",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-              className: "material-symbols-outlined",
+            className: "nav-text",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "material-symbols-outlined btn btn-info btn-lg",
               children: "restaurant"
-            })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              children: "\u98DF\u4E8B\u3092\u767B\u9332\u3059\u308B"
+            })]
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+          className: "col-3",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
             to: "/shops-recommend",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-              className: "material-symbols-outlined",
+            className: "nav-text",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "material-symbols-outlined btn btn-info btn-lg",
               children: "storefront"
-            })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              children: "\u304A\u5E97\u3092\u691C\u7D22\u3059\u308B"
+            })]
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+          className: "col-3",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
             to: "/graph",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-              className: "material-symbols-outlined",
+            className: "nav-text",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "material-symbols-outlined btn btn-info btn-lg",
               children: "show_chart"
-            })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              children: "\u30B0\u30E9\u30D5\u3092\u898B\u308B"
+            })]
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+          className: "col-3",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
             to: "/setting",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-              className: "material-symbols-outlined",
+            className: "nav-text",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "material-symbols-outlined btn btn-info btn-lg",
               children: "settings"
-            })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              children: "\u8A2D\u5B9A"
+            })]
           })
         })]
       })
@@ -7164,21 +7135,25 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var ShopsRecommend = function ShopsRecommend() {
-  var options = {
-    enableHighAccuracy: true,
-    maximumAge: 0
-  };
-  function success(pos) {
-    var crd = pos.coords;
-    console.log('Your current position is:');
-    console.log("Latitude : ".concat(crd.latitude)); //緯度
-    console.log("Longitude: ".concat(crd.longitude)); //軽度
-    console.log("More or less ".concat(crd.accuracy, " meters."));
-  }
-  function error(err) {
-    console.warn("ERROR(".concat(err.code, "): ").concat(err.message));
-  }
-  navigator.geolocation.getCurrentPosition(success, error, options);
+  //   var options = {
+  //     enableHighAccuracy: true,
+  //     maximumAge: 0
+  //   };
+
+  //   function success(pos) {
+  //     var crd = pos.coords;
+
+  //     console.log('Your current position is:');
+  //     console.log(`Latitude : ${crd.latitude}`);//緯度
+  //     console.log(`Longitude: ${crd.longitude}`);//軽度
+  //     console.log(`More or less ${crd.accuracy} meters.`);
+  //   }
+
+  //   function error(err) {
+  //     console.warn(`ERROR(${err.code}): ${err.message}`);
+  //   }
+
+  //   navigator.geolocation.getCurrentPosition(success, error, options);
 
   // const navigate=useNavigate()
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
@@ -7187,21 +7162,39 @@ var ShopsRecommend = function ShopsRecommend() {
     setSearch = _useState2[1];
   var onClickSearch = function onClickSearch() {
     if (!search) {
-      alert("調べたいお店を入力してください");
+      return;
     } else {
-      window.location.href = "https://www.google.co.jp/maps/search/".concat(search);
+      window.open("https://www.google.co.jp/maps/search/".concat(search)); //新しいウィンドウで開く
+      setSearch("");
     }
   };
+  var onClickCancel = function onClickCancel() {
+    setSearch("");
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    children: ["\u304A\u3059\u3059\u3081\u306E\u304A\u5E97", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+    className: "container",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
+      children: "\u304A\u5E97\u3092\u691C\u7D22"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+      htmlFor: "search",
+      children: "\u5E97\u540D\u3092\u5165\u529B"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+      "class": "form-control mb-3",
       type: "text",
       value: search,
       onChange: function onChange(e) {
         return setSearch(e.target.value);
-      }
+      },
+      id: "search",
+      placeholder: "\u30DE\u30AF\u30C9\u30CA\u30EB\u30C9"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      className: "btn btn-primary",
       onClick: onClickSearch,
       children: "\u691C\u7D22"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      className: "btn btn-danger",
+      onClick: onClickCancel,
+      children: "\u53D6\u6D88"
     })]
   });
 };
@@ -7269,6 +7262,79 @@ var Src = function Src() {
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Src);
+
+/***/ }),
+
+/***/ "./resources/js/ReactViews/components/CalrieGraph.jsx":
+/*!************************************************************!*\
+  !*** ./resources/js/ReactViews/components/CalrieGraph.jsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_apexcharts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-apexcharts */ "./node_modules/react-apexcharts/dist/react-apexcharts.min.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var CalrieGraph = function CalrieGraph() {
+  var number = 2030;
+  var total = 3000;
+  var state = {
+    series: [number, total - number],
+    options: {
+      dataLabels: {
+        enabled: false
+      },
+      legend: {
+        show: false //横に出てくるタグを消す
+      },
+
+      // fill: {
+      //     colors: ["#F44336", "#ffffff"],
+      // },
+      labels: ["総摂取カロリー", "残り摂取カロリー"],
+      show: false,
+      chart: {
+        height: 350,
+        type: "donut"
+      },
+      plotOptions: {
+        pie: {
+          donut: {
+            labels: {
+              show: true,
+              total: {
+                show: true,
+                showAlways: true,
+                label: "総摂取カロリー",
+                formatter: function formatter(w) {
+                  // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
+                  return "".concat(number, "kcal");
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_apexcharts__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      options: state.options,
+      series: state.series,
+      type: "donut",
+      className: "chart-style"
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CalrieGraph);
 
 /***/ }),
 
@@ -14557,7 +14623,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n    font-family: \"M PLUS Rounded 1c\", sans-serif;\n    \n}\n.na {\n\n    display:flex;\n    justify-content: space-around;\n    margin-top: 50px;\n\n}\n\n.na li {\n    list-style: none;\n    justify-content: space-between;\n\n}\n\n.material-symbols-outlined {\n    background: rgb(209, 209, 58);\n    border-radius: 50%;\n    width: 50px;\n    height: 50px;\n    color: #fff;\n    font-size: 30px;\n    text-align: center;\n    line-height: 50px;\n}\n.material-symbols-outlined:hover {\n    cursor: pointer;\n    color: skyblue;\n    background-color: white;\n    border: 3px solid skyblue;\n}\n\n.chart-wrapper {\n    width: 95vh;\n    margin: auto;\n   } \n\n   .chart-style{\n    width: 100%;\n    margin-left: auto;\n    margin-right: auto;\n   }\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n    font-family: \"M PLUS Rounded 1c\", sans-serif;\n}\n.nav-list {\n    display: flex;\n    justify-content: space-around;\n    margin-top: 50px;\n}\n\n.nav-list li {\n    list-style: none;\n    justify-content: space-between;\n    text-align: center;\n}\n.nav-text{\n    text-decoration: none;\n}\n\n.material-symbols-outlined {\n    color: #fff;\n    font-size: 50px;\n    text-align: center;\n    line-height: 50px;\n}\n.material-symbols-outlined:hover {\n    cursor: pointer;\n    color: skyblue;\n    background-color: white;\n    border: 3px solid skyblue;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

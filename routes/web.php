@@ -23,7 +23,6 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
 // Route::prefix('contents')->middleware(['auth']) // 認証
 // ->name('contents.') // ルート名
 // ->controller(HealthContentController::class)
