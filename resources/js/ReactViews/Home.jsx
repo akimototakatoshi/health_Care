@@ -1,35 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../modules/home.css";
-import axios from "axios";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import CalrieGraph from "./components/CalrieGraph";
 
 const Home = () => {
-    const [calorie, setCalorie] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get("calorieIntake")
-            .then((res) => {
-                setCalorie(res.data.data);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }, []);
 
     return (
-        <div className="container">
-            {calorie.map((todo) => {
-                return (
-                    <div key={todo.id}>
-                        {todo.food_name} {todo.calorie}
-                    </div>
-                );
-            })}
-        <div>
-        
+        <div className="container">        
             <div className="row">
                 <div className="col-3">
                     <h3>必要運動量</h3>
@@ -79,7 +57,6 @@ const Home = () => {
                     </li>
                 </ul>
             </div>
-        </div>
         </div>
     );
 };
