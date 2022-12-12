@@ -28,8 +28,21 @@ const Home = () => {
                     </div>
                 );
             })}
-
-            <CalrieGraph />
+        <div>
+        
+            <div className="row">
+                <div className="col-3">
+                    <h3>必要運動量</h3>
+                    <ul>
+                        <li>ウォーキング：１０分</li>
+                        <li>ランニング：５分</li>
+                        <li>サイクリング：３分</li>
+                    </ul>
+                </div>
+                <div className="col-9">
+                    <CalrieGraph />
+                </div>
+            </div>
             <div>
                 <ul className="nav-list row">
                     <li className="col-3">
@@ -66,6 +79,7 @@ const Home = () => {
                     </li>
                 </ul>
             </div>
+        </div>
         </div>
     );
 };
