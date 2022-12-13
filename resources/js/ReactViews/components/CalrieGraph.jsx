@@ -1,6 +1,22 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 const CalrieGraph = () => {
+    const [calorie, setCalorie] = useState([]);
+
+    // useEffect(() => {
+    //     axios
+    //         .get("calorieIntake")
+    //         .then((res) => {
+    //             setCalorie(res.data.data);
+    //         })
+    //         .catch((e) => {
+    //             console.log(e);
+    //         });
+    // }, []);
+
     const number = 2030;
     const total = 3000;
     const state = {

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CalorieIntake;
 use App\Http\Resources\CalorieIntakeResource;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class CalorieIntakeController extends Controller
 {
@@ -15,8 +17,11 @@ class CalorieIntakeController extends Controller
      */
     public function index()
     {
-        //
-        return CalorieIntakeResource::collection(CalorieIntake::all());
+        // 今日の日付取得
+        $today = Carbon::today();
+        
+        // マイページのカロリーデータ取得 
+        return CalorieIntakeResource::collection(CalorieIntake::whereDate('created_at', $today)->where('user_id', '=', Auth::id())->get());
     }
 
     /**

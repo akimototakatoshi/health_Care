@@ -13,6 +13,7 @@ const Home = () => {
             .get("calorieIntake")
             .then((res) => {
                 setCalorie(res.data.data);
+                console.log(res.data.data);
             })
             .catch((e) => {
                 console.log(e);
@@ -21,13 +22,13 @@ const Home = () => {
 
     return (
         <div className="container">
-            {calorie.map((todo) => {
+            {/* {calorie.map((todo) => {
                 return (
                     <div key={todo.id}>
-                        {todo.food_name} {todo.calorie}
+                        {todo.food_name} {todo.calorie} {todo.created_at}
                     </div>
                 );
-            })}
+            })} */}
 
             <CalrieGraph />
             <div>
