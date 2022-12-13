@@ -21,6 +21,7 @@ const Home = () => {
                     <CalrieGraph />
                 </div>
             </div>
+
             <div>
                 <ul className="nav-list row">
                     <li className="col-3">
