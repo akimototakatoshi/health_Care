@@ -4377,7 +4377,7 @@ var CalrieGraph = function CalrieGraph() {
                 //     )}kcal`;
                 // },
                 formatter: function formatter() {
-                  return "".concat(number, "kcal");
+                  return "".concat(number, "kcal/").concat(total, "kcal");
                 }
               }
             }
