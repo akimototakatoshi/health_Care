@@ -34,4 +34,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::controller(CalorieIntakeController::class)->middleware(['api'])
 ->group(function(){ // グループ化
     Route::get('/calorieIntake', 'index')->name('calorieIntake'); // 名前つきルート 
+    Route::get('/calorieWeek', 'weekGraph')->name('calorieWeek');
+    Route::get('/calorieMonth', 'monthGraph')->name('calorieMonth');
 });
