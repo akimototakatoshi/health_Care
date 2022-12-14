@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('physical_level', 50)->after('weight');
+            $table->string('physical', 50)->after('weight');
         });
     }
 
@@ -28,7 +28,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('physical_level');
+            $table->dropColumn('physical');
         });
     }
 };

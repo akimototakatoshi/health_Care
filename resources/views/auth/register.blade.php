@@ -45,12 +45,12 @@
                             <div class="col-md-6">
                                 <select name="age" class="form-select">
                                     <option value="">選択してください</option> 
-                                    <option value="1" {{ old('age') == 1 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">~19歳</option> 
-                                    <option value="2" {{ old('age') == 2 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">20歳~29歳</option> 
-                                    <option value="3" {{ old('age') == 3 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">30歳~39歳</option> 
-                                    <option value="4" {{ old('age') == 4 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">40歳~49歳</option> 
-                                    <option value="5" {{ old('age') == 5 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">50歳~59歳</option> 
-                                    <option value="6" {{ old('age') == 6 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">60歳~</option> 
+                                    <option value="15" {{ old('age') == 15 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">10歳~19歳</option> 
+                                    <option value="25" {{ old('age') == 25 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">20歳~29歳</option> 
+                                    <option value="35" {{ old('age') == 35 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">30歳~39歳</option> 
+                                    <option value="45" {{ old('age') == 45 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">40歳~49歳</option> 
+                                    <option value="55" {{ old('age') == 55 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">50歳~59歳</option> 
+                                    <option value="65" {{ old('age') == 65 ? 'selected' : '' }}  class="form-control @error('age') is-invalid @enderror">60歳~70歳</option> 
                                 </select>
 
                                 @error('age')
