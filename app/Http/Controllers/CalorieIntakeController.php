@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CalorieIntake;
 use App\Http\Resources\CalorieIntakeResource;
+use App\Http\Resources\CalorieWeekResource;
+use App\Http\Resources\CalorieMonthResource;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -21,17 +23,48 @@ class CalorieIntakeController extends Controller
         $today = Carbon::today();
         
         // マイページのカロリーデータ取得 
-        return CalorieIntakeResource::collection(CalorieIntake::whereDate('created_at', $today)->where('user_id', '=', Auth::id())->get());
+        return CalorieIntakeResource::collection(CalorieIntake::whereDate('created_at', $today)
+        ->where('user_id', '=', Auth::id())->get());
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function weekGraph()
     {
-        //
+        //今週の月曜日の日付取得
+        $monday = Carbon::today()->startOfWeek();
+        //月曜日から7日後の日付取得
+        $startWeek = Carbon::today()->startOfWeek();
+        $addWeek = $startWeek->addDays(6);
+        
+        // 週毎のカロリーデータ取得 
+        return CalorieWeekResource::collection(CalorieIntake::whereDate('created_at', '>=', $monday)
+        ->whereDate('created_at', '<=', $addWeek)
+        ->where('user_id', '=', Auth::id())->get());
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function monthGraph()
+    {
+        // 月初の日付
+        $month_from = Carbon::today();
+		$month_from->startOfMonth();
+
+        // 月末の日付
+		$month_to = Carbon::today();
+		$month_to->endOfMonth();
+
+
+        // 月毎のカロリーデータ取得 
+        return CalorieMonthResource::collection(CalorieIntake::whereBetween('created_at', [$month_from, $month_to])
+        ->where('user_id', '=', Auth::id())->get());
     }
 
     /**
