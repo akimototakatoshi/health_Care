@@ -14,6 +14,12 @@ class CalorieMonthResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'food_name' => $this->food_name,
+            'calorie' => $this->calorie,
+            'created_at' => $this->created_at
+        ];
     }
 }
