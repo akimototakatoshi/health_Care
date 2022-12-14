@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'gender' => ['required', 'max:1'],
             'height' => ['required', 'max:10'],
             'weight' => ['required','max:10'],
+            'physical' => ['required', 'string', 'max:50'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -75,6 +76,7 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'height' => $data['height'],
             'weight' => $data['weight'],
+            'physical' => $data['physical'],
             'password' => Hash::make($data['password']),
         ]);
     }

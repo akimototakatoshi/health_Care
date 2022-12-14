@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HealthContentController;
 use App\Http\Controllers\CalorieIntakeController;
+use App\Http\Controllers\UserSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,8 @@ use App\Http\Controllers\CalorieIntakeController;
 |
 */
 
-Route::get('/home', function () {
-    return view('welcome');
+Route::get('/', function () {
+    return view('home');
 });
 
 Auth::routes();
@@ -33,7 +34,12 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::controller(CalorieIntakeController::class)->middleware(['api'])
 ->group(function(){ // グループ化
-    Route::get('/calorieIntake', 'index')->name('calorieIntake'); // 名前つきルート 
-    Route::get('/calorieWeek', 'weekGraph')->name('calorieWeek');
-    Route::get('/calorieMonth', 'monthGraph')->name('calorieMonth');
+    Route::get('/calorieIntake', 'index')->name('calorieIntake'); // 名前つきルート マイページ
+    Route::get('/calorieWeek', 'weekGraph')->name('calorieWeek'); // 曜日毎のグラフ
+    Route::get('/calorieMonth', 'monthGraph')->name('calorieMonth'); // 月毎のグラフ
+});
+
+Route::controller(UserSettingController::class)->middleware(['api'])
+->group(function(){ // グループ化
+    Route::get('/userSetting', 'edit')->name('userSetting'); // ログイン中のユーザー情報
 });

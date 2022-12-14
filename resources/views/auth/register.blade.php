@@ -112,6 +112,24 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="physical" class="col-md-4 col-form-label text-md-end">{{ __('Physical') }}</label>
+                            <div class="col-md-6">
+                                <select name="physical" class="form-select">
+                                    <option value="">選択してください</option> 
+                                    <option value="1.5" {{ old('physical') == 1.5 ? 'selected' : '' }}  class="form-control @error('physical') is-invalid @enderror">生活の大部分が座位で、静的な活動が中心</option> 
+                                    <option value="1.75" {{ old('physical') == 1.75 ? 'selected' : '' }}  class="form-control @error('physical') is-invalid @enderror">座位中心の仕事だが、作業・接客等、あるいは通勤・買物・家事など軽い運動を含む</option> 
+                                    <option value="2.0" {{ old('physical') == 2.0 ? 'selected' : '' }}  class="form-control @error('physical') is-invalid @enderror">移動や立位の多い仕事への従事者。あるいは、スポーツなど余暇における活発な運動習慣をもっている</option> 
+                                </select>
+
+                                @error('physical')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
