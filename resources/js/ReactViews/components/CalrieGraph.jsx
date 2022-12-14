@@ -49,7 +49,7 @@ const CalrieGraph = () => {
                                 //     )}kcal`;
                                 // },
                                 formatter: function () {
-                                    return `${number}kcal`;
+                                    return `${number}kcal/${total}kcal`;
                                 },
                             },
                         },
