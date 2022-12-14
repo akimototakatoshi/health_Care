@@ -4,23 +4,17 @@ import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const CalrieGraph = () => {
     const { data, error, isLoading } = useSWR("calorieIntake", fetcher);
-    console.log(data);
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
-    // const [calorie, setCalorie] = useState([]);
-
-    // useEffect(() => {
-    //     axios.get("calorieIntake").then((res) => {
-    //         // console.log(res);
-    //         setCalorie([...calorie, res.data.data[0].calorie]);
-    //     });
-    // }, []);
-
-    const number = data.data[0].calorie;
+     
+    let number = 0;
+    for (let i = 0; i < data.data.length; i++) {
+        number += parseInt(data.data[i].calorie);
+    }
     const total = 3000;
 
     const state = {
-        series: [parseInt(number), total - parseInt(number)],
+        series: [number, total - number],
         options: {
             dataLabels: {
                 enabled: false,
@@ -28,14 +22,10 @@ const CalrieGraph = () => {
             legend: {
                 show: false, //横に出てくるタグを消す
             },
-            // fill: {
-            //     colors: ["#F44336", "#ffffff"],
-            // },
             labels: ["総摂取カロリー", "残り摂取カロリー"],
-            formatter:function(value){
-                return `${value}kcal`
+            formatter: function (value) {
+                return `${value}kcal`;
             },
-    
             show: true,
             chart: {
                 height: 350,
@@ -68,7 +58,7 @@ const CalrieGraph = () => {
             },
         },
     };
-    
+
     return (
         <div>
             <ReactApexChart
