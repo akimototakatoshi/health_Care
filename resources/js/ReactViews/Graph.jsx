@@ -41,13 +41,15 @@ const Graph = () => {
         }
     }
 
-    let mondayOfTotal = 0;
-    if (monday === []) {
-        return 0;
-    } else {
-        mondayOfTotal = monday.reduce(function (a, b) {
-            return a + b;
-        });
+    function mondayOfTotal() {
+        if (monday.length === 0) {
+            return 0;
+        } else {
+            let reduceMon = saturday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceMon;
+        }
     }
 
     let tuesdayOfTotal = 0;
@@ -86,22 +88,26 @@ const Graph = () => {
         });
     }
 
-    let saturdayOfTotal = 0;
-    if (saturday.length === 0) {
-        return 0;
-    } else {
-        saturdayOfTotal = saturday.reduce(function (a, b) {
-            return a + b;
-        });
+    function saturdayOfTotal() {
+        if (saturday.length === 0) {
+            return 0;
+        } else {
+            let reduceSat = saturday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceSat;
+        }
     }
 
-    let sundayOfTotal = 0;
-    if (sunday === []) {
-        return 0;
-    } else {
-        sundayOfTotal = sunday.reduce(function (a, b) {
-            return a + b;
-        });
+    function sundayOfTotal() {
+        if (sunday.length === 0) {
+            return 0;
+        } else {
+            let reduceSun = sunday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceSun;
+        }
     }
 
     // var result = numbers.reduce(function(a, b) {

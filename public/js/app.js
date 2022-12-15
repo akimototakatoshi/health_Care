@@ -3668,13 +3668,15 @@ var Graph = function Graph() {
       sunday.push(parseInt(data.data[i].calorie));
     }
   }
-  var mondayOfTotal = 0;
-  if (monday === []) {
-    return 0;
-  } else {
-    mondayOfTotal = monday.reduce(function (a, b) {
-      return a + b;
-    });
+  function mondayOfTotal() {
+    if (monday.length === 0) {
+      return 0;
+    } else {
+      var reduceMon = saturday.reduce(function (a, b) {
+        return a + b;
+      });
+      return reduceMon;
+    }
   }
   var tuesdayOfTotal = 0;
   if (tuesday === []) {
@@ -3708,21 +3710,25 @@ var Graph = function Graph() {
       return a + b;
     });
   }
-  var saturdayOfTotal = 0;
-  if (saturday.length === 0) {
-    return 0;
-  } else {
-    saturdayOfTotal = saturday.reduce(function (a, b) {
-      return a + b;
-    });
+  function saturdayOfTotal() {
+    if (saturday.length === 0) {
+      return 0;
+    } else {
+      var reduceSat = saturday.reduce(function (a, b) {
+        return a + b;
+      });
+      return reduceSat;
+    }
   }
-  var sundayOfTotal = 0;
-  if (sunday === []) {
-    return 0;
-  } else {
-    sundayOfTotal = sunday.reduce(function (a, b) {
-      return a + b;
-    });
+  function sundayOfTotal() {
+    if (sunday.length === 0) {
+      return 0;
+    } else {
+      var reduceSun = sunday.reduce(function (a, b) {
+        return a + b;
+      });
+      return reduceSun;
+    }
   }
 
   // var result = numbers.reduce(function(a, b) {
