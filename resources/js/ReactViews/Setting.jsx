@@ -1,181 +1,213 @@
 import React from "react";
+import useSWR from "swr";
+import SettingGender from './components/SetteingGender'
+import { useState } from "react";
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const Setting = () => {
+    const { data, error, isLoading } = useSWR("userSetting", fetcher);
+
+    const [gender, setGender] = useState('');
+
+    console.log(data);
+    console.log('uuuu', gender)
+
+    if (error) return <div>failed to load</div>;
+    if (isLoading) return <div>loading...</div>;
+
+    const userData = data.data[0];
+
     return (
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                    <div class="card-header">情報</div>
-                        <div class="card-body">
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-md-8">
+                    <div className="card">
+                        <div className="card-header">登録情報</div>
+                        <div className="card-body">
                             <form method="POST" action="">
-                                <div class="row mb-3">
+                                <div className="row mb-3">
                                     <label
-                                        for="name"
-                                        class="col-md-4 col-form-label text-md-end"
+                                        htmlFor="name"
+                                        className="col-md-4 col-form-label text-md-end"
                                     >
                                         氏名
                                     </label>
 
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <input
                                             id="name"
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             name="name"
+                                            value={userData.name}
                                         />
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div className="row mb-3">
                                     <label
-                                        for="email"
-                                        class="col-md-4 col-form-label text-md-end"
+                                        htmlFor="email"
+                                        className="col-md-4 col-form-label text-md-end"
                                     >
-                                        email
+                                        メールアドレス
                                     </label>
 
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <input
                                             id="email"
                                             type="email"
-                                            class="form-control"
+                                            className="form-control"
                                             name="email"
                                         />
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div className="row mb-3">
                                     <label
-                                        for="age"
-                                        class="col-md-4 col-form-label text-md-end"
+                                        htmlFor="age"
+                                        className="col-md-4 col-form-label text-md-end"
                                     >
-                                        age
+                                        年齢
                                     </label>
 
-                                    <div class="col-md-6">
-                                        <select name="age" class="form-select">
+                                    <div className="col-md-6">
+                                        <select
+                                            name="age"
+                                            className="form-select"
+                                        >
                                             <option value="">
                                                 選択してください
                                             </option>
                                             <option
-                                                value="1"
-                                                class="form-control"
+                                                value="15"
+                                                className="form-control"
                                             >
-                                                ~19歳
+                                                10歳~19歳
                                             </option>
                                             <option
-                                                value="2"
-                                                class="form-control"
+                                                value="25"
+                                                className="form-control"
                                             >
                                                 20歳~29歳
                                             </option>
                                             <option
-                                                value="3"
-                                                class="form-control"
+                                                value="35"
+                                                className="form-control"
                                             >
                                                 30歳~39歳
                                             </option>
                                             <option
-                                                value="4"
-                                                class="form-control"
+                                                value="45"
+                                                className="form-control"
                                             >
                                                 40歳~49歳
                                             </option>
                                             <option
-                                                value="5"
-                                                class="form-control"
+                                                value="55"
+                                                className="form-control"
                                             >
                                                 50歳~59歳
                                             </option>
                                             <option
-                                                value="6"
-                                                class="form-control"
+                                                value="65"
+                                                className="form-control"
                                             >
-                                                60歳~
+                                                60歳~70歳
                                             </option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <label class="col-md-4 col-form-label text-md-end">
-                                        gender
+                                <div className="row mb-3">
+                                    <label className="col-md-4 col-form-label text-md-end">
+                                        性別
                                     </label>
 
-                                    <div class="col-md-6">
-                                        <input
-                                            type="radio"
-                                            id="male"
-                                            name="gender"
-                                            value="0"
-                                            class="form-check-input"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="male"
-                                        >
-                                            男性
-                                        </label>
-                                        <input
-                                            type="radio"
-                                            id="female"
-                                            name="gender"
-                                            value="1"
-                                            class="form-check-input"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="female"
-                                        >
-                                            女性
-                                        </label>
-                                    </div>
+                                    <SettingGender value={userData.gender} setGender={setGender}/>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div className="row mb-3">
                                     <label
-                                        for="height"
-                                        class="col-md-4 col-form-label text-md-end"
+                                        htmlFor="height"
+                                        className="col-md-4 col-form-label text-md-end"
                                     >
-                                        height
+                                        身長
                                     </label>
 
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <input
                                             id="height"
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             name="height"
                                         />
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div className="row mb-3">
                                     <label
-                                        for="weight"
-                                        class="col-md-4 col-form-label text-md-end"
+                                        htmlFor="weight"
+                                        className="col-md-4 col-form-label text-md-end"
                                     >
-                                        Weight
+                                        体重
                                     </label>
 
-                                    <div class="col-md-6">
+                                    <div className="col-md-6">
                                         <input
                                             id="weight"
                                             type="weight"
-                                            class="form-control"
+                                            className="form-control"
                                             name="weight"
                                         />
                                     </div>
                                 </div>
 
-                                <div class="row mb-0">
-                                    <div class="col-md-6 offset-md-4">
+                                <div className="row mb-3">
+                                    <label
+                                        htmlFor="physical"
+                                        className="col-md-4 col-form-label text-md-end"
+                                    >
+                                        活動レベル
+                                    </label>
+
+                                    <div className="col-md-6">
+                                        <select
+                                            name="physical"
+                                            className="form-select"
+                                        >
+                                            <option value="">
+                                                選択してください
+                                            </option>
+                                            <option
+                                                value="1.5"
+                                                className="form-control"
+                                            >
+                                                生活の大部分が座位で、静的な活動が中心
+                                            </option>
+                                            <option
+                                                value="1.75"
+                                                className="form-control"
+                                            >
+                                                座位中心の仕事だが、作業・接客等、あるいは通勤・買物・家事など軽い運動を含む
+                                            </option>
+                                            <option
+                                                value="2"
+                                                className="form-control"
+                                            >
+                                                移動や立位の多い仕事への従事者。あるいは、スポーツなど余暇における活発な運動習慣をもっている
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div className="row mb-0">
+                                    <div className="col-md-6 offset-md-4">
                                         <button
                                             type="submit"
-                                            class="btn btn-primary"
+                                            className="btn btn-primary"
                                         >
-                                            lll
+                                            更新
                                         </button>
                                     </div>
                                 </div>
