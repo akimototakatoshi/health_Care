@@ -8,6 +8,7 @@ use App\Http\Resources\CalorieIntakeResource;
 use App\Http\Resources\CalorieWeekResource;
 use App\Http\Resources\CalorieMonthResource;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Carbon\Carbon;
 
 class CalorieIntakeController extends Controller

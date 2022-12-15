@@ -20,7 +20,7 @@ class CalorieWeekResource extends JsonResource
             'food_name' => $this->food_name,
             'calorie' => $this->calorie,
             'week' => $this->week,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at->format("Y-m-d")
         ];
     }
 }
