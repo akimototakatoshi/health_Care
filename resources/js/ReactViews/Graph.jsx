@@ -45,47 +45,55 @@ const Graph = () => {
         if (monday.length === 0) {
             return 0;
         } else {
-            let reduceMon = saturday.reduce(function (a, b) {
+            let reduceMon = monday.reduce(function (a, b) {
                 return a + b;
             });
             return reduceMon;
         }
     }
 
-    let tuesdayOfTotal = 0;
-    if (tuesday === []) {
-        return 0;
-    } else {
-        tuesdayOfTotal = tuesday.reduce(function (a, b) {
-            return a + b;
-        });
+    function tuesdayOfTotal() {
+        if (tuesday.length === 0) {
+            return 0;
+        } else {
+            let reduceTue = tuesday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceTue;
+        }
     }
 
-    let wednesdayOfTotal = 0;
-    if (wednesday === []) {
-        return 0;
-    } else {
-        wednesdayOfTotal = wednesday.reduce(function (a, b) {
-            return a + b;
-        });
+    function wednesdayOfTotal() {
+        if (wednesday.length === 0) {
+            return 0;
+        } else {
+            let reduceWen = wednesday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceWen;
+        }
     }
 
-    let thursdayOfTotal = 0;
-    if (thursday === []) {
-        return 0;
-    } else {
-        thursdayOfTotal = thursday.reduce(function (a, b) {
-            return a + b;
-        });
+    function thursdayOfTotal() {
+        if (thursday.length === 0) {
+            return 0;
+        } else {
+            let reduceThu = thursday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceThu;
+        }
     }
 
-    let fridayOfTotal = 0;
-    if (friday === []) {
-        return 0;
-    } else {
-        fridayOfTotal = friday.reduce(function (a, b) {
-            return a + b;
-        });
+    function fridayOfTotal() {
+        if (friday.length === 0) {
+            return 0;
+        } else {
+            let reduceFri = friday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceFri;
+        }
     }
 
     function saturdayOfTotal() {
@@ -128,13 +136,13 @@ const Graph = () => {
                 name: "あなたの摂取カロリー",
                 type: "column",
                 data: [
-                    mondayOfTotal,
-                    tuesdayOfTotal,
-                    wednesdayOfTotal,
-                    thursdayOfTotal,
-                    fridayOfTotal,
-                    saturdayOfTotal,
-                    sundayOfTotal,
+                    mondayOfTotal(),
+                    tuesdayOfTotal(),
+                    wednesdayOfTotal(),
+                    thursdayOfTotal(),
+                    fridayOfTotal(),
+                    saturdayOfTotal(),
+                    sundayOfTotal(),
                 ],
             },
             {

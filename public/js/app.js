@@ -3672,43 +3672,51 @@ var Graph = function Graph() {
     if (monday.length === 0) {
       return 0;
     } else {
-      var reduceMon = saturday.reduce(function (a, b) {
+      var reduceMon = monday.reduce(function (a, b) {
         return a + b;
       });
       return reduceMon;
     }
   }
-  var tuesdayOfTotal = 0;
-  if (tuesday === []) {
-    return 0;
-  } else {
-    tuesdayOfTotal = tuesday.reduce(function (a, b) {
-      return a + b;
-    });
+  function tuesdayOfTotal() {
+    if (tuesday.length === 0) {
+      return 0;
+    } else {
+      var reduceTue = tuesday.reduce(function (a, b) {
+        return a + b;
+      });
+      return reduceTue;
+    }
   }
-  var wednesdayOfTotal = 0;
-  if (wednesday === []) {
-    return 0;
-  } else {
-    wednesdayOfTotal = wednesday.reduce(function (a, b) {
-      return a + b;
-    });
+  function wednesdayOfTotal() {
+    if (wednesday.length === 0) {
+      return 0;
+    } else {
+      var reduceWen = wednesday.reduce(function (a, b) {
+        return a + b;
+      });
+      return reduceWen;
+    }
   }
-  var thursdayOfTotal = 0;
-  if (thursday === []) {
-    return 0;
-  } else {
-    thursdayOfTotal = thursday.reduce(function (a, b) {
-      return a + b;
-    });
+  function thursdayOfTotal() {
+    if (thursday.length === 0) {
+      return 0;
+    } else {
+      var reduceThu = thursday.reduce(function (a, b) {
+        return a + b;
+      });
+      return reduceThu;
+    }
   }
-  var fridayOfTotal = 0;
-  if (friday === []) {
-    return 0;
-  } else {
-    fridayOfTotal = friday.reduce(function (a, b) {
-      return a + b;
-    });
+  function fridayOfTotal() {
+    if (friday.length === 0) {
+      return 0;
+    } else {
+      var reduceFri = friday.reduce(function (a, b) {
+        return a + b;
+      });
+      return reduceFri;
+    }
   }
   function saturdayOfTotal() {
     if (saturday.length === 0) {
@@ -3747,7 +3755,7 @@ var Graph = function Graph() {
     series: [{
       name: "あなたの摂取カロリー",
       type: "column",
-      data: [mondayOfTotal, tuesdayOfTotal, wednesdayOfTotal, thursdayOfTotal, fridayOfTotal, saturdayOfTotal, sundayOfTotal]
+      data: [mondayOfTotal(), tuesdayOfTotal(), wednesdayOfTotal(), thursdayOfTotal(), fridayOfTotal(), saturdayOfTotal(), sundayOfTotal()]
     }, {
       name: "平均摂取カロリー",
       type: "line",
