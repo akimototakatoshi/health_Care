@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('calorie_intakes', function (Blueprint $table) {
             //
-            $table->string('physical', 50)->after('weight');
+            $table->tinyInteger('week')->after('calorie');
+
         });
     }
 
@@ -26,9 +27,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('calorie_intakes', function (Blueprint $table) {
             //
-            $table->dropColumn('physical');
+            $table->dropColumn('week');
         });
     }
 };

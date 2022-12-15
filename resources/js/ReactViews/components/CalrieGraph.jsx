@@ -2,25 +2,37 @@ import React from "react";
 import ReactApexChart from "react-apexcharts";
 import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
-const CalrieGraph = () => {
+
+const CalrieGraph = ({userData}) => {
     const { data, error, isLoading } = useSWR("calorieIntake", fetcher);
-    console.log(data);
+
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
-    // const [calorie, setCalorie] = useState([]);
 
-    // useEffect(() => {
-    //     axios.get("calorieIntake").then((res) => {
-    //         // console.log(res);
-    //         setCalorie([...calorie, res.data.data[0].calorie]);
-    //     });
-    // }, []);
+    console.log("iii",userData)
+    let userdata = userData.data[0]
+    console.log(userdata)
 
-    const number = data.data[0].calorie;
-    const total = 3000;
+    function kisotaisya (){
+        if(userdata.gender === 0){
+        return Math.floor( (13.397 * ((userdata.height / 100) **2)*22 + 4.799 * userdata.height - 5.677 * userdata.age + 88.362) * Number(userdata.physical))
+        }else if(userdata.gender === 1){
+           return Math.floor((9.247 * ((userdata.height / 100) **2)*22 + 3.098 * userdata.height - 4.33 * userdata.age + 447.593)* Number(userdata.physical))
+        }
+    }
+
+
+
+    console.log(kisotaisya())
+
+    let number = 0;
+    for (let i = 0; i < data.data.length; i++) {
+        number += parseInt(data.data[i].calorie);
+    }
+    const total = kisotaisya()
 
     const state = {
-        series: [parseInt(number), total - parseInt(number)],
+        series: [number, total - number],
         options: {
             dataLabels: {
                 enabled: false,
@@ -28,14 +40,10 @@ const CalrieGraph = () => {
             legend: {
                 show: false, //横に出てくるタグを消す
             },
-            // fill: {
-            //     colors: ["#F44336", "#ffffff"],
-            // },
             labels: ["総摂取カロリー", "残り摂取カロリー"],
-            formatter:function(value){
-                return `${value}kcal`
+            formatter: function (value) {
+                return `${value}kcal`;
             },
-    
             show: true,
             chart: {
                 height: 350,
@@ -59,7 +67,7 @@ const CalrieGraph = () => {
                                 //     )}kcal`;
                                 // },
                                 formatter: function () {
-                                    return `${number}kcal`;
+                                    return `${number}kcal/${total}kcal`;
                                 },
                             },
                         },
@@ -68,7 +76,7 @@ const CalrieGraph = () => {
             },
         },
     };
-    
+
     return (
         <div>
             <ReactApexChart
