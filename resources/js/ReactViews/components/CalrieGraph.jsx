@@ -84,6 +84,8 @@ const CalrieGraph = ({userData}) => {
                 series={state.series}
                 type="donut"
                 className="chart-style"
+                width={500}
+                height={500}
             />
         </div>
     );
