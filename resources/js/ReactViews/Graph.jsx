@@ -1,19 +1,83 @@
-import { min } from "lodash";
-import ReactApexChart from "react-apexcharts";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React,{ useEffect, useState } from "react";
 import useSWR from "swr";
+import {
+    Chart as ChartJS,
+    LinearScale,
+    CategoryScale,
+    BarElement,
+    PointElement,
+    LineElement,
+    Legend,
+    Tooltip,
+    LineController,
+    BarController,
+} from "chart.js";
+import { Chart } from "react-chartjs-2";
+import { Link } from "react-router-dom";
+ChartJS.register(
+    LinearScale,
+    CategoryScale,
+    BarElement,
+    PointElement,
+    LineElement,
+    Legend,
+    Tooltip,
+    LineController,
+    BarController
+);
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const Graph = () => {
     const { data, error, isLoading } = useSWR("calorieWeek", fetcher);
+    const [userData, setUserData] = useState([]);
+    const labels = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+    ];
+    useEffect(() => {
+        const axiosData = async () => {
+            try {
+                const response = await axios.get("userSetting");
+                setUserData(response.data.data[0]);
+            } catch (e) {
+                return;
+            }
+        };
+        axiosData();
+    }, []);
 
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
 
+
+
+    function caluculateAveCalorie() {
+        if (userData.gender === 0) {
+            return Math.floor(
+                (13.397 * (userData.height / 100) ** 2 * 22 +
+                    4.799 * userData.height -
+                    5.677 * userData.age +
+                    88.362) *
+                    Number(userData.physical)
+            );
+        } else if (userData.gender === 1) {
+            return Math.floor(
+                (9.247 * (userData.height / 100) ** 2 * 22 +
+                    3.098 * userData.height -
+                    4.33 * userData.age +
+                    447.593) *
+                    Number(userData.physical)
+            );
+        }
+    }
     // let date = new Date()
-    // console.log(date.getDay())
-    // let array = [{13:calorie},{13:calorie},{15:calorie},{15:calorie}];
+
     const monday = [];
     const tuesday = [];
     const wednesday = [];
@@ -117,24 +181,29 @@ const Graph = () => {
             return reduceSun;
         }
     }
-
-    // var result = numbers.reduce(function(a, b) {
-
-    //     return a + b;
-
-    //   })
-    // const monday = Math.min(...array);
-
-    // for (let i = 0; i < data.data.length; i++) {
-    //    console.log(data.data[i].created_at)
-
-    // }
-
-    let state = {
-        series: [
+    const data2 = {
+        labels,
+        datasets: [
             {
-                name: "あなたの摂取カロリー",
-                type: "column",
+                type: "line",
+                label: "標準摂取カロリー",
+                borderColor: "rgb(255, 99, 132)",
+                borderWidth: 2,
+                fill: false,
+                data: [
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
+                ],
+            },
+            {
+                type: "bar",
+                label: "あなたの摂取カロリー",
+                backgroundColor: "rgb(75, 192, 192)",
                 data: [
                     mondayOfTotal(),
                     tuesdayOfTotal(),
@@ -144,71 +213,17 @@ const Graph = () => {
                     saturdayOfTotal(),
                     sundayOfTotal(),
                 ],
-            },
-            {
-                name: "平均摂取カロリー",
-                type: "line",
-                data: [1, 2, 3],
+                borderColor: "white",
+                borderWidth: 2,
             },
         ],
-        options: {
-            chart: {
-                height: 350,
-                type: "line",
-            },
-            stroke: {
-                width: [0, 4],
-            },
-            title: {
-                text: "",
-            },
-            dataLabels: {
-                enabled: true,
-                enabledOnSeries: [1],
-            },
-            labels: [
-                "01 Jan 2001",
-                "02 Jan 2001",
-                "03 Jan 2001",
-                "04 Jan 2001",
-                "05 Jan 2001",
-                "06 Jan 2001",
-                "07 Jan 2001",
-                "08 Jan 2001",
-                "09 Jan 2001",
-                "10 Jan 2001",
-                "11 Jan 2001",
-                "12 Jan 2001",
-            ],
-            xaxis: {
-                type: "datetime",
-            },
-            yaxis: [
-                {
-                    title: {
-                        text: "あなたの体重",
-                    },
-                },
-                {
-                    opposite: true,
-                    title: {
-                        text: "平均体重",
-                    },
-                },
-            ],
-        },
     };
 
     return (
-        <div>
-            <h1>体重の変化</h1>
-            <ReactApexChart
-                options={state.options}
-                series={state.series}
-                type="line"
-                height={350}
-            />
-            <Link to="/register">aaa</Link>
+        <div className="container">
+            <h3>カロリー摂取量</h3>
+            <Chart type="bar" data={data2} className="mt-4"/>
+            <Link to="/">Homeへ戻る</Link>
         </div>
     );
 };
