@@ -3545,6 +3545,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+//const mysql = require('mysql');
+//const knex = require('../../../node-db/knex');
+
 
 var EatedList = function EatedList() {
   var getUser = /*#__PURE__*/function () {
@@ -3591,6 +3594,8 @@ var EatedList = function EatedList() {
         return setEated(event.target.value);
       }
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      type: "text",
+      name: "add",
       onClick: onClickRegister,
       children: "\u767B\u9332"
     })]

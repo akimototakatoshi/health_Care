@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 
+//const mysql = require('mysql');
+//const knex = require('../../../node-db/knex');
+
+
 const EatedList = () => {
     
     const getUser = async() => {
@@ -28,9 +32,14 @@ const EatedList = () => {
                 value={eated}
                 onChange={(event) => setEated(event.target.value)}
             />
-            <button onClick={onClickRegister}>登録</button>
+            <button 
+            type="text"
+            name= "add"
+            onClick={onClickRegister}>登録</button>
+        
         </div>
     );
 };
 
 export default EatedList;
+
