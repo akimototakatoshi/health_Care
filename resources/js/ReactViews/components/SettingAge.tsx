@@ -1,6 +1,6 @@
 import React from "react";
 
-const SettingAge = (props) => {
+const SettingAge = (props:any) => {
     return (
         <div className="col-md-6">
             <select

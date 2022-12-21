@@ -34,7 +34,6 @@ const EatedList= () => {
                 onChange={(event) => setEated(event.target.value)}
             />
             <button 
-            type="text"
             name= "add"
             onClick={onClickRegister}>登録</button>
         
@@ -43,4 +42,3 @@ const EatedList= () => {
 };
 
 export default EatedList;
-

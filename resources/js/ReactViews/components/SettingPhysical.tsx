@@ -1,6 +1,6 @@
 import React from "react";
 
-const SettingPhysical = (props) => {
+const SettingPhysical = (props:any) => {
     return (
         <div className="col-md-6">
             <select

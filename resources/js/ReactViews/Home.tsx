@@ -4,7 +4,7 @@ import "../modules/home.css";
 import useSWR from "swr";
 import CalrieGraph from "./components/CalrieGraph";
 import Exercise from "./components/Exercise";
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const fetcher = (...args:any) => fetch(args).then((res) => res.json());
 
 const Home = () => {
     const { data, error, isLoading } = useSWR("userSetting", fetcher);
