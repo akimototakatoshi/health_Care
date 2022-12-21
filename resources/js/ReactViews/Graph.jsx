@@ -1,19 +1,83 @@
-import { min } from "lodash";
-import ReactApexChart from "react-apexcharts";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React,{ useEffect, useState } from "react";
 import useSWR from "swr";
+import {
+    Chart as ChartJS,
+    LinearScale,
+    CategoryScale,
+    BarElement,
+    PointElement,
+    LineElement,
+    Legend,
+    Tooltip,
+    LineController,
+    BarController,
+} from "chart.js";
+import { Chart } from "react-chartjs-2";
+import { Link } from "react-router-dom";
+ChartJS.register(
+    LinearScale,
+    CategoryScale,
+    BarElement,
+    PointElement,
+    LineElement,
+    Legend,
+    Tooltip,
+    LineController,
+    BarController
+);
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const Graph = () => {
     const { data, error, isLoading } = useSWR("calorieWeek", fetcher);
+    const [userData, setUserData] = useState([]);
+    const labels = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+    ];
+    useEffect(() => {
+        const axiosData = async () => {
+            try {
+                const response = await axios.get("userSetting");
+                setUserData(response.data.data[0]);
+            } catch (e) {
+                return;
+            }
+        };
+        axiosData();
+    }, []);
 
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
 
+
+
+    function caluculateAveCalorie() {
+        if (userData.gender === 0) {
+            return Math.floor(
+                (13.397 * (userData.height / 100) ** 2 * 22 +
+                    4.799 * userData.height -
+                    5.677 * userData.age +
+                    88.362) *
+                    Number(userData.physical)
+            );
+        } else if (userData.gender === 1) {
+            return Math.floor(
+                (9.247 * (userData.height / 100) ** 2 * 22 +
+                    3.098 * userData.height -
+                    4.33 * userData.age +
+                    447.593) *
+                    Number(userData.physical)
+            );
+        }
+    }
     // let date = new Date()
-    // console.log(date.getDay())
-    // let array = [{13:calorie},{13:calorie},{15:calorie},{15:calorie}];
+
     const monday = [];
     const tuesday = [];
     const wednesday = [];
@@ -41,160 +105,125 @@ const Graph = () => {
         }
     }
 
-    let mondayOfTotal = 0;
-    if (monday === []) {
-        return 0;
-    } else {
-        mondayOfTotal = monday.reduce(function (a, b) {
-            return a + b;
-        });
+    function mondayOfTotal() {
+        if (monday.length === 0) {
+            return 0;
+        } else {
+            let reduceMon = monday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceMon;
+        }
     }
 
-    let tuesdayOfTotal = 0;
-    if (tuesday === []) {
-        return 0;
-    } else {
-        tuesdayOfTotal = tuesday.reduce(function (a, b) {
-            return a + b;
-        });
+    function tuesdayOfTotal() {
+        if (tuesday.length === 0) {
+            return 0;
+        } else {
+            let reduceTue = tuesday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceTue;
+        }
     }
 
-    let wednesdayOfTotal = 0;
-    if (wednesday === []) {
-        return 0;
-    } else {
-        wednesdayOfTotal = wednesday.reduce(function (a, b) {
-            return a + b;
-        });
+    function wednesdayOfTotal() {
+        if (wednesday.length === 0) {
+            return 0;
+        } else {
+            let reduceWen = wednesday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceWen;
+        }
     }
 
-    let thursdayOfTotal = 0;
-    if (thursday === []) {
-        return 0;
-    } else {
-        thursdayOfTotal = thursday.reduce(function (a, b) {
-            return a + b;
-        });
+    function thursdayOfTotal() {
+        if (thursday.length === 0) {
+            return 0;
+        } else {
+            let reduceThu = thursday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceThu;
+        }
     }
 
-    let fridayOfTotal = 0;
-    if (friday === []) {
-        return 0;
-    } else {
-        fridayOfTotal = friday.reduce(function (a, b) {
-            return a + b;
-        });
+    function fridayOfTotal() {
+        if (friday.length === 0) {
+            return 0;
+        } else {
+            let reduceFri = friday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceFri;
+        }
     }
 
-    let saturdayOfTotal = 0;
-    if (saturday.length === 0) {
-        return 0;
-    } else {
-        saturdayOfTotal = saturday.reduce(function (a, b) {
-            return a + b;
-        });
+    function saturdayOfTotal() {
+        if (saturday.length === 0) {
+            return 0;
+        } else {
+            let reduceSat = saturday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceSat;
+        }
     }
 
-    let sundayOfTotal = 0;
-    if (sunday === []) {
-        return 0;
-    } else {
-        sundayOfTotal = sunday.reduce(function (a, b) {
-            return a + b;
-        });
+    function sundayOfTotal() {
+        if (sunday.length === 0) {
+            return 0;
+        } else {
+            let reduceSun = sunday.reduce(function (a, b) {
+                return a + b;
+            });
+            return reduceSun;
+        }
     }
-
-    // var result = numbers.reduce(function(a, b) {
-
-    //     return a + b;
-
-    //   })
-    // const monday = Math.min(...array);
-
-    // for (let i = 0; i < data.data.length; i++) {
-    //    console.log(data.data[i].created_at)
-
-    // }
-
-    let state = {
-        series: [
+    const data2 = {
+        labels,
+        datasets: [
             {
-                name: "あなたの摂取カロリー",
-                type: "column",
+                type: "line",
+                label: "標準摂取カロリー",
+                borderColor: "rgb(255, 99, 132)",
+                borderWidth: 2,
+                fill: false,
                 data: [
-                    mondayOfTotal,
-                    tuesdayOfTotal,
-                    wednesdayOfTotal,
-                    thursdayOfTotal,
-                    fridayOfTotal,
-                    saturdayOfTotal,
-                    sundayOfTotal,
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
+                    caluculateAveCalorie(),
                 ],
             },
             {
-                name: "平均摂取カロリー",
-                type: "line",
-                data: [1, 2, 3],
+                type: "bar",
+                label: "あなたの摂取カロリー",
+                backgroundColor: "rgb(75, 192, 192)",
+                data: [
+                    mondayOfTotal(),
+                    tuesdayOfTotal(),
+                    wednesdayOfTotal(),
+                    thursdayOfTotal(),
+                    fridayOfTotal(),
+                    saturdayOfTotal(),
+                    sundayOfTotal(),
+                ],
+                borderColor: "white",
+                borderWidth: 2,
             },
         ],
-        options: {
-            chart: {
-                height: 350,
-                type: "line",
-            },
-            stroke: {
-                width: [0, 4],
-            },
-            title: {
-                text: "",
-            },
-            dataLabels: {
-                enabled: true,
-                enabledOnSeries: [1],
-            },
-            labels: [
-                "01 Jan 2001",
-                "02 Jan 2001",
-                "03 Jan 2001",
-                "04 Jan 2001",
-                "05 Jan 2001",
-                "06 Jan 2001",
-                "07 Jan 2001",
-                "08 Jan 2001",
-                "09 Jan 2001",
-                "10 Jan 2001",
-                "11 Jan 2001",
-                "12 Jan 2001",
-            ],
-            xaxis: {
-                type: "datetime",
-            },
-            yaxis: [
-                {
-                    title: {
-                        text: "あなたの体重",
-                    },
-                },
-                {
-                    opposite: true,
-                    title: {
-                        text: "平均体重",
-                    },
-                },
-            ],
-        },
     };
 
     return (
-        <div>
-            <h1>体重の変化</h1>
-            <ReactApexChart
-                options={state.options}
-                series={state.series}
-                type="line"
-                height={350}
-            />
-            <Link to="/register">aaa</Link>
+        <div className="container">
+            <h3>カロリー摂取量</h3>
+            <Chart type="bar" data={data2} className="mt-4"/>
+            <Link to="/">Homeへ戻る</Link>
         </div>
     );
 };

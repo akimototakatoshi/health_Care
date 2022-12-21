@@ -37,9 +37,11 @@ Route::controller(CalorieIntakeController::class)->middleware(['api'])
     Route::get('/calorieIntake', 'index')->name('calorieIntake'); // 名前つきルート マイページ
     Route::get('/calorieWeek', 'weekGraph')->name('calorieWeek'); // 曜日毎のグラフ
     Route::get('/calorieMonth', 'monthGraph')->name('calorieMonth'); // 月毎のグラフ
+    Route::get('/calorieYear', 'yearGraph')->name('calorieYear');
 });
 
 Route::controller(UserSettingController::class)->middleware(['api'])
 ->group(function(){ // グループ化
-    Route::get('/userSetting', 'edit')->name('userSetting'); // ログイン中のユーザー情報
+    Route::get('/userSetting', 'edit')->name('userSetting'); // ログイン中のユーザー情報取得
+    Route::post('/userUpdate', 'update')->name('userUpdate');
 });

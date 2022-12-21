@@ -3,20 +3,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 
-//const mysql = require('mysql');
-//const knex = require('../../../node-db/knex');
 
+const EatedList= () => {
+    const getUser = async () => {
+        const data = await axios.get("/calorie");
 
-const EatedList = () => {
-    
-    const getUser = async() => {
-        const data = await axios.get('/calorie')
         console.log(data.data[1]);
-    }
+    };
 
     useEffect(() => {
         getUser();
-    },[])
+    }, []);
 
     const navigate = useNavigate();
     const [eated, setEated] = useState("");
@@ -24,6 +21,10 @@ const EatedList = () => {
     const onClickRegister = () => {
         navigate("/");
     };
+
+
+   
+
     return (
         <div>
             <h1>食べたものを登録する</h1>

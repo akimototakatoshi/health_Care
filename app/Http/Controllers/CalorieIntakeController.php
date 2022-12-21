@@ -7,7 +7,9 @@ use App\Models\CalorieIntake;
 use App\Http\Resources\CalorieIntakeResource;
 use App\Http\Resources\CalorieWeekResource;
 use App\Http\Resources\CalorieMonthResource;
+use App\Http\Resources\CalorieYearResource;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Carbon\Carbon;
 
 class CalorieIntakeController extends Controller
@@ -65,6 +67,36 @@ class CalorieIntakeController extends Controller
         // 月毎のカロリーデータ取得 
         return CalorieMonthResource::collection(CalorieIntake::whereBetween('created_at', [$month_from, $month_to])
         ->where('user_id', '=', Auth::id())->get());
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function yearGraph()
+    {
+        // 年明け
+        $year_from = Carbon::today();
+		$year_from->startOfYear();
+
+        // 年末
+		$year_to = Carbon::today();
+		$year_to->endOfYear();
+
+        $year = Carbon::now()->year; 
+
+        // 一年のカロリーデータ取得 
+        $calorieYear = CalorieIntake::where('user_id', '=', Auth::id())->whereYear('created_at', $year)
+        ->orderBy('created_at')->get()
+        ->groupBy(function ($row) {
+            return $row->created_at->format('m');
+        })->map(function ($day) {
+            return $day->sum('calorie');
+        });
+
+        return CalorieYearResource::collection($year);
+
     }
 
     /**

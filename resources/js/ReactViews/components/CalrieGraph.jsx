@@ -1,37 +1,47 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 import useSWR from "swr";
+
+
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-const CalrieGraph = ({userData}) => {
+const CalrieGraph = ({ userData }) => {
     const { data, error, isLoading } = useSWR("calorieIntake", fetcher);
 
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
 
-    console.log("iii",userData)
-    let userdata = userData.data[0]
-    console.log(userdata)
+    // console.log("iii",userData)
+    let userdata = userData.data[0];
+    // console.log(userdata)
 
-    function kisotaisya (){
-        if(userdata.gender === 0){
-        return Math.floor( (13.397 * ((userdata.height / 100) **2)*22 + 4.799 * userdata.height - 5.677 * userdata.age + 88.362) * Number(userdata.physical))
-        }else if(userdata.gender === 1){
-           return Math.floor((9.247 * ((userdata.height / 100) **2)*22 + 3.098 * userdata.height - 4.33 * userdata.age + 447.593)* Number(userdata.physical))
+    function kisotaisya() {
+        if (userdata.gender === 0) {
+            return Math.floor(
+                (13.397 * (userdata.height / 100) ** 2 * 22 +
+                    4.799 * userdata.height -
+                    5.677 * userdata.age +
+                    88.362) *
+                    Number(userdata.physical)
+            );
+        } else if (userdata.gender === 1) {
+            return Math.floor(
+                (9.247 * (userdata.height / 100) ** 2 * 22 +
+                    3.098 * userdata.height -
+                    4.33 * userdata.age +
+                    447.593) *
+                    Number(userdata.physical)
+            );
         }
     }
-
-
-
-    console.log(kisotaisya())
 
     let number = 0;
     for (let i = 0; i < data.data.length; i++) {
         number += parseInt(data.data[i].calorie);
     }
-    const total = kisotaisya()
+    const total = kisotaisya();
 
-    const state = {
+    const state= {
         series: [number, total - number],
         options: {
             dataLabels: {
@@ -46,9 +56,28 @@ const CalrieGraph = ({userData}) => {
             },
             show: true,
             chart: {
-                height: 350,
                 type: "donut",
             },
+            responsive: [
+                {
+                    //ここで、ブレイクポイントを設定
+                    breakpoint: 770, //575px以下になると・・・
+                    options: {
+                        plotOptions: {
+                            bar: {
+                                horizontal: true,
+                            },
+                        },
+                        chart: {
+                            width: 400, //チャートは320pxにして・・・
+                            height: 400,
+                        },
+                        legend: {
+                            position: "bottom", //項目を下へ・・・
+                        },
+                    },
+                },
+            ],
             plotOptions: {
                 pie: {
                     donut: {
@@ -83,7 +112,8 @@ const CalrieGraph = ({userData}) => {
                 options={state.options}
                 series={state.series}
                 type="donut"
-                className="chart-style"
+                height={600}
+                width={600}
             />
         </div>
     );
