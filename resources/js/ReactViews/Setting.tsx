@@ -7,13 +7,13 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const fetcher = (...args:any) => fetch(args).then((res) => res.json());
 
 const Setting = () => {
     const { data, error, isLoading } = useSWR("userSetting", fetcher);
     const navigate = useNavigate();
 
-    // 初期データを保管、Ï入力されたデータを保管
+    // 初期データを保管、入力されたデータを保管
     const [formName, setFormName] = useState("");
     const [formAge, setFormAge] = useState("");
     const [formGender, setFormGender] = useState("");

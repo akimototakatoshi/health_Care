@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Exercise = ({ userData }) => {
+const Exercise = ({ userData }:any) => {
     const[reduceCalorie,setReduceCalorie] = useState(0)
     const userWeight = userData.data[0].weight;
 
@@ -23,7 +23,7 @@ const Exercise = ({ userData }) => {
         <div>
             <h3>必要運動量</h3>
             <p>あなたの現在の体重は{userWeight}kgです。標準体重は{aveWeight}kgです。</p>
-            <input type="number" value={reduceCalorie} onChange={(e)=>setReduceCalorie(e.target.value)} placeholder="100"/>
+            <input type="number" value={reduceCalorie} onChange={(e:any)=>setReduceCalorie(e.target.value)} placeholder="100"/>
             <p>{reduceCalorie}kcalを消費するのに必要な運動量</p>
             <div className="accordion" id="accordionExample">
                 <div className="accordion-item">

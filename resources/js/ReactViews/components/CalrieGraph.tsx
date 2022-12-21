@@ -3,9 +3,9 @@ import ReactApexChart from "react-apexcharts";
 import useSWR from "swr";
 
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const fetcher = (...args:any) => fetch(args).then((res) => res.json());
 
-const CalrieGraph = ({ userData }) => {
+const CalrieGraph = ({ userData }:any) => {
     const { data, error, isLoading } = useSWR("calorieIntake", fetcher);
 
     if (error) return <div>failed to load</div>;
@@ -39,9 +39,9 @@ const CalrieGraph = ({ userData }) => {
     for (let i = 0; i < data.data.length; i++) {
         number += parseInt(data.data[i].calorie);
     }
-    const total = kisotaisya();
+    const total:any = kisotaisya();
 
-    const state= {
+    const state:any= {
         series: [number, total - number],
         options: {
             dataLabels: {
@@ -51,7 +51,7 @@ const CalrieGraph = ({ userData }) => {
                 show: false, //横に出てくるタグを消す
             },
             labels: ["総摂取カロリー", "残り摂取カロリー"],
-            formatter: function (value) {
+            formatter: function (value:number) {
                 return `${value}kcal`;
             },
             show: true,

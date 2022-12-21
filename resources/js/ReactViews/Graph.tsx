@@ -27,11 +27,11 @@ ChartJS.register(
     BarController
 );
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const fetcher = (...args:any) => fetch(args).then((res) => res.json());
 
 const Graph = () => {
-    const { data, error, isLoading } = useSWR("calorieWeek", fetcher);
-    const [userData, setUserData] = useState([]);
+    const { data, error, isLoading }:{data:any,error:any,isLoading:any} = useSWR("calorieWeek", fetcher);
+    const [userData, setUserData] = useState<any|null>([]);
     const labels = [
         "Monday",
         "Tuesday",
@@ -43,7 +43,7 @@ const Graph = () => {
     useEffect(() => {
         const axiosData = async () => {
             try {
-                const response = await axios.get("userSetting");
+                const response:any = await axios.get("userSetting");
                 setUserData(response.data.data[0]);
             } catch (e) {
                 return;
@@ -78,13 +78,13 @@ const Graph = () => {
     }
     // let date = new Date()
 
-    const monday = [];
-    const tuesday = [];
-    const wednesday = [];
-    const thursday = [];
-    const friday = [];
-    const saturday = [];
-    const sunday = [];
+    const monday:any = [];
+    const tuesday:any = [];
+    const wednesday:any = [];
+    const thursday:any = [];
+    const friday:any = [];
+    const saturday:any = [];
+    const sunday:any = [];
 
     for (let i = 0; i < data.data.length; i++) {
         let week = data.data[i].week;
@@ -109,7 +109,7 @@ const Graph = () => {
         if (monday.length === 0) {
             return 0;
         } else {
-            let reduceMon = monday.reduce(function (a, b) {
+            let reduceMon = monday.reduce(function (a:number, b:number) {
                 return a + b;
             });
             return reduceMon;
@@ -120,7 +120,7 @@ const Graph = () => {
         if (tuesday.length === 0) {
             return 0;
         } else {
-            let reduceTue = tuesday.reduce(function (a, b) {
+            let reduceTue = tuesday.reduce(function (a:number, b:number) {
                 return a + b;
             });
             return reduceTue;
@@ -131,7 +131,7 @@ const Graph = () => {
         if (wednesday.length === 0) {
             return 0;
         } else {
-            let reduceWen = wednesday.reduce(function (a, b) {
+            let reduceWen = wednesday.reduce(function (a:number, b:number) {
                 return a + b;
             });
             return reduceWen;
@@ -142,7 +142,7 @@ const Graph = () => {
         if (thursday.length === 0) {
             return 0;
         } else {
-            let reduceThu = thursday.reduce(function (a, b) {
+            let reduceThu = thursday.reduce(function (a:number, b:number) {
                 return a + b;
             });
             return reduceThu;
@@ -153,7 +153,7 @@ const Graph = () => {
         if (friday.length === 0) {
             return 0;
         } else {
-            let reduceFri = friday.reduce(function (a, b) {
+            let reduceFri = friday.reduce(function (a:number, b:number) {
                 return a + b;
             });
             return reduceFri;
@@ -164,7 +164,7 @@ const Graph = () => {
         if (saturday.length === 0) {
             return 0;
         } else {
-            let reduceSat = saturday.reduce(function (a, b) {
+            let reduceSat = saturday.reduce(function (a:number, b:number) {
                 return a + b;
             });
             return reduceSat;
@@ -175,13 +175,13 @@ const Graph = () => {
         if (sunday.length === 0) {
             return 0;
         } else {
-            let reduceSun = sunday.reduce(function (a, b) {
+            let reduceSun = sunday.reduce(function (a:number, b:number) {
                 return a + b;
             });
             return reduceSun;
         }
     }
-    const data2 = {
+    const data2:any = {
         labels,
         datasets: [
             {

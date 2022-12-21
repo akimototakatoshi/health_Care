@@ -28,8 +28,8 @@ const ShopsRecommend = () => {
     const [searchPrefecture, setSearchPrefecture] = useState("");
     const [searchCity, setSearchCity] = useState("");
     const [searchHistory, setSearchHistory] = useState(() => { //ストレージから持ってきたJSONをパースした値を初期値に入れる。何もなかったら空を返す
-        let json = localStorage.getItem("shops");
-        let listShops = JSON.parse(json);
+        let json:any = localStorage.getItem("shops");
+        let listShops:any = JSON.parse(json);
         return listShops || "";
     });
 
@@ -65,7 +65,8 @@ const ShopsRecommend = () => {
         setSearchCity("");
     };
 
-    const onClickRemoveHistory = (index) => {
+    const onClickRemoveHistory = (index:number) => {
+        //@ts-ignore
         const storageShops = JSON.parse(localStorage.getItem("shops"));//JSONをパースした値を持ってくる
         delete storageShops[index];//"shops"のindex番目を削除
         localStorage.setItem("shops", JSON.stringify(storageShops));//ローカルストレージにindex番目を消した値を追加する
@@ -134,7 +135,7 @@ const ShopsRecommend = () => {
                     >
                         <div className="accordion-body">
                             {searchHistory.length > 0 &&
-                                searchHistory.map((history, index) => {
+                                searchHistory.map((history:any, index:number) => {
                                     return (
                                         <div
                                             key={history.searchName}

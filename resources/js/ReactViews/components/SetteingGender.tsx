@@ -1,7 +1,6 @@
 import React from "react";
-import { useState } from "react";
 
-const settingGender = (props) => {
+const settingGender = (props:any) => {
     return (
         <>
             <div className="col-md-6">
