@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 
+
 const EatedList= () => {
     const getUser = async () => {
         const data = await axios.get("/calorie");
+
         console.log(data.data[1]);
     };
 
@@ -31,9 +33,14 @@ const EatedList= () => {
                 value={eated}
                 onChange={(event) => setEated(event.target.value)}
             />
-            <button onClick={onClickRegister}>登録</button>
+            <button 
+            type="text"
+            name= "add"
+            onClick={onClickRegister}>登録</button>
+        
         </div>
     );
 };
 
 export default EatedList;
+
