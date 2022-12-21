@@ -1,0 +1,1 @@
+const puppeteer = requite('puppeteer')
