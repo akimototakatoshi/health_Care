@@ -1,18 +1,15 @@
-import React from "react";
+import React, { useEffect} from "react";
 import ReactApexChart from "react-apexcharts";
 import useSWR from "swr";
+import { Data, userData } from "../types/user";
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-
-const fetcher = (...args:any) => fetch(args).then((res) => res.json());
-
-const CalrieGraph = ({ userData }:any) => {
+const CalrieGraph = ({ userData}: { userData: Data,}) => {
     const { data, error, isLoading } = useSWR("calorieIntake", fetcher);
-
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
-
     // console.log("iii",userData)
-    let userdata = userData.data[0];
+    let userdata: userData = userData.data[0];
     // console.log(userdata)
 
     function kisotaisya() {
@@ -39,10 +36,9 @@ const CalrieGraph = ({ userData }:any) => {
     for (let i = 0; i < data.data.length; i++) {
         number += parseInt(data.data[i].calorie);
     }
-    const total:any = kisotaisya();
-
-    const state:any= {
-        series: [number, total - number],
+    const total: number = kisotaisya()!;
+    const state = {
+        series: [number, total! - number],
         options: {
             dataLabels: {
                 enabled: false,
@@ -51,12 +47,29 @@ const CalrieGraph = ({ userData }:any) => {
                 show: false, //横に出てくるタグを消す
             },
             labels: ["総摂取カロリー", "残り摂取カロリー"],
-            formatter: function (value:number) {
-                return `${value}kcal`;
-            },
+            // formatter: function (value:number) {
+            //     return `${value}kcal`;
+            // },
             show: true,
             chart: {
-                type: "donut",
+                type: "donut" as
+                    | "line"
+                    | "area"
+                    | "bar"
+                    | "histogram"
+                    | "pie"
+                    | "donut"
+                    | "radialBar"
+                    | "scatter"
+                    | "bubble"
+                    | "heatmap"
+                    | "candlestick"
+                    | "boxPlot"
+                    | "radar"
+                    | "polarArea"
+                    | "rangeBar"
+                    | "rangeArea"
+                    | "treemap",
             },
             responsive: [
                 {
@@ -108,11 +121,12 @@ const CalrieGraph = ({ userData }:any) => {
 
     return (
         <div>
+            {number > total &&(<h3 style={{color:"red",marginLeft:"140px"}}>{number-total}kcalオーバーしています。</h3>)}
             <ReactApexChart
                 options={state.options}
                 series={state.series}
                 type="donut"
-                height={600}
+                height={600} //heightとwidthがないとエラーが出る。
                 width={600}
             />
         </div>

@@ -3567,9 +3567,6 @@ var __awaiter = undefined && undefined.__awaiter || function (thisArg, _argument
 
 
 
-//const mysql = require('mysql');
-//const knex = require('../../../node-db/knex');
-
 
 var EatedList = function EatedList() {
   var getUser = function getUser() {
@@ -3603,20 +3600,16 @@ var EatedList = function EatedList() {
   var onClickRegister = function onClickRegister() {
     navigate("/");
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-      children: "\u98DF\u3079\u305F\u3082\u306E\u3092\u767B\u9332\u3059\u308B"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-      type: "text",
-      value: eated,
-      onChange: function onChange(event) {
-        return setEated(event.target.value);
-      }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-      onClick: onClickRegister,
-      children: "\u767B\u9332"
-    })]
-  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u98DF\u3079\u305F\u3082\u306E\u3092\u767B\u9332\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "text",
+    value: eated,
+    onChange: function onChange(event) {
+      return setEated(event.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    name: "add",
+    onClick: onClickRegister
+  }, "\u767B\u9332"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EatedList);
 
@@ -3682,11 +3675,8 @@ var __awaiter = undefined && undefined.__awaiter || function (thisArg, _argument
 
 
 chart_js__WEBPACK_IMPORTED_MODULE_2__.Chart.register(chart_js__WEBPACK_IMPORTED_MODULE_2__.LinearScale, chart_js__WEBPACK_IMPORTED_MODULE_2__.CategoryScale, chart_js__WEBPACK_IMPORTED_MODULE_2__.BarElement, chart_js__WEBPACK_IMPORTED_MODULE_2__.PointElement, chart_js__WEBPACK_IMPORTED_MODULE_2__.LineElement, chart_js__WEBPACK_IMPORTED_MODULE_2__.Legend, chart_js__WEBPACK_IMPORTED_MODULE_2__.Tooltip, chart_js__WEBPACK_IMPORTED_MODULE_2__.LineController, chart_js__WEBPACK_IMPORTED_MODULE_2__.BarController);
-var fetcher = function fetcher() {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-  return fetch(args).then(function (res) {
+var fetcher = function fetcher(url) {
+  return fetch(url).then(function (res) {
     return res.json();
   });
 };
@@ -3695,7 +3685,7 @@ var Graph = function Graph() {
     data = _useSWR.data,
     error = _useSWR.error,
     isLoading = _useSWR.isLoading;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
     _useState2 = _slicedToArray(_useState, 2),
     userData = _useState2[0],
     setUserData = _useState2[1];
@@ -3713,19 +3703,20 @@ var Graph = function Graph() {
                 return axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("userSetting");
               case 3:
                 response = _context.sent;
+                console.log(response.data);
                 setUserData(response.data.data[0]);
-                _context.next = 10;
+                _context.next = 11;
                 break;
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 return _context.abrupt("return");
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 8]]);
       }));
     };
     axiosData();
@@ -3733,10 +3724,10 @@ var Graph = function Graph() {
   if (error) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "failed to load");
   if (isLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "loading...");
   function caluculateAveCalorie() {
-    if (userData.gender === 0) {
-      return Math.floor((13.397 * Math.pow(userData.height / 100, 2) * 22 + 4.799 * userData.height - 5.677 * userData.age + 88.362) * Number(userData.physical));
-    } else if (userData.gender === 1) {
-      return Math.floor((9.247 * Math.pow(userData.height / 100, 2) * 22 + 3.098 * userData.height - 4.33 * userData.age + 447.593) * Number(userData.physical));
+    if ((userData === null || userData === void 0 ? void 0 : userData.gender) === 0) {
+      return Math.floor((13.397 * Math.pow((userData === null || userData === void 0 ? void 0 : userData.height) / 100, 2) * 22 + 4.799 * (userData === null || userData === void 0 ? void 0 : userData.height) - 5.677 * (userData === null || userData === void 0 ? void 0 : userData.age) + 88.362) * Number(userData === null || userData === void 0 ? void 0 : userData.physical));
+    } else if ((userData === null || userData === void 0 ? void 0 : userData.gender) === 1) {
+      return Math.floor((9.247 * Math.pow((userData === null || userData === void 0 ? void 0 : userData.height) / 100, 2) * 22 + 3.098 * (userData === null || userData === void 0 ? void 0 : userData.height) - 4.33 * (userData === null || userData === void 0 ? void 0 : userData.age) + 447.593) * Number(userData === null || userData === void 0 ? void 0 : userData.physical));
     }
   }
   // let date = new Date()
@@ -3891,11 +3882,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var fetcher = function fetcher() {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-  return fetch(args).then(function (res) {
+var fetcher = function fetcher(url) {
+  return fetch(url).then(function (res) {
     return res.json();
   });
 };
@@ -4032,11 +4020,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var fetcher = function fetcher() {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-  return fetch(args).then(function (res) {
+var fetcher = function fetcher(url) {
+  return fetch(url).then(function (res) {
     return res.json();
   });
 };
@@ -4051,31 +4036,31 @@ var Setting = function Setting() {
     _useState2 = _slicedToArray(_useState, 2),
     formName = _useState2[0],
     setFormName = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
     _useState4 = _slicedToArray(_useState3, 2),
     formAge = _useState4[0],
     setFormAge = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
     _useState6 = _slicedToArray(_useState5, 2),
     formGender = _useState6[0],
     setFormGender = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
     _useState8 = _slicedToArray(_useState7, 2),
     formHeight = _useState8[0],
     setFormHeight = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
     _useState10 = _slicedToArray(_useState9, 2),
     formWeight = _useState10[0],
     setFormWeight = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
     _useState12 = _slicedToArray(_useState11, 2),
     formPhysical = _useState12[0],
     setFormPhysical = _useState12[1];
-  console.log(data);
-  console.log("gen", formGender);
-  console.log("age", formAge);
-  console.log("phy", formPhysical);
-  console.log("wei", formWeight);
+  // console.log(data);
+  // console.log("gen", formGender);
+  // console.log("age", formAge);
+  // console.log("phy", formPhysical);
+  // console.log("wei", formWeight);
   var userData = data === null || data === void 0 ? void 0 : data.data[0];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (userData) {
@@ -4145,7 +4130,9 @@ var Setting = function Setting() {
     className: "form-control",
     name: "email",
     value: userData.email,
-    onChange: function onChange() {}
+    onChange: function onChange() {
+      return;
+    }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "row mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
@@ -4175,7 +4162,7 @@ var Setting = function Setting() {
     name: "height",
     value: formHeight,
     onChange: function onChange(e) {
-      return setFormHeight(e.target.value);
+      return setFormHeight(Number(e.target.value));
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "row mb-3"
@@ -4191,7 +4178,7 @@ var Setting = function Setting() {
     name: "weight",
     value: formWeight,
     onChange: function onChange(e) {
-      return setFormWeight(e.target.value);
+      return setFormWeight(Number(e.target.value));
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "row mb-3"
@@ -4270,9 +4257,19 @@ var ShopsRecommend = function ShopsRecommend() {
     searchCity = _useState6[0],
     setSearchCity = _useState6[1];
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
-      var json = localStorage.getItem("shops");
-      var listShops = JSON.parse(json);
-      return listShops || "";
+      //ストレージから持ってきたJSONをパースした値を初期値に入れる。何もなかったら空を返す
+      var shopsJson = localStorage.getItem("shops");
+      if (shopsJson === null) {
+        return [];
+      }
+      try {
+        var listShops = JSON.parse(shopsJson);
+        return listShops;
+      } catch (e) {
+        console.error(e, shopsJson);
+        localStorage.removeItem("shops");
+        return [];
+      }
     }),
     _useState8 = _slicedToArray(_useState7, 2),
     searchHistory = _useState8[0],
@@ -4479,11 +4476,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var fetcher = function fetcher() {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-  return fetch(args).then(function (res) {
+var fetcher = function fetcher(url) {
+  return fetch(url).then(function (res) {
     return res.json();
   });
 };
@@ -4521,9 +4515,9 @@ var CalrieGraph = function CalrieGraph(_ref) {
       },
 
       labels: ["総摂取カロリー", "残り摂取カロリー"],
-      formatter: function formatter(value) {
-        return "".concat(value, "kcal");
-      },
+      // formatter: function (value:number) {
+      //     return `${value}kcal`;
+      // },
       show: true,
       chart: {
         type: "donut"
@@ -4574,7 +4568,12 @@ var CalrieGraph = function CalrieGraph(_ref) {
       }
     }
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_apexcharts__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, number > total && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+    style: {
+      color: "red",
+      marginLeft: "140px"
+    }
+  }, number - total, "kcal\u30AA\u30FC\u30D0\u30FC\u3057\u3066\u3044\u307E\u3059\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_apexcharts__WEBPACK_IMPORTED_MODULE_1__["default"], {
     options: state.options,
     series: state.series,
     type: "donut",
@@ -4608,7 +4607,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Exercise = function Exercise(_ref) {
   var userData = _ref.userData;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState2 = _slicedToArray(_useState, 2),
     reduceCalorie = _useState2[0],
     setReduceCalorie = _useState2[1];
@@ -4617,14 +4616,14 @@ var Exercise = function Exercise(_ref) {
   //    console.log(6.8 *userdata.weight* 4 *1.05)//時間に対する消費カロリー
   //    console.log(Math.round((100/(6.8*userdata.weight*1.05))*60))//カロリーに対する必要運動時間
   var aveWeight = Math.floor(Math.pow(userData.data[0].height / 100, 2) * 22);
-  var lowSycling = Math.round(reduceCalorie / (6.8 * userWeight * 1.05) * 60); //16.1-19.2km/時、レジャー、ゆっくり、楽な労力
-  var middleSycling = Math.round(reduceCalorie / (8.0 * userWeight * 1.05) * 60); //19.3-22.4km/時、レジャー、ほどほどの労力
-  var highSycling = Math.round(reduceCalorie / (10.0 * userWeight * 1.05) * 60); //22.5-25.6km/時、レース、レジャー、速い、きつい労力
-  var lowRunning = Math.round(reduceCalorie / (6 * userWeight * 1.05) * 60); //107m／分程度：6METs
-  var middleRunning = Math.round(reduceCalorie / (11.5 * userWeight * 1.05) * 60); //201m／分程度：11.5METs
-  var highRunning = Math.round(reduceCalorie / (16 * userWeight * 1.05) * 60); //295m／分程度：16METs
-  var normalWalking = Math.round(reduceCalorie / (3 * userWeight * 1.05) * 60); //70m／分程度：3METs 	普通に歩く：70m／分程度
-  var fastWalking = Math.round(reduceCalorie / (3.5 * userWeight * 1.05) * 60); //80m／分程度：3.5METs 早歩き：80～90m／分程度
+  var lowSycling = Math.round(Number(reduceCalorie) / (6.8 * userWeight * 1.05) * 60); //16.1-19.2km/時、レジャー、ゆっくり、楽な労力
+  var middleSycling = Math.round(Number(reduceCalorie) / (8.0 * userWeight * 1.05) * 60); //19.3-22.4km/時、レジャー、ほどほどの労力
+  var highSycling = Math.round(Number(reduceCalorie) / (10.0 * userWeight * 1.05) * 60); //22.5-25.6km/時、レース、レジャー、速い、きつい労力
+  var lowRunning = Math.round(Number(reduceCalorie) / (6 * userWeight * 1.05) * 60); //107m／分程度：6METs
+  var middleRunning = Math.round(Number(reduceCalorie) / (11.5 * userWeight * 1.05) * 60); //201m／分程度：11.5METs
+  var highRunning = Math.round(Number(reduceCalorie) / (16 * userWeight * 1.05) * 60); //295m／分程度：16METs
+  var normalWalking = Math.round(Number(reduceCalorie) / (3 * userWeight * 1.05) * 60); //70m／分程度：3METs 	普通に歩く：70m／分程度
+  var fastWalking = Math.round(Number(reduceCalorie) / (3.5 * userWeight * 1.05) * 60); //80m／分程度：3.5METs 早歩き：80～90m／分程度
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "\u5FC5\u8981\u904B\u52D5\u91CF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "\u3042\u306A\u305F\u306E\u73FE\u5728\u306E\u4F53\u91CD\u306F", userWeight, "kg\u3067\u3059\u3002\u6A19\u6E96\u4F53\u91CD\u306F", aveWeight, "kg\u3067\u3059\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "number",
     value: reduceCalorie,
@@ -4721,7 +4720,7 @@ var settingGender = function settingGender(props) {
     name: "gender",
     className: "form-check-input",
     value: "0",
-    onChange: function onChange(e) {
+    onChange: function onChange() {
       props.setGender(0);
     },
     checked: props.gender === 0
@@ -4734,7 +4733,7 @@ var settingGender = function settingGender(props) {
     name: "gender",
     value: "1",
     className: "form-check-input",
-    onChange: function onChange(e) {
+    onChange: function onChange() {
       props.setGender(1);
     },
     checked: props.gender === 1
@@ -4769,7 +4768,7 @@ var SettingAge = function SettingAge(props) {
     className: "form-select",
     value: props.age,
     onChange: function onChange(e) {
-      return props.setAge(e.target.value);
+      return props.setAge(Number(e.target.value));
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
     value: "15",
@@ -4817,7 +4816,7 @@ var SettingPhysical = function SettingPhysical(props) {
     className: "form-select",
     value: props.physical,
     onChange: function onChange(e) {
-      props.setPhysical(e.target.value);
+      props.setPhysical(Number(e.target.value));
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
     value: "1.5",

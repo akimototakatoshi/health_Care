@@ -1,6 +1,9 @@
-import React from "react";
-
-const SettingPhysical = (props:any) => {
+import React, { FC } from "react";
+type Props ={
+    physical:number;
+    setPhysical:(value: number)=>void
+}
+const SettingPhysical:FC<Props> = (props) => {
     return (
         <div className="col-md-6">
             <select
@@ -8,7 +11,7 @@ const SettingPhysical = (props:any) => {
                 className="form-select"
                 value={props.physical}
                 onChange={(e) => {
-                    props.setPhysical(e.target.value);
+                    props.setPhysical(Number(e.target.value));
                 }}
             >
                 <option value="1.5" className="form-control">
