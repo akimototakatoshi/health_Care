@@ -1,29 +1,30 @@
 import React, { useState } from "react";
+import { Data } from "../types/user";
 
-const Exercise = ({ userData }:any) => {
-    const[reduceCalorie,setReduceCalorie] = useState(0)
+const Exercise = ({ userData }:{userData:Data}) => {
+    const[reduceCalorie,setReduceCalorie] = useState<string>("")
     const userWeight = userData.data[0].weight;
 
     //    消費カロリー（kcal）＝METs×体重（kg）×運動時間（h）×1.05
     //    console.log(6.8 *userdata.weight* 4 *1.05)//時間に対する消費カロリー
     //    console.log(Math.round((100/(6.8*userdata.weight*1.05))*60))//カロリーに対する必要運動時間
     const aveWeight = Math.floor((userData.data[0].height / 100) ** 2 * 22)
-    const lowSycling = Math.round((reduceCalorie/ (6.8 * userWeight * 1.05)) * 60); //16.1-19.2km/時、レジャー、ゆっくり、楽な労力
-    const middleSycling = Math.round((reduceCalorie/ (8.0 * userWeight * 1.05)) * 60); //19.3-22.4km/時、レジャー、ほどほどの労力
-    const highSycling = Math.round((reduceCalorie/ (10.0 * userWeight * 1.05)) * 60); //22.5-25.6km/時、レース、レジャー、速い、きつい労力
+    const lowSycling = Math.round((Number(reduceCalorie)/ (6.8 * userWeight * 1.05)) * 60); //16.1-19.2km/時、レジャー、ゆっくり、楽な労力
+    const middleSycling = Math.round((Number(reduceCalorie)/ (8.0 * userWeight * 1.05)) * 60); //19.3-22.4km/時、レジャー、ほどほどの労力
+    const highSycling = Math.round((Number(reduceCalorie)/ (10.0 * userWeight * 1.05)) * 60); //22.5-25.6km/時、レース、レジャー、速い、きつい労力
 
-    const lowRunning = Math.round((reduceCalorie/ (6 * userWeight * 1.05)) * 60); //107m／分程度：6METs
-    const middleRunning = Math.round((reduceCalorie/ (11.5 * userWeight * 1.05)) * 60); //201m／分程度：11.5METs
-    const highRunning = Math.round((reduceCalorie/ (16 * userWeight * 1.05)) * 60); //295m／分程度：16METs
+    const lowRunning = Math.round((Number(reduceCalorie)/ (6 * userWeight * 1.05)) * 60); //107m／分程度：6METs
+    const middleRunning = Math.round((Number(reduceCalorie)/ (11.5 * userWeight * 1.05)) * 60); //201m／分程度：11.5METs
+    const highRunning = Math.round((Number(reduceCalorie)/ (16 * userWeight * 1.05)) * 60); //295m／分程度：16METs
 
-    const normalWalking = Math.round((reduceCalorie/ (3 * userWeight * 1.05)) * 60); //70m／分程度：3METs 	普通に歩く：70m／分程度
-    const fastWalking = Math.round((reduceCalorie/ (3.5 * userWeight * 1.05)) * 60); //80m／分程度：3.5METs 早歩き：80～90m／分程度
+    const normalWalking = Math.round((Number(reduceCalorie)/ (3 * userWeight * 1.05)) * 60); //70m／分程度：3METs 	普通に歩く：70m／分程度
+    const fastWalking = Math.round((Number(reduceCalorie)/ (3.5 * userWeight * 1.05)) * 60); //80m／分程度：3.5METs 早歩き：80～90m／分程度
 
     return (
         <div>
             <h3>必要運動量</h3>
             <p>あなたの現在の体重は{userWeight}kgです。標準体重は{aveWeight}kgです。</p>
-            <input type="number" value={reduceCalorie} onChange={(e:any)=>setReduceCalorie(e.target.value)} placeholder="100"/>
+            <input type="number" value={reduceCalorie} onChange={(e)=>setReduceCalorie(e.target.value)} placeholder="100"/>
             <p>{reduceCalorie}kcalを消費するのに必要な運動量</p>
             <div className="accordion" id="accordionExample">
                 <div className="accordion-item">

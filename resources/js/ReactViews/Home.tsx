@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../modules/home.css";
 import useSWR from "swr";
 import CalrieGraph from "./components/CalrieGraph";
 import Exercise from "./components/Exercise";
-const fetcher = (...args:any) => fetch(args).then((res) => res.json());
+import { Data } from "./types/user";
+const fetcher = (url:string) => fetch(url).then((res) => res.json());
 
 const Home = () => {
-    const { data, error, isLoading } = useSWR("userSetting", fetcher);
-
+    const {
+        data,
+        error,
+        isLoading,
+    }: { data: Data; error: Error|undefined; isLoading: boolean } = useSWR(
+        "userSetting",
+        fetcher
+    );
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
 
@@ -16,13 +23,13 @@ const Home = () => {
         <div>
             <div className="container">
                 <div className="card">
-                <div className="row">
-                    <div className=" col-auto">
-            <CalrieGraph userData={data} />
-                    </div>
-                    <div className="col mt-5 wf-roundedmplus1c">
-                        <Exercise userData={data} />
-                    </div>
+                    <div className="row">
+                        <div className=" col-auto">
+                            <CalrieGraph userData={data} />
+                        </div>
+                        <div className="col mt-5 wf-roundedmplus1c">
+                            <Exercise userData={data} />
+                        </div>
                     </div>
                 </div>
             </div>

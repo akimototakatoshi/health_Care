@@ -6,28 +6,29 @@ import SettingPhysical from "./components/SettingPhysical";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Data, userData } from "./types/user";
 
-const fetcher = (...args:any) => fetch(args).then((res) => res.json());
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Setting = () => {
-    const { data, error, isLoading } = useSWR("userSetting", fetcher);
+    const { data, error, isLoading }:{data:Data,error:Error|undefined,isLoading:any} = useSWR("userSetting", fetcher);
     const navigate = useNavigate();
 
     // 初期データを保管、入力されたデータを保管
-    const [formName, setFormName] = useState("");
-    const [formAge, setFormAge] = useState("");
-    const [formGender, setFormGender] = useState("");
-    const [formHeight, setFormHeight] = useState("");
-    const [formWeight, setFormWeight] = useState("");
-    const [formPhysical, setFormPhysical] = useState("");
+    const [formName, setFormName] = useState<string>("");
+    const [formAge, setFormAge] = useState<number>(0);
+    const [formGender, setFormGender] = useState<number>(0);
+    const [formHeight, setFormHeight] = useState<number>(0);
+    const [formWeight, setFormWeight] = useState<number>(0);
+    const [formPhysical, setFormPhysical] = useState<number>(0);
 
-    console.log(data);
-    console.log("gen", formGender);
-    console.log("age", formAge);
-    console.log("phy", formPhysical);
-    console.log("wei", formWeight);
+    // console.log(data);
+    // console.log("gen", formGender);
+    // console.log("age", formAge);
+    // console.log("phy", formPhysical);
+    // console.log("wei", formWeight);
 
-    const userData = data?.data[0];
+    const userData:userData = data?.data[0];
     useEffect(() => {
         if (userData) {
             setFormName(userData.name);
@@ -83,7 +84,7 @@ const Setting = () => {
                                         className="form-control"
                                         name="name"
                                         value={formName}
-                                        onChange={(e) =>
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                             setFormName(e.target.value)
                                         }
                                     />
@@ -105,7 +106,7 @@ const Setting = () => {
                                         className="form-control"
                                         name="email"
                                         value={userData.email}
-                                        onChange={() => {}}
+                                        onChange={()=>{return}}
                                     />
                                 </div>
                             </div>
@@ -146,7 +147,7 @@ const Setting = () => {
                                         name="height"
                                         value={formHeight}
                                         onChange={(e) =>
-                                            setFormHeight(e.target.value)
+                                            setFormHeight(Number(e.target.value))
                                         }
                                     />
                                 </div>
@@ -168,7 +169,7 @@ const Setting = () => {
                                         name="weight"
                                         value={formWeight}
                                         onChange={(e) =>
-                                            setFormWeight(e.target.value)
+                                            setFormWeight(Number(e.target.value))
                                         }
                                     />
                                 </div>

@@ -1,13 +1,16 @@
-import React from "react";
-
-const SettingAge = (props:any) => {
+import React, { FC } from "react";
+type Props ={
+    age: number;
+    setAge: (value: number) => void
+}
+const SettingAge: FC<Props> = (props) => {
     return (
         <div className="col-md-6">
             <select
                 name="age"
                 className="form-select"
                 value={props.age}
-                onChange={(e) => props.setAge(e.target.value)}
+                onChange={(e) => props.setAge(Number(e.target.value))}
             >
                 <option value="15" className="form-control">
                     10歳~19歳

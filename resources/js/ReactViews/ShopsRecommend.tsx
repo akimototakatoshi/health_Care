@@ -27,17 +27,27 @@ const ShopsRecommend = () => {
     const [searchName, setSearchName] = useState("");
     const [searchPrefecture, setSearchPrefecture] = useState("");
     const [searchCity, setSearchCity] = useState("");
-    const [searchHistory, setSearchHistory] = useState(() => { //ストレージから持ってきたJSONをパースした値を初期値に入れる。何もなかったら空を返す
-        let json:any = localStorage.getItem("shops");
-        let listShops:any = JSON.parse(json);
-        return listShops || "";
+    const [searchHistory, setSearchHistory] = useState(() => {
+        //ストレージから持ってきたJSONをパースした値を初期値に入れる。何もなかったら空を返す
+        let shopsJson = localStorage.getItem("shops");
+        if (shopsJson === null) {
+            return [];
+        }
+        try {
+            let listShops = JSON.parse(shopsJson);
+            return listShops;
+        } catch (e) {
+            console.error(e,shopsJson);
+            localStorage.removeItem("shops");
+            return [];
+        }
     });
 
     useEffect(() => {
         if (searchHistory.length === 0) {
             localStorage.clear();
         }
-    }, [searchHistory]);//searchHistoryが空ならローカルストレージを全て削除する。
+    }, [searchHistory]); //searchHistoryが空ならローカルストレージを全て削除する。
 
     const onClickSearch = () => {
         if (!searchName && !searchPrefecture && !searchCity) {
@@ -47,8 +57,8 @@ const ShopsRecommend = () => {
                 ...searchHistory,
                 { searchName, searchPrefecture, searchCity },
             ];
-            localStorage.setItem("shops", JSON.stringify(history));//historyの値をJSON形式に直して、shopsに追加
-            setSearchHistory(history);//historyの値はローカルストレージに保存されているので、ステイトを更新しても値は消えない
+            localStorage.setItem("shops", JSON.stringify(history)); //historyの値をJSON形式に直して、shopsに追加
+            setSearchHistory(history); //historyの値はローカルストレージに保存されているので、ステイトを更新しても値は消えない
 
             window.open(
                 `https://www.google.co.jp/maps/search/${searchPrefecture}${searchCity}${searchName}/`
@@ -65,11 +75,11 @@ const ShopsRecommend = () => {
         setSearchCity("");
     };
 
-    const onClickRemoveHistory = (index:number) => {
+    const onClickRemoveHistory = (index: number) => {
         //@ts-ignore
-        const storageShops = JSON.parse(localStorage.getItem("shops"));//JSONをパースした値を持ってくる
-        delete storageShops[index];//"shops"のindex番目を削除
-        localStorage.setItem("shops", JSON.stringify(storageShops));//ローカルストレージにindex番目を消した値を追加する
+        const storageShops = JSON.parse(localStorage.getItem("shops")); //JSONをパースした値を持ってくる
+        delete storageShops[index]; //"shops"のindex番目を削除
+        localStorage.setItem("shops", JSON.stringify(storageShops)); //ローカルストレージにindex番目を消した値を追加する
 
         const history = [...searchHistory];
         history.splice(index, 1);
@@ -135,40 +145,44 @@ const ShopsRecommend = () => {
                     >
                         <div className="accordion-body">
                             {searchHistory.length > 0 &&
-                                searchHistory.map((history:any, index:number) => {
-                                    return (
-                                        <div
-                                            key={history.searchName}
-                                            className="row"
-                                            style={{ margin: "10px" }}
-                                        >
-                                            <span className="col-2">
-                                                {history.searchName}
-                                            </span>
-                                            <span className="col-2">
-                                                {history.searchPrefecture}
-                                            </span>
-                                            <span className="col-2">
-                                                {history.searchCity}
-                                            </span>
-                                            <button
-                                                type="button"
-                                                className="btn btn-warning col-3"
+                                searchHistory.map(
+                                    (history: any, index: number) => {
+                                        return (
+                                            <div
+                                                key={history.searchName}
+                                                className="row"
+                                                style={{ margin: "10px" }}
                                             >
-                                                お気に入り
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="btn btn-danger col-3"
-                                                onClick={() => {
-                                                    onClickRemoveHistory(index);
-                                                }}
-                                            >
-                                                削除
-                                            </button>
-                                        </div>
-                                    );
-                                })}
+                                                <span className="col-2">
+                                                    {history.searchName}
+                                                </span>
+                                                <span className="col-2">
+                                                    {history.searchPrefecture}
+                                                </span>
+                                                <span className="col-2">
+                                                    {history.searchCity}
+                                                </span>
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-warning col-3"
+                                                >
+                                                    お気に入り
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-danger col-3"
+                                                    onClick={() => {
+                                                        onClickRemoveHistory(
+                                                            index
+                                                        );
+                                                    }}
+                                                >
+                                                    削除
+                                                </button>
+                                            </div>
+                                        );
+                                    }
+                                )}
                         </div>
                     </div>
                 </div>

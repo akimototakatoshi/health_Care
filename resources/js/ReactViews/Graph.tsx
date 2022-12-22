@@ -15,6 +15,7 @@ import {
 } from "chart.js";
 import { Chart } from "react-chartjs-2";
 import { Link } from "react-router-dom";
+import { Data, userData } from "./types/user";
 ChartJS.register(
     LinearScale,
     CategoryScale,
@@ -27,11 +28,19 @@ ChartJS.register(
     BarController
 );
 
-const fetcher = (...args:any) => fetch(args).then((res) => res.json());
+type data2 ={
+data:Calorie[]
+}
+
+type Calorie ={
+    calorie:string;
+    week:number
+}
+const fetcher = (url:string) => fetch(url).then((res) => res.json());
 
 const Graph = () => {
-    const { data, error, isLoading }:{data:any,error:any,isLoading:any} = useSWR("calorieWeek", fetcher);
-    const [userData, setUserData] = useState<any|null>([]);
+    const { data, error, isLoading }:{data:data2,error:Error|undefined,isLoading:boolean} = useSWR("calorieWeek", fetcher);
+    const [userData, setUserData] = useState<userData>();
     const labels = [
         "Monday",
         "Tuesday",
@@ -43,7 +52,8 @@ const Graph = () => {
     useEffect(() => {
         const axiosData = async () => {
             try {
-                const response:any = await axios.get("userSetting");
+                const response = await axios.get<Data> ("userSetting");
+                console.log(response.data)
                 setUserData(response.data.data[0]);
             } catch (e) {
                 return;
@@ -58,33 +68,33 @@ const Graph = () => {
 
 
     function caluculateAveCalorie() {
-        if (userData.gender === 0) {
+        if (userData?.gender === 0) {
             return Math.floor(
-                (13.397 * (userData.height / 100) ** 2 * 22 +
-                    4.799 * userData.height -
-                    5.677 * userData.age +
+                (13.397 * (userData?.height / 100) ** 2 * 22 +
+                    4.799 * userData?.height -
+                    5.677 * userData?.age +
                     88.362) *
-                    Number(userData.physical)
+                    Number(userData?.physical)
             );
-        } else if (userData.gender === 1) {
+        } else if (userData?.gender === 1) {
             return Math.floor(
-                (9.247 * (userData.height / 100) ** 2 * 22 +
-                    3.098 * userData.height -
-                    4.33 * userData.age +
+                (9.247 * (userData?.height / 100) ** 2 * 22 +
+                    3.098 * userData?.height -
+                    4.33 * userData?.age +
                     447.593) *
-                    Number(userData.physical)
+                    Number(userData?.physical)
             );
         }
     }
     // let date = new Date()
 
-    const monday:any = [];
-    const tuesday:any = [];
-    const wednesday:any = [];
-    const thursday:any = [];
-    const friday:any = [];
-    const saturday:any = [];
-    const sunday:any = [];
+    const monday: number[] = [];
+    const tuesday:number[] = [];
+    const wednesday:number[] = [];
+    const thursday:number[] = [];
+    const friday:number[] = [];
+    const saturday:number[] = [];
+    const sunday:number[] = [];
 
     for (let i = 0; i < data.data.length; i++) {
         let week = data.data[i].week;

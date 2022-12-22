@@ -1,6 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 
-const settingGender = (props:any) => {
+type Props ={
+    gender:number;
+    setGender:(value:number)=>void
+}
+const settingGender:FC<Props> = (props) => {
     return (
         <>
             <div className="col-md-6">
@@ -10,7 +14,7 @@ const settingGender = (props:any) => {
                     name="gender"
                     className="form-check-input"
                     value="0"
-                    onChange={(e) => {
+                    onChange={() => {
                         props.setGender(0);
                     }}
                     checked={props.gender === 0}
@@ -25,7 +29,7 @@ const settingGender = (props:any) => {
                     name="gender"
                     value="1"
                     className="form-check-input"
-                    onChange={(e) => {
+                    onChange={() => {
                         props.setGender(1);
                     }}
                     checked={props.gender === 1}
