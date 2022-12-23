@@ -1,0 +1,19 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scraping.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "akimoto-takatoshi",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio-httpcli": "^0.8.3",
+    "fs": "^0.0.1-security",
+    "https-proxy-agent": "^2.2.3",
+    "knex": "^2.3.0",
+    "mysql": "^2.18.1",
+    "puppeteer": "^19.4.1"
+  }
+}
