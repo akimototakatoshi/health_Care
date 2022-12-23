@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import useSWR from "swr";
 // import { useNavigate } from 'react-router-dom';
 
 const ShopsRecommend = () => {
@@ -27,17 +29,23 @@ const ShopsRecommend = () => {
     const [searchName, setSearchName] = useState("");
     const [searchPrefecture, setSearchPrefecture] = useState("");
     const [searchCity, setSearchCity] = useState("");
-    const [searchHistory, setSearchHistory] = useState(() => { //ストレージから持ってきたJSONをパースした値を初期値に入れる。何もなかったら空を返す
+    const [searchHistory, setSearchHistory] = useState(() => {
+        //ストレージから持ってきたJSONをパースした値を初期値に入れる。何もなかったら空を返す
         let json = localStorage.getItem("shops");
         let listShops = JSON.parse(json);
         return listShops || "";
     });
 
+    //お気に入りデータ取得
+    const fetcher = (...args) => fetch(...args).then((res) => res.json());
+    const { data, error, isLoading } = useSWR("FavoriteStore", fetcher);
+    const favoriteStore = data?.data;
+
     useEffect(() => {
         if (searchHistory.length === 0) {
             localStorage.clear();
         }
-    }, [searchHistory]);//searchHistoryが空ならローカルストレージを全て削除する。
+    }, [searchHistory]); //searchHistoryが空ならローカルストレージを全て削除する。
 
     const onClickSearch = () => {
         if (!searchName && !searchPrefecture && !searchCity) {
@@ -47,8 +55,8 @@ const ShopsRecommend = () => {
                 ...searchHistory,
                 { searchName, searchPrefecture, searchCity },
             ];
-            localStorage.setItem("shops", JSON.stringify(history));//historyの値をJSON形式に直して、shopsに追加
-            setSearchHistory(history);//historyの値はローカルストレージに保存されているので、ステイトを更新しても値は消えない
+            localStorage.setItem("shops", JSON.stringify(history)); //historyの値をJSON形式に直して、shopsに追加
+            setSearchHistory(history); //historyの値はローカルストレージに保存されているので、ステイトを更新しても値は消えない
 
             window.open(
                 `https://www.google.co.jp/maps/search/${searchPrefecture}${searchCity}${searchName}/`
@@ -66,14 +74,57 @@ const ShopsRecommend = () => {
     };
 
     const onClickRemoveHistory = (index) => {
-        const storageShops = JSON.parse(localStorage.getItem("shops"));//JSONをパースした値を持ってくる
-        delete storageShops[index];//"shops"のindex番目を削除
-        localStorage.setItem("shops", JSON.stringify(storageShops));//ローカルストレージにindex番目を消した値を追加する
+        const storageShops = JSON.parse(localStorage.getItem("shops")); //JSONをパースした値を持ってくる
+        delete storageShops[index]; //"shops"のindex番目を削除
+        localStorage.setItem("shops", JSON.stringify(storageShops)); //ローカルストレージにindex番目を消した値を追加する
 
         const history = [...searchHistory];
         history.splice(index, 1);
         setSearchHistory(history);
     };
+
+    // お気に入りに追加
+    const onClickFavorite = (index) => {
+        axios
+            .post("FavoriteAdd", {
+                name: searchHistory[index].searchName,
+                prefecture: searchHistory[index].searchPrefecture,
+                city: searchHistory[index].searchCity,
+            })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((e) => {
+                console.log("axiosError");
+            });
+        onClickRemoveHistory();
+        location.reload();
+    };
+
+    // お気に入り検索
+    const onClickFavoriteSearch = (favoriteData) => {
+        setSearchName(favoriteData.name);
+        setSearchPrefecture(favoriteData.prefecture);
+        setSearchCity(favoriteData.city);
+    };
+
+    // お気に入りに削除
+    const onClickFavoriteDelete = (favoId) => {
+        axios
+            .post("FavoriteDelete", {
+                id: favoId,
+            })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((e) => {
+                console.log("axiosError");
+            });
+        location.reload();
+    };
+
+    if (error) return <div>failed to load</div>;
+    if (isLoading) return <div>loading...</div>;
 
     return (
         <div className="container">
@@ -105,12 +156,14 @@ const ShopsRecommend = () => {
                     placeholder="新宿"
                 ></input>
             </div>
-            <button className="btn btn-primary" onClick={onClickSearch}>
-                検索
-            </button>
-            <button className="btn btn-danger" onClick={onClickCancel}>
-                取消
-            </button>
+            <div className="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                <button className="btn btn-primary" onClick={onClickSearch}>
+                    検索
+                </button>
+                <button className="btn btn-danger" onClick={onClickCancel}>
+                    取消
+                </button>
+            </div>
             <hr />
             <div className="accordion" id="accordionExample">
                 <div className="accordion-item">
@@ -133,41 +186,128 @@ const ShopsRecommend = () => {
                         data-bs-parent="#accordionExample"
                     >
                         <div className="accordion-body">
-                            {searchHistory.length > 0 &&
+                            {searchHistory.length > 0 ? (
                                 searchHistory.map((history, index) => {
                                     return (
                                         <div
-                                            key={history.searchName}
+                                            key={index}
                                             className="row"
                                             style={{ margin: "10px" }}
                                         >
-                                            <span className="col-2">
+                                            <span className="col-3 d-flex align-items-center justify-content-center">
                                                 {history.searchName}
                                             </span>
-                                            <span className="col-2">
+                                            <span className="col-3 d-flex align-items-center justify-content-center">
                                                 {history.searchPrefecture}
                                             </span>
-                                            <span className="col-2">
+                                            <span className="col-3 d-flex align-items-center justify-content-center">
                                                 {history.searchCity}
                                             </span>
-                                            <button
-                                                type="button"
-                                                className="btn btn-warning col-3"
-                                            >
-                                                お気に入り
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="btn btn-danger col-3"
-                                                onClick={() => {
-                                                    onClickRemoveHistory(index);
-                                                }}
-                                            >
-                                                削除
-                                            </button>
+                                            <span className="d-grid gap-2 d-md-flex justify-content-md-end col-3">
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-warning"
+                                                    onClick={() => {
+                                                        onClickFavorite(index);
+                                                    }}
+                                                >
+                                                    お気に入り
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-outline-danger"
+                                                    onClick={() => {
+                                                        onClickRemoveHistory(
+                                                            index
+                                                        );
+                                                    }}
+                                                >
+                                                    削除
+                                                </button>
+                                            </span>
                                         </div>
                                     );
-                                })}
+                                })
+                            ) : (
+                                <div>
+                                    <p>履歴がありません</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <div className="accordion-item">
+                    <h2 className="accordion-header" id="headingTwo">
+                        <button
+                            className="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo"
+                            aria-expanded="false"
+                            aria-controls="collapseTwo"
+                        >
+                            <h5 className="font-monospace">お気に入り</h5>
+                        </button>
+                    </h2>
+                    <div
+                        id="collapseTwo"
+                        className="accordion-collapse collapse"
+                        aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample"
+                    >
+                        <div className="accordion-body">
+                            {favoriteStore.length > 0 ? (
+                                favoriteStore.map((favorite) => {
+                                    return (
+                                        <div
+                                            key={favorite.id}
+                                            className="row"
+                                            style={{ margin: "10px" }}
+                                        >
+                                            <span className="col-3 d-flex align-items-center justify-content-center">
+                                                {favorite.name}
+                                            </span>
+                                            <span className="col-3 d-flex align-items-center justify-content-center">
+                                                {favorite.prefecture}
+                                            </span>
+                                            <span className="col-3 d-flex align-items-center justify-content-center">
+                                                {favorite.city}
+                                            </span>
+
+                                            <span className="d-grid gap-2 d-md-flex justify-content-md-end col-3">
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-outline-primary"
+                                                    onClick={() => {
+                                                        onClickFavoriteSearch(
+                                                            favorite
+                                                        );
+                                                    }}
+                                                >
+                                                    入力
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-outline-danger"
+                                                    onClick={() => {
+                                                        onClickFavoriteDelete(
+                                                            favorite.id
+                                                        );
+                                                    }}
+                                                >
+                                                    削除
+                                                </button>
+                                            </span>
+                                        </div>
+                                    );
+                                })
+                            ) : (
+                                <div>
+                                    <p>お気に入りがありません</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

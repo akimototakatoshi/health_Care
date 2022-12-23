@@ -21,12 +21,6 @@ const Setting = () => {
     const [formWeight, setFormWeight] = useState("");
     const [formPhysical, setFormPhysical] = useState("");
 
-    console.log(data);
-    console.log("gen", formGender);
-    console.log("age", formAge);
-    console.log("phy", formPhysical);
-    console.log("wei", formWeight);
-
     const userData = data?.data[0];
     useEffect(() => {
         if (userData) {

@@ -3,10 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
-class CalorieYearResource extends JsonResource
+class FavoriteStoreResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +15,12 @@ class CalorieYearResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'calorie' => $this->calorie,
-            'created_at' => $this->created_at->format("m")
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'name' => $this->name,
+            'prefecture' => $this->prefecture,
+            'city' => $this->city,
+            'created_at' => $this->created_at->format("Y-m-d")
         ];
     }
 }

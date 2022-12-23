@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HealthContentController;
 use App\Http\Controllers\CalorieIntakeController;
 use App\Http\Controllers\UserSettingController;
+use App\Http\Controllers\FavoriteStoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,14 @@ Route::controller(CalorieIntakeController::class)->middleware(['api'])
 });
 
 Route::controller(UserSettingController::class)->middleware(['api'])
-->group(function(){ // グループ化
+->group(function(){ 
     Route::get('/userSetting', 'edit')->name('userSetting'); // ログイン中のユーザー情報取得
     Route::post('/userUpdate', 'update')->name('userUpdate');
+});
+
+Route::controller(FavoriteStoreController::class)->middleware(['api'])
+->group(function(){ 
+    Route::get('/FavoriteStore', 'index')->name('FavoriteStore'); 
+    Route::post('/FavoriteAdd', 'store')->name('FavoriteAdd');
+    Route::post('/FavoriteDelete', 'destroy')->name('FavoriteDelete');
 });

@@ -84,18 +84,9 @@ class CalorieIntakeController extends Controller
 		$year_to = Carbon::today();
 		$year_to->endOfYear();
 
-        $year = Carbon::now()->year; 
-
         // 一年のカロリーデータ取得 
-        $calorieYear = CalorieIntake::where('user_id', '=', Auth::id())->whereYear('created_at', $year)
-        ->orderBy('created_at')->get()
-        ->groupBy(function ($row) {
-            return $row->created_at->format('m');
-        })->map(function ($day) {
-            return $day->sum('calorie');
-        });
-
-        return CalorieYearResource::collection($year);
+        return CalorieYearResource::collection(CalorieIntake::whereBetween('created_at', [$year_from, $year_to])
+        ->where('user_id', '=', Auth::id())->get());
 
     }
 
