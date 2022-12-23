@@ -4056,11 +4056,6 @@ var Setting = function Setting() {
     _useState12 = _slicedToArray(_useState11, 2),
     formPhysical = _useState12[0],
     setFormPhysical = _useState12[1];
-  // console.log(data);
-  // console.log("gen", formGender);
-  // console.log("age", formAge);
-  // console.log("phy", formPhysical);
-  // console.log("wei", formWeight);
   var userData = data === null || data === void 0 ? void 0 : data.data[0];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (userData) {
@@ -4215,6 +4210,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var swr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swr */ "./node_modules/swr/core/dist/index.mjs");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -4225,6 +4224,8 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 // import { useNavigate } from 'react-router-dom';
 var ShopsRecommend = function ShopsRecommend() {
@@ -4274,6 +4275,18 @@ var ShopsRecommend = function ShopsRecommend() {
     _useState8 = _slicedToArray(_useState7, 2),
     searchHistory = _useState8[0],
     setSearchHistory = _useState8[1];
+
+  //お気に入りデータ取得
+  var fetcher = function fetcher() {
+    return fetch.apply(void 0, arguments).then(function (res) {
+      return res.json();
+    });
+  };
+  var _useSWR = (0,swr__WEBPACK_IMPORTED_MODULE_1__["default"])("FavoriteStore", fetcher),
+    data = _useSWR.data,
+    error = _useSWR.error,
+    isLoading = _useSWR.isLoading;
+  var favoriteStore = data === null || data === void 0 ? void 0 : data.data;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (searchHistory.length === 0) {
       localStorage.clear();
@@ -4310,95 +4323,231 @@ var ShopsRecommend = function ShopsRecommend() {
     history.splice(index, 1);
     setSearchHistory(history);
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-    className: "font-monospace"
-  }, "\u304A\u5E97\u3092\u691C\u7D22"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    htmlFor: "search"
-  }, "\u5E97\u540D\u3092\u5165\u529B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: " col-4",
-    type: "text",
-    value: searchName,
-    onChange: function onChange(e) {
-      return setSearchName(e.target.value);
-    },
-    id: "search",
-    placeholder: "\u30DE\u30AF\u30C9\u30CA\u30EB\u30C9"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: " col-4",
-    type: "text",
-    value: searchPrefecture,
-    onChange: function onChange(e) {
-      return setSearchPrefecture(e.target.value);
-    },
-    id: "search",
-    placeholder: "\u6771\u4EAC\u90FD"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: " col-4",
-    type: "text",
-    value: searchCity,
-    onChange: function onChange(e) {
-      return setSearchCity(e.target.value);
-    },
-    id: "search",
-    placeholder: "\u65B0\u5BBF"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-primary",
-    onClick: onClickSearch
-  }, "\u691C\u7D22"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-danger",
-    onClick: onClickCancel
-  }, "\u53D6\u6D88"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "accordion",
-    id: "accordionExample"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "accordion-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-    className: "accordion-header",
-    id: "headingOne"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "accordion-button",
-    type: "button",
-    "data-bs-toggle": "collapse",
-    "data-bs-target": "#collapseOne",
-    "aria-expanded": "true",
-    "aria-controls": "collapseOne"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h5", {
-    className: "font-monospace"
-  }, "\u691C\u7D22\u5C65\u6B74"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    id: "collapseOne",
-    className: "accordion-collapse collapse",
-    "aria-labelledby": "headingOne",
-    "data-bs-parent": "#accordionExample"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "accordion-body"
-  }, searchHistory.length > 0 && searchHistory.map(function (history, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      key: history.searchName,
+
+  // お気に入りに追加
+  var onClickFavorite = function onClickFavorite(index) {
+    axios__WEBPACK_IMPORTED_MODULE_3__["default"].post("FavoriteAdd", {
+      name: searchHistory[index].searchName,
+      prefecture: searchHistory[index].searchPrefecture,
+      city: searchHistory[index].searchCity
+    }).then(function (res) {
+      console.log(res);
+    })["catch"](function (e) {
+      console.log("axiosError");
+    });
+    onClickRemoveHistory();
+    location.reload();
+  };
+
+  // お気に入り検索
+  var onClickFavoriteSearch = function onClickFavoriteSearch(favoriteData) {
+    setSearchName(favoriteData.name);
+    setSearchPrefecture(favoriteData.prefecture);
+    setSearchCity(favoriteData.city);
+  };
+
+  // お気に入りに削除
+  var onClickFavoriteDelete = function onClickFavoriteDelete(favoId) {
+    axios__WEBPACK_IMPORTED_MODULE_3__["default"].post("FavoriteDelete", {
+      id: favoId
+    }).then(function (res) {
+      console.log(res);
+    })["catch"](function (e) {
+      console.log("axiosError");
+    });
+    location.reload();
+  };
+  if (error) return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    children: "failed to load"
+  });
+  if (isLoading) return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    children: "loading..."
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "container",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+      className: "font-monospace",
+      children: "\u304A\u5E97\u3092\u691C\u7D22"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+      htmlFor: "search",
+      children: "\u5E97\u540D\u3092\u5165\u529B"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "row",
-      style: {
-        margin: "10px"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-      className: "col-2"
-    }, history.searchName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-      className: "col-2"
-    }, history.searchPrefecture), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-      className: "col-2"
-    }, history.searchCity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-      type: "button",
-      className: "btn btn-warning col-3"
-    }, "\u304A\u6C17\u306B\u5165\u308A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-      type: "button",
-      className: "btn btn-danger col-3",
-      onClick: function onClick() {
-        onClickRemoveHistory(index);
-      }
-    }, "\u524A\u9664"));
-  }))))));
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        className: " col-4",
+        type: "text",
+        value: searchName,
+        onChange: function onChange(e) {
+          return setSearchName(e.target.value);
+        },
+        id: "search",
+        placeholder: "\u30DE\u30AF\u30C9\u30CA\u30EB\u30C9"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        className: " col-4",
+        type: "text",
+        value: searchPrefecture,
+        onChange: function onChange(e) {
+          return setSearchPrefecture(e.target.value);
+        },
+        id: "search",
+        placeholder: "\u6771\u4EAC\u90FD"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        className: " col-4",
+        type: "text",
+        value: searchCity,
+        onChange: function onChange(e) {
+          return setSearchCity(e.target.value);
+        },
+        id: "search",
+        placeholder: "\u65B0\u5BBF"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "d-grid gap-2 d-md-flex justify-content-md-center mt-3",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+        className: "btn btn-primary",
+        onClick: onClickSearch,
+        children: "\u691C\u7D22"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+        className: "btn btn-danger",
+        onClick: onClickCancel,
+        children: "\u53D6\u6D88"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "accordion",
+      id: "accordionExample",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "accordion-item",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+          className: "accordion-header",
+          id: "headingOne",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            className: "accordion-button",
+            type: "button",
+            "data-bs-toggle": "collapse",
+            "data-bs-target": "#collapseOne",
+            "aria-expanded": "true",
+            "aria-controls": "collapseOne",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+              className: "font-monospace",
+              children: "\u691C\u7D22\u5C65\u6B74"
+            })
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          id: "collapseOne",
+          className: "accordion-collapse collapse",
+          "aria-labelledby": "headingOne",
+          "data-bs-parent": "#accordionExample",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "accordion-body",
+            children: searchHistory.length > 0 ? searchHistory.map(function (history, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "row",
+                style: {
+                  margin: "10px"
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  className: "col-3 d-flex align-items-center justify-content-center",
+                  children: history.searchName
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  className: "col-3 d-flex align-items-center justify-content-center",
+                  children: history.searchPrefecture
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  className: "col-3 d-flex align-items-center justify-content-center",
+                  children: history.searchCity
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+                  className: "d-grid gap-2 d-md-flex justify-content-md-end col-3",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    type: "button",
+                    className: "btn btn-warning",
+                    onClick: function onClick() {
+                      onClickFavorite(index);
+                    },
+                    children: "\u304A\u6C17\u306B\u5165\u308A"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    type: "button",
+                    className: "btn btn-outline-danger",
+                    onClick: function onClick() {
+                      onClickRemoveHistory(index);
+                    },
+                    children: "\u524A\u9664"
+                  })]
+                })]
+              }, index);
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                children: "\u5C65\u6B74\u304C\u3042\u308A\u307E\u305B\u3093"
+              })
+            })
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "accordion-item",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+          className: "accordion-header",
+          id: "headingTwo",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            className: "accordion-button collapsed",
+            type: "button",
+            "data-bs-toggle": "collapse",
+            "data-bs-target": "#collapseTwo",
+            "aria-expanded": "false",
+            "aria-controls": "collapseTwo",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+              className: "font-monospace",
+              children: "\u304A\u6C17\u306B\u5165\u308A"
+            })
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          id: "collapseTwo",
+          className: "accordion-collapse collapse",
+          "aria-labelledby": "headingTwo",
+          "data-bs-parent": "#accordionExample",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "accordion-body",
+            children: favoriteStore.length > 0 ? favoriteStore.map(function (favorite) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "row",
+                style: {
+                  margin: "10px"
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  className: "col-3 d-flex align-items-center justify-content-center",
+                  children: favorite.name
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  className: "col-3 d-flex align-items-center justify-content-center",
+                  children: favorite.prefecture
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  className: "col-3 d-flex align-items-center justify-content-center",
+                  children: favorite.city
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+                  className: "d-grid gap-2 d-md-flex justify-content-md-end col-3",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    type: "button",
+                    className: "btn btn-outline-primary",
+                    onClick: function onClick() {
+                      onClickFavoriteSearch(favorite);
+                    },
+                    children: "\u5165\u529B"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    type: "button",
+                    className: "btn btn-outline-danger",
+                    onClick: function onClick() {
+                      onClickFavoriteDelete(favorite.id);
+                    },
+                    children: "\u524A\u9664"
+                  })]
+                })]
+              }, favorite.id);
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                children: "\u304A\u6C17\u306B\u5165\u308A\u304C\u3042\u308A\u307E\u305B\u3093"
+              })
+            })
+          })
+        })]
+      })]
+    })]
+  });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShopsRecommend);
 
