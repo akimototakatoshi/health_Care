@@ -109,6 +109,7 @@ const CalrieGraph = ({ userData}: { userData: Data,}) => {
                                 //     )}kcal`;
                                 // },
                                 formatter: function () {
+
                                     return `${number}kcal/${total}kcal`;
                                 },
                             },
@@ -121,7 +122,7 @@ const CalrieGraph = ({ userData}: { userData: Data,}) => {
 
     return (
         <div>
-            {number > total &&(<h3 style={{color:"red",marginLeft:"140px"}}>{number-total}kcalオーバーしています。</h3>)}
+            {number > total &&(<h3 style={{color:"red",marginLeft:"10px"}}>{number-total}kcalオーバーしています。</h3>)}
             <ReactApexChart
                 options={state.options}
                 series={state.series}

@@ -3,7 +3,9 @@ import axios from "axios";
 import useSWR from "swr";
 // import { useNavigate } from 'react-router-dom';
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const ShopsRecommend = () => {
+    const { data, error, isLoading } = useSWR("FavoriteStore", fetcher);
     //   var options = {
     //     enableHighAccuracy: true,
     //     maximumAge: 0
@@ -46,10 +48,8 @@ const ShopsRecommend = () => {
     });
 
     //お気に入りデータ取得
-    const fetcher = (url: string) => fetch(url).then((res) => res.json());
-    const { data, error, isLoading } = useSWR("FavoriteStore", fetcher);
     const favoriteStore = data?.data;
-
+    
     useEffect(() => {
         if (searchHistory.length === 0) {
             localStorage.clear();
@@ -57,7 +57,7 @@ const ShopsRecommend = () => {
     }, [searchHistory]); //searchHistoryが空ならローカルストレージを全て削除する。
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
-
+    
     const onClickSearch = () => {
         if (!searchName && !searchPrefecture && !searchCity) {
             return;

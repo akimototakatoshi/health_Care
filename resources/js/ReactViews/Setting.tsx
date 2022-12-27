@@ -14,17 +14,7 @@ const Setting = () => {
     const { data, error, isLoading }:{data:Data,error:Error|undefined,isLoading:any} = useSWR("userSetting", fetcher);
     const navigate = useNavigate();
 
-<<<<<<< HEAD:resources/js/ReactViews/Setting.jsx
-    // 初期データを保管、Ï入力されたデータを保管
-    const [formName, setFormName] = useState("");
-    const [formAge, setFormAge] = useState("");
-    const [formGender, setFormGender] = useState("");
-    const [formHeight, setFormHeight] = useState("");
-    const [formWeight, setFormWeight] = useState("");
-    const [formPhysical, setFormPhysical] = useState("");
 
-    const userData = data?.data[0];
-=======
     // 初期データを保管、入力されたデータを保管
     const [formName, setFormName] = useState<string>("");
     const [formAge, setFormAge] = useState<number>(0);
@@ -40,7 +30,6 @@ const Setting = () => {
     // console.log("wei", formWeight);
 
     const userData:userData = data?.data[0];
->>>>>>> 1c3769cfa32679a4f78668eff373e4e09c90bacf:resources/js/ReactViews/Setting.tsx
     useEffect(() => {
         if (userData) {
             setFormName(userData.name);

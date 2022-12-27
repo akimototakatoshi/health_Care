@@ -1,5 +1,5 @@
 import axios from "axios";
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import {
     Chart as ChartJS,
@@ -16,6 +16,8 @@ import {
 import { Chart } from "react-chartjs-2";
 import { Link } from "react-router-dom";
 import { Data, userData } from "./types/user";
+import CalorieYear from "./components/CalorieYear"
+import { CalorieOfYear } from "./types/calorie";
 ChartJS.register(
     LinearScale,
     CategoryScale,
@@ -28,19 +30,29 @@ ChartJS.register(
     BarController
 );
 
-type data2 ={
-data:Calorie[]
-}
+type data2 = {
+    data: Calorie[];
+};
 
-type Calorie ={
-    calorie:string;
-    week:number
-}
-const fetcher = (url:string) => fetch(url).then((res) => res.json());
+type Calorie = {
+    calorie: string;
+    week: number;
+};
+
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Graph = () => {
-    const { data, error, isLoading }:{data:data2,error:Error|undefined,isLoading:boolean} = useSWR("calorieWeek", fetcher);
+    const {
+        data,
+        error,
+        isLoading,
+    }: { data: data2; error: Error | undefined; isLoading: boolean } = useSWR(
+        "calorieWeek",
+        fetcher
+    );
     const [userData, setUserData] = useState<userData>();
+    const [calorieOfYear, setCalorieOfYear] = useState<CalorieOfYear[]>([]);
     const labels = [
         "Monday",
         "Tuesday",
@@ -49,23 +61,30 @@ const Graph = () => {
         "Friday",
         "Saturday",
     ];
+
     useEffect(() => {
         const axiosData = async () => {
             try {
-                const response = await axios.get<Data> ("userSetting");
-                console.log(response.data)
+                const response = await axios.get<Data>("userSetting");
                 setUserData(response.data.data[0]);
             } catch (e) {
                 return;
             }
         };
+        const axiosDataOfCalorieYear = async () => {
+            try {
+                const responseData = await axios.get("calorieYear");
+                let calorieAndMonthData = responseData.data.data;
+                setCalorieOfYear(calorieAndMonthData);
+            } catch (e) {
+                return;
+            }
+        };
         axiosData();
+        axiosDataOfCalorieYear();
     }, []);
-
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
-
-
 
     function caluculateAveCalorie() {
         if (userData?.gender === 0) {
@@ -86,15 +105,16 @@ const Graph = () => {
             );
         }
     }
+
     // let date = new Date()
 
     const monday: number[] = [];
-    const tuesday:number[] = [];
-    const wednesday:number[] = [];
-    const thursday:number[] = [];
-    const friday:number[] = [];
-    const saturday:number[] = [];
-    const sunday:number[] = [];
+    const tuesday: number[] = [];
+    const wednesday: number[] = [];
+    const thursday: number[] = [];
+    const friday: number[] = [];
+    const saturday: number[] = [];
+    const sunday: number[] = [];
 
     for (let i = 0; i < data.data.length; i++) {
         let week = data.data[i].week;
@@ -119,7 +139,7 @@ const Graph = () => {
         if (monday.length === 0) {
             return 0;
         } else {
-            let reduceMon = monday.reduce(function (a:number, b:number) {
+            let reduceMon = monday.reduce(function (a: number, b: number) {
                 return a + b;
             });
             return reduceMon;
@@ -130,7 +150,7 @@ const Graph = () => {
         if (tuesday.length === 0) {
             return 0;
         } else {
-            let reduceTue = tuesday.reduce(function (a:number, b:number) {
+            let reduceTue = tuesday.reduce(function (a: number, b: number) {
                 return a + b;
             });
             return reduceTue;
@@ -141,7 +161,7 @@ const Graph = () => {
         if (wednesday.length === 0) {
             return 0;
         } else {
-            let reduceWen = wednesday.reduce(function (a:number, b:number) {
+            let reduceWen = wednesday.reduce(function (a: number, b: number) {
                 return a + b;
             });
             return reduceWen;
@@ -152,7 +172,7 @@ const Graph = () => {
         if (thursday.length === 0) {
             return 0;
         } else {
-            let reduceThu = thursday.reduce(function (a:number, b:number) {
+            let reduceThu = thursday.reduce(function (a: number, b: number) {
                 return a + b;
             });
             return reduceThu;
@@ -163,7 +183,7 @@ const Graph = () => {
         if (friday.length === 0) {
             return 0;
         } else {
-            let reduceFri = friday.reduce(function (a:number, b:number) {
+            let reduceFri = friday.reduce(function (a: number, b: number) {
                 return a + b;
             });
             return reduceFri;
@@ -174,7 +194,7 @@ const Graph = () => {
         if (saturday.length === 0) {
             return 0;
         } else {
-            let reduceSat = saturday.reduce(function (a:number, b:number) {
+            let reduceSat = saturday.reduce(function (a: number, b: number) {
                 return a + b;
             });
             return reduceSat;
@@ -185,13 +205,14 @@ const Graph = () => {
         if (sunday.length === 0) {
             return 0;
         } else {
-            let reduceSun = sunday.reduce(function (a:number, b:number) {
+            let reduceSun = sunday.reduce(function (a: number, b: number) {
                 return a + b;
             });
             return reduceSun;
         }
     }
-    const data2:any = {
+
+    const data2: any = {
         labels,
         datasets: [
             {
@@ -200,15 +221,7 @@ const Graph = () => {
                 borderColor: "rgb(255, 99, 132)",
                 borderWidth: 2,
                 fill: false,
-                data: [
-                    caluculateAveCalorie(),
-                    caluculateAveCalorie(),
-                    caluculateAveCalorie(),
-                    caluculateAveCalorie(),
-                    caluculateAveCalorie(),
-                    caluculateAveCalorie(),
-                    caluculateAveCalorie(),
-                ],
+                data: [],
             },
             {
                 type: "bar",
@@ -228,12 +241,19 @@ const Graph = () => {
             },
         ],
     };
-
+    for (let i = 1; i <= 7; i++) {
+        data2.datasets[0].data.push(caluculateAveCalorie());
+    }
     return (
         <div className="container">
             <h3>カロリー摂取量</h3>
-            <Chart type="bar" data={data2} className="mt-4"/>
+            <h5 style={{marginTop:"20px"}}>１週間のカロリー</h5>
+            <Chart type="bar" data={data2} className="mt-4" />
+            <br/>
+            <h5 style={{marginTop:"20px"}}>月毎のカロリー</h5>
+            <CalorieYear calorieData={calorieOfYear} userData={userData}/>
             <Link to="/">Homeへ戻る</Link>
+
         </div>
     );
 };
