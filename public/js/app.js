@@ -3562,6 +3562,7 @@ var EatedList = function EatedList() {
   var onClickRegister = function onClickRegister() {
     navigate("/");
   };
+  // 入力した名前と一致するデータを取得
   var onClickSearch = function onClickSearch() {
     axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieSearch", {
       search: eated
@@ -3572,22 +3573,28 @@ var EatedList = function EatedList() {
     });
   };
   console.log("ccc", aaaa);
-  // const selectCalorie = () => {
-  //     axios
-  //     .get("calorieSearch")
-  // }
-  // const onClickGetSearch = () => {
-  //     axios
-  //         .get("", {
-  //             search: eated,
-  //         })
-  //         .then((res) => {
-  //             console.log(res);
-  //         })
-  //         .catch((e) => {
-  //             console.log("axiosError");
-  //         })
-  // };
+  // 直接入力されたデータを保存
+  var today = new Date();
+  var day = today.getDay();
+  var onClickAddText = function onClickAddText() {
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieAddText", {
+      food_name: inputFood,
+      calorie: inputFoodCal,
+      week: day
+    }).then(function (res) {
+      console.log(res);
+    })["catch"](function (e) {
+      console.log("axiosError");
+    });
+    setInputFood("");
+    setInputFoodCal("");
+  };
+  // セレクトしてデータ保存
+  var onClickAddSelect = function onClickAddSelect() {
+    // setInputFood();
+    // setInputFoodCal();
+    onClickAddText();
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u98DF\u3079\u305F\u3082\u306E\u3092\u767B\u9332\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
     value: eated,
@@ -3611,7 +3618,9 @@ var EatedList = function EatedList() {
       return setInputFoodCal(e.target.value);
     },
     placeholder: "100"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "\u767B\u9332"));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: onClickAddText
+  }, "\u767B\u9332"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EatedList);
 
