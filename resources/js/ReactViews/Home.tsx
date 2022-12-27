@@ -27,7 +27,7 @@ const Home = () => {
                         <div className=" col-auto justify-content-sm-center justify-content-md-start">
                             <CalrieGraph userData={data} />
                         </div>
-                        <div className="col mt-5 wf-roundedmplus1c">
+                        <div className="col mt-5 wf-roundedmplus1c" style={{margin:"20px 20px 20px 20px"}}>
                             <Exercise userData={data} />
                         </div>
                     </div>

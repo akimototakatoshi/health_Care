@@ -145,19 +145,19 @@ const CalrieGraph = ({ userData }: { userData: Data }) => {
 
     return (
         <div>
-            {number > total && (
-                <h3 style={{ color: "red", marginLeft: "140px" }}>
-                    {number - total}kcalオーバーしています。
-                </h3>
-            )}
             <button
                 className="btn btn-outline-primary m-2"
                 onClick={() => {
                     onClickReload();
                 }}
-            >
+                >
                 グラフの更新
             </button>
+                {number > total && (
+                    <h3 style={{ color: "red", marginLeft: "140px" }}>
+                        {number - total}kcalオーバーしています。
+                    </h3>
+                )}
             <ReactApexChart
                 options={state.options}
                 series={state.series}

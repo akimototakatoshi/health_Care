@@ -3549,6 +3549,14 @@ var EatedList = function EatedList() {
     _useState2 = _slicedToArray(_useState, 2),
     eated = _useState2[0],
     setEated = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    inputFood = _useState4[0],
+    setInputFood = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState6 = _slicedToArray(_useState5, 2),
+    inputFoodCal = _useState6[0],
+    setInputFoodCal = _useState6[1];
   var onClickRegister = function onClickRegister() {
     navigate("/");
   };
@@ -3561,7 +3569,21 @@ var EatedList = function EatedList() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     name: "add",
     onClick: onClickRegister
-  }, "\u767B\u9332"));
+  }, "\u767B\u9332"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u98DF\u3079\u305F\u3082\u306E\u3092\u5165\u529B\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "text",
+    value: inputFood,
+    onChange: function onChange(e) {
+      return setInputFood(e.target.value);
+    },
+    placeholder: "\u30AB\u30EC\u30FC"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "text",
+    value: inputFoodCal,
+    onChange: function onChange(e) {
+      return setInputFoodCal(e.target.value);
+    },
+    placeholder: "100"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "\u767B\u9332"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EatedList);
 
@@ -3647,7 +3669,7 @@ var Graph = function Graph() {
     _useState4 = _slicedToArray(_useState3, 2),
     calorieOfYear = _useState4[0],
     setCalorieOfYear = _useState4[1];
-  var labels = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var labels = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var axiosData = function axiosData() {
       return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -3830,27 +3852,44 @@ var Graph = function Graph() {
       borderWidth: 2
     }]
   };
-  for (var _i2 = 1; _i2 <= 7; _i2++) {
+  for (var _i2 = 0; _i2 <= 6; _i2++) {
     data2.datasets[0].data.push(caluculateAveCalorie());
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "\u30AB\u30ED\u30EA\u30FC\u6442\u53D6\u91CF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h5", {
-    style: {
-      marginTop: "20px"
-    }
-  }, "\uFF11\u9031\u9593\u306E\u30AB\u30ED\u30EA\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_5__.Chart, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "\u30AB\u30ED\u30EA\u30FC\u6442\u53D6\u91CF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
+    className: "p-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
+    className: "nav nav-tabs p-0 d-flex"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+    className: "nav-item col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: "#graph1",
+    className: "nav-link active",
+    "data-bs-toggle": "tab"
+  }, "\uFF11\u9031\u9593\u5206\u306E\u30AB\u30ED\u30EA\u30FC")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+    className: "nav-item col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: "#graph2",
+    className: "nav-link",
+    "data-bs-toggle": "tab"
+  }, "\u6708\u6BCE\u306E\u30AB\u30ED\u30EA\u30FC"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "tab-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    id: "graph1",
+    className: "tab-pane active"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_5__.Chart, {
     type: "bar",
     data: data2,
-    className: "mt-4"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h5", {
-    style: {
-      marginTop: "20px"
-    }
-  }, "\u6708\u6BCE\u306E\u30AB\u30ED\u30EA\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CalorieYear__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "mt-4",
+    height: 200
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    id: "graph2",
+    className: "tab-pane"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CalorieYear__WEBPACK_IMPORTED_MODULE_2__["default"], {
     calorieData: calorieOfYear,
     userData: userData
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
     to: "/"
   }, "Home\u3078\u623B\u308B"));
 };
@@ -3905,7 +3944,10 @@ var Home = function Home() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CalrieGraph__WEBPACK_IMPORTED_MODULE_3__["default"], {
     userData: data
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "col mt-5 wf-roundedmplus1c"
+    className: "col mt-5 wf-roundedmplus1c",
+    style: {
+      margin: "20px 20px 20px 20px"
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Exercise__WEBPACK_IMPORTED_MODULE_4__["default"], {
     userData: data
   }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4786,7 +4828,8 @@ var calorieYear = function calorieYear(_ref) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__.Chart, {
     type: "bar",
     data: data2,
-    className: "mt-4"
+    className: "mt-4",
+    height: 200
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (calorieYear);
@@ -4921,17 +4964,17 @@ var CalrieGraph = function CalrieGraph(_ref) {
   var onClickReload = function onClickReload() {
     window.location.reload();
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, number > total && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-    style: {
-      color: "red",
-      marginLeft: "140px"
-    }
-  }, number - total, "kcal\u30AA\u30FC\u30D0\u30FC\u3057\u3066\u3044\u307E\u3059\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "btn btn-outline-primary m-2",
     onClick: function onClick() {
       onClickReload();
     }
-  }, "\u30B0\u30E9\u30D5\u306E\u66F4\u65B0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_apexcharts__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "\u30B0\u30E9\u30D5\u306E\u66F4\u65B0"), number > total && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+    style: {
+      color: "red",
+      marginLeft: "140px"
+    }
+  }, number - total, "kcal\u30AA\u30FC\u30D0\u30FC\u3057\u3066\u3044\u307E\u3059\u3002"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_apexcharts__WEBPACK_IMPORTED_MODULE_1__["default"], {
     options: state.options,
     series: state.series,
     type: "donut",

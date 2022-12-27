@@ -232,6 +232,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
     }
     const data2: any = {
         labels: labels2,
+
         datasets: [
             {
                 type: "line",
@@ -243,7 +244,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
             },
             {
                 type: "bar",
-                label: "あなたの摂取カロリー",
+                label:"あなたの摂取カロリー",
                 backgroundColor: "rgb(75, 192, 192)",
                 data: [
                     janTotal(),
@@ -261,6 +262,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
                 ],
                 borderColor: "white",
                 borderWidth: 2,
+                
             },
         ],
     };
@@ -269,7 +271,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
     }
     return (
         <div>
-            <Chart type="bar" data={data2} className="mt-4" />
+            <Chart type="bar" data={data2} className="mt-4" height={200}/>
         </div>
     );
 };
