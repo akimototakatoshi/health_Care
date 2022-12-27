@@ -11,6 +11,8 @@ const EatedList = () => {
     const navigate = useNavigate();
     const [eated, setEated] = useState("");
     const [aaaa, setAaaaa] = useState();
+    const [inputFood,setInputFood]=useState("")
+    const [inputFoodCal,setInputFoodCal]=useState("")
 
     const onClickRegister = () => {
         navigate("/");
@@ -57,9 +59,16 @@ const EatedList = () => {
                 value={eated}
                 onChange={(event) => setEated(event.target.value)}
             />
+
             <button name="add" onClick={onClickSearch}>
                 検索
             </button>
+
+            <h1>食べたものを入力する</h1>
+         <input type="text" value={inputFood} onChange={(e)=>setInputFood(e.target.value)} placeholder="カレー"/>
+         <input type="text" value={inputFoodCal} onChange={(e)=>setInputFoodCal(e.target.value)} placeholder="100"/>
+         <button>登録</button>
+
         </div>
     );
 };
