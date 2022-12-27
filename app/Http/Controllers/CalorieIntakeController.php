@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CalorieIntake;
+use App\Models\CalorieData;
 use App\Http\Resources\CalorieIntakeResource;
 use App\Http\Resources\CalorieWeekResource;
 use App\Http\Resources\CalorieMonthResource;
 use App\Http\Resources\CalorieYearResource;
+use App\Http\Resources\EatedSelectResource;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Carbon\Carbon;
@@ -96,10 +98,11 @@ class CalorieIntakeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function collation()
+    public function collation(Request $request)
     {
-        //　スクレイピングしたデータの取得
-        return CalorieCollationResource::collection(sk-Calorie::all());
+        //　検索された名前とスクレイピングしたデータを照合
+        $search = $request->search;
+        return  EatedSelectResource::collection(CalorieData::where('calorie_name', 'LIKE', "%{$search}%")->get());
     }
 
     /**
@@ -108,7 +111,7 @@ class CalorieIntakeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function show($foodData)
     {
         //　
     }
@@ -119,7 +122,7 @@ class CalorieIntakeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function shw($id)
     {
         //
     }

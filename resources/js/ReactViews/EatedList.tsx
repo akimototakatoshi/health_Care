@@ -3,27 +3,51 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 
-
-const EatedList= () => {
-    // const getUser = async () => {
-    //     const data = await axios.get("/calorie");
-
-    //     console.log(data.data[1]);
-    // };
-
+const EatedList = () => {
     // useEffect(() => {
     //     getUser();
     // }, []);
 
     const navigate = useNavigate();
     const [eated, setEated] = useState("");
+    const [aaaa, setAaaaa] = useState();
 
     const onClickRegister = () => {
         navigate("/");
     };
 
+    const onClickSearch = () => {
+        axios
+            .post("calorieSearch", {
+                search: eated,
+            })
+            .then((res) => {
+                setAaaaa(res.data);
+            })
+            .catch((e) => {
+                console.log("axiosError");
+            });
+    };
 
-   
+    console.log("ccc", aaaa);
+
+    // const selectCalorie = () => {
+    //     axios
+    //     .get("calorieSearch")
+    // }
+
+    // const onClickGetSearch = () => {
+    //     axios
+    //         .get("", {
+    //             search: eated,
+    //         })
+    //         .then((res) => {
+    //             console.log(res);
+    //         })
+    //         .catch((e) => {
+    //             console.log("axiosError");
+    //         })
+    // };
 
     return (
         <div>
@@ -33,10 +57,9 @@ const EatedList= () => {
                 value={eated}
                 onChange={(event) => setEated(event.target.value)}
             />
-            <button 
-            name= "add"
-            onClick={onClickRegister}>登録</button>
-        
+            <button name="add" onClick={onClickSearch}>
+                検索
+            </button>
         </div>
     );
 };

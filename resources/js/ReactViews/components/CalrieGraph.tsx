@@ -127,8 +127,6 @@ const CalrieGraph = ({ userData }: { userData: Data }) => {
                                 //     )}kcal`;
                                 // },
                                 formatter: function () {
-
-
                                     return `${number}kcal/${total}kcal`;
                                 },
                             },

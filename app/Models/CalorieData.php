@@ -5,13 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CalorieIntake extends Model
+class CalorieData extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'user_id',
-        'food_name',
-        'calorie',
-    ];
 }

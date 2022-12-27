@@ -3528,6 +3528,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -3536,11 +3537,8 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+
 var EatedList = function EatedList() {
-  // const getUser = async () => {
-  //     const data = await axios.get("/calorie");
-  //     console.log(data.data[1]);
-  // };
   // useEffect(() => {
   //     getUser();
   // }, []);
@@ -3549,9 +3547,39 @@ var EatedList = function EatedList() {
     _useState2 = _slicedToArray(_useState, 2),
     eated = _useState2[0],
     setEated = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+    _useState4 = _slicedToArray(_useState3, 2),
+    aaaa = _useState4[0],
+    setAaaaa = _useState4[1];
   var onClickRegister = function onClickRegister() {
     navigate("/");
   };
+  var onClickSearch = function onClickSearch() {
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieSearch", {
+      search: eated
+    }).then(function (res) {
+      setAaaaa(res.data);
+    })["catch"](function (e) {
+      console.log("axiosError");
+    });
+  };
+  console.log("ccc", aaaa);
+  // const selectCalorie = () => {
+  //     axios
+  //     .get("calorieSearch")
+  // }
+  // const onClickGetSearch = () => {
+  //     axios
+  //         .get("", {
+  //             search: eated,
+  //         })
+  //         .then((res) => {
+  //             console.log(res);
+  //         })
+  //         .catch((e) => {
+  //             console.log("axiosError");
+  //         })
+  // };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u98DF\u3079\u305F\u3082\u306E\u3092\u767B\u9332\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
     value: eated,
@@ -3560,8 +3588,8 @@ var EatedList = function EatedList() {
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     name: "add",
-    onClick: onClickRegister
-  }, "\u767B\u9332"));
+    onClick: onClickSearch
+  }, "\u691C\u7D22"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EatedList);
 
