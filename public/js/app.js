@@ -3547,10 +3547,10 @@ var EatedList = function EatedList() {
     _useState2 = _slicedToArray(_useState, 2),
     eated = _useState2[0],
     setEated = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState4 = _slicedToArray(_useState3, 2),
-    aaaa = _useState4[0],
-    setAaaaa = _useState4[1];
+    getData = _useState4[0],
+    setGetData = _useState4[1];
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState6 = _slicedToArray(_useState5, 2),
     inputFood = _useState6[0],
@@ -3559,19 +3559,25 @@ var EatedList = function EatedList() {
     _useState8 = _slicedToArray(_useState7, 2),
     inputFoodCal = _useState8[0],
     setInputFoodCal = _useState8[1];
-  var onClickRegister = function onClickRegister() {
-    navigate("/");
-  };
+  // const [suggestName,setSuggestName]=useState("")
+  // const [suggestCal,setSuggestCal]=useState("")
+  // const onClickRegister = () => {
+  //     navigate("/");
+  // };
   var onClickSearch = function onClickSearch() {
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieSearch", {
-      search: eated
-    }).then(function (res) {
-      setAaaaa(res.data);
-    })["catch"](function (e) {
-      console.log("axiosError");
-    });
+    if (!eated) {
+      return;
+    } else {
+      axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieSearch", {
+        search: eated
+      }).then(function (res) {
+        setGetData(res.data.data);
+      })["catch"](function (e) {
+        console.log("axiosError");
+      });
+    }
+    setEated("");
   };
-  console.log("ccc", aaaa);
   // const selectCalorie = () => {
   //     axios
   //     .get("calorieSearch")
@@ -3588,30 +3594,59 @@ var EatedList = function EatedList() {
   //             console.log("axiosError");
   //         })
   // };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u98DF\u3079\u305F\u3082\u306E\u3092\u767B\u9332\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "\u98DF\u3079\u305F\u3082\u306E\u3092\u691C\u7D22\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-floating mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
+    className: "form-control",
+    id: "floatingInput",
+    placeholder: "\u98DF\u3079\u305F\u7269\u3092\u5165\u529B",
     value: eated,
     onChange: function onChange(event) {
       return setEated(event.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "floatingInput"
+  }, "\u98DF\u3079\u305F\u7269\u3092\u5165\u529B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     name: "add",
     onClick: onClickSearch
-  }, "\u691C\u7D22"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u98DF\u3079\u305F\u3082\u306E\u3092\u5165\u529B\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }, "\u691C\u7D22")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "\u98DF\u3079\u305F\u7269\u3092\u81EA\u5206\u3067\u767B\u9332\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-floating col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
+    className: "form-control",
+    id: "floatingInput2",
+    placeholder: "\u98DF\u3079\u305F\u7269\u3092\u5165\u529B",
     value: inputFood,
     onChange: function onChange(e) {
       return setInputFood(e.target.value);
-    },
-    placeholder: "\u30AB\u30EC\u30FC"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "floatingInput2"
+  }, "\u98DF\u3079\u305F\u7269\u3092\u5165\u529B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-floating col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
+    className: "form-control",
+    id: "floatingInput3",
+    placeholder: "\u30AB\u30ED\u30EA\u30FC\u3092\u5165\u529B",
     value: inputFoodCal,
     onChange: function onChange(e) {
       return setInputFoodCal(e.target.value);
-    },
-    placeholder: "100"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "\u767B\u9332"));
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "floatingInput3"
+  }, "\u30AB\u30ED\u30EA\u30FC\u3092\u5165\u529B"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "\u767B\u9332"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, getData.map(function (e) {
+    var splitName = e.name.split("/");
+    var arrayLastData = splitName.slice(-1)[0];
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      key: e.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "\u540D\u524D\uFF1A", arrayLastData, " \u30AB\u30ED\u30EA\u30FC\uFF1A", e.calorie), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "\u767B\u9332")));
+  })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EatedList);
 
