@@ -96,9 +96,21 @@ class CalorieIntakeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function collation()
+    {
+        //　スクレイピングしたデータの取得
+        return CalorieCollationResource::collection(sk-Calorie::all());
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        //
+        //　
     }
 
     /**

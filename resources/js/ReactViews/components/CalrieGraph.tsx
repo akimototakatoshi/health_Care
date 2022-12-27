@@ -1,16 +1,33 @@
-import React, { useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import useSWR from "swr";
 import { Data, userData } from "../types/user";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const CalrieGraph = ({ userData}: { userData: Data,}) => {
+const CalrieGraph = ({ userData }: { userData: Data }) => {
     const { data, error, isLoading } = useSWR("calorieIntake", fetcher);
+
+    let userdata: userData = userData.data[0];
+    // const [userdata, setUserData] = useState<userData>({
+    //     id: userData.data[0].id,
+    //     name: userData.data[0].name,
+    //     email: userData.data[0].email,
+    //     age: userData.data[0].age,
+    //     gender: userData.data[0].gender,
+    //     height: userData.data[0].height,
+    //     weight: userData.data[0].weight,
+    //     physical: userData.data[0].physical,
+    //     week: userData.data[0].week,
+    // });
+
+    // useEffect(() => {
+    //     const user = userData.data[0];
+    //     setUserData(user);
+    // }, []);
+
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
     // console.log("iii",userData)
-    let userdata: userData = userData.data[0];
-    // console.log(userdata)
 
     function kisotaisya() {
         if (userdata.gender === 0) {
@@ -37,6 +54,7 @@ const CalrieGraph = ({ userData}: { userData: Data,}) => {
         number += parseInt(data.data[i].calorie);
     }
     const total: number = kisotaisya()!;
+    console.log("bbb", total);
     const state = {
         series: [number, total! - number],
         options: {
@@ -82,8 +100,8 @@ const CalrieGraph = ({ userData}: { userData: Data,}) => {
                             },
                         },
                         chart: {
-                            width: 400, //チャートは320pxにして・・・
-                            height: 400,
+                            width: 350, //チャートは320pxにして・・・
+                            height: 350,
                         },
                         legend: {
                             position: "bottom", //項目を下へ・・・
@@ -108,7 +126,8 @@ const CalrieGraph = ({ userData}: { userData: Data,}) => {
                                 //         0
                                 //     )}kcal`;
                                 // },
-                                formatter: function () {
+                                formatter: () => {
+                                    // console.log("bnn", val);
                                     return `${number}kcal/${total}kcal`;
                                 },
                             },
@@ -119,9 +138,25 @@ const CalrieGraph = ({ userData}: { userData: Data,}) => {
         },
     };
 
+    const onClickReload = () => {
+        window.location.reload();
+    };
+
     return (
         <div>
-            {number > total &&(<h3 style={{color:"red",marginLeft:"140px"}}>{number-total}kcalオーバーしています。</h3>)}
+            {number > total && (
+                <h3 style={{ color: "red", marginLeft: "140px" }}>
+                    {number - total}kcalオーバーしています。
+                </h3>
+            )}
+            <button
+                className="btn btn-outline-primary m-2"
+                onClick={() => {
+                    onClickReload();
+                }}
+            >
+                グラフの更新
+            </button>
             <ReactApexChart
                 options={state.options}
                 series={state.series}

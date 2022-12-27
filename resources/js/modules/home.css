@@ -2,20 +2,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "M PLUS Rounded 1c", sans-serif;
-}
-.nav-list {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 50px;
+    /* font-family: "M PLUS Rounded 1c", sans-serif; */
 }
 
 .nav-list li {
     list-style: none;
-    justify-content: space-between;
     text-align: center;
 }
-.nav-text{
+
+.nav-text {
     text-decoration: none;
 }
 
@@ -25,6 +20,7 @@
     text-align: center;
     line-height: 50px;
 }
+
 .material-symbols-outlined:hover {
     cursor: pointer;
     color: skyblue;
@@ -33,4 +29,6 @@
 }
 
 
-.wf-roundedmplus1c { font-family: "M PLUS Rounded 1c"; }
+.wf-roundedmplus1c {
+    font-family: "M PLUS Rounded 1c";
+}
