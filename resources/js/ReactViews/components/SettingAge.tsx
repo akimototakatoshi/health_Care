@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-type Props ={
+type Props = {
     age: number;
-    setAge: (value: number) => void
-}
+    setAge: (value: number) => void;
+};
 const SettingAge: FC<Props> = (props) => {
     return (
         <div className="col-md-6">

@@ -38,7 +38,8 @@ Route::controller(CalorieIntakeController::class)->middleware(['api'])
     Route::get('/calorieIntake', 'index')->name('calorieIntake'); // 名前つきルート マイページ
     Route::get('/calorieWeek', 'weekGraph')->name('calorieWeek'); // 曜日毎のグラフ
     Route::get('/calorieMonth', 'monthGraph')->name('calorieMonth'); // 月毎のグラフ
-    Route::get('/calorieYear', 'yearGraph')->name('calorieYear');
+    Route::get('/calorieYear', 'yearGraph')->name('calorieYear'); // 一年分のグラフ
+    Route::post('/calorieSearch', 'collation')->name('calorieSearch'); // カロリー検索
 });
 
 Route::controller(UserSettingController::class)->middleware(['api'])

@@ -3,28 +3,53 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 
-
-const EatedList= () => {
-    // const getUser = async () => {
-    //     const data = await axios.get("/calorie");
-
-    //     console.log(data.data[1]);
-    // };
-
+const EatedList = () => {
     // useEffect(() => {
     //     getUser();
     // }, []);
 
     const navigate = useNavigate();
     const [eated, setEated] = useState("");
+    const [aaaa, setAaaaa] = useState();
     const [inputFood,setInputFood]=useState("")
     const [inputFoodCal,setInputFoodCal]=useState("")
+
     const onClickRegister = () => {
         navigate("/");
     };
 
+    const onClickSearch = () => {
+        axios
+            .post("calorieSearch", {
+                search: eated,
+            })
+            .then((res) => {
+                setAaaaa(res.data);
+            })
+            .catch((e) => {
+                console.log("axiosError");
+            });
+    };
 
-   
+    console.log("ccc", aaaa);
+
+    // const selectCalorie = () => {
+    //     axios
+    //     .get("calorieSearch")
+    // }
+
+    // const onClickGetSearch = () => {
+    //     axios
+    //         .get("", {
+    //             search: eated,
+    //         })
+    //         .then((res) => {
+    //             console.log(res);
+    //         })
+    //         .catch((e) => {
+    //             console.log("axiosError");
+    //         })
+    // };
 
     return (
         <div>
@@ -34,13 +59,16 @@ const EatedList= () => {
                 value={eated}
                 onChange={(event) => setEated(event.target.value)}
             />
-            <button 
-            name= "add"
-            onClick={onClickRegister}>登録</button>
+
+            <button name="add" onClick={onClickSearch}>
+                検索
+            </button>
+
             <h1>食べたものを入力する</h1>
          <input type="text" value={inputFood} onChange={(e)=>setInputFood(e.target.value)} placeholder="カレー"/>
          <input type="text" value={inputFoodCal} onChange={(e)=>setInputFoodCal(e.target.value)} placeholder="100"/>
          <button>登録</button>
+
         </div>
     );
 };

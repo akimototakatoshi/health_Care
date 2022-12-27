@@ -9,9 +9,9 @@ class CalorieIntake extends Model
 {
     use HasFactory;
 
-    // protected $fillable = [
-    //     'user_id',
-    //     'food_name',
-    //     'calorie',
-    // ];
+    protected $fillable = [
+        'user_id',
+        'food_name',
+        'calorie',
+    ];
 }
