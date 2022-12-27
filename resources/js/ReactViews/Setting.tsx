@@ -21,6 +21,7 @@ const Setting = () => {
     );
     const navigate = useNavigate();
 
+
     // 初期データを保管、入力されたデータを保管
     const [formName, setFormName] = useState<string>("");
     const [formAge, setFormAge] = useState<number>(0);
@@ -35,8 +36,8 @@ const Setting = () => {
     // console.log("phy", formPhysical);
     // console.log("wei", formWeight);
 
-    const userData: userData = data?.data[0];
 
+    const userData:userData = data?.data[0];
     useEffect(() => {
         if (userData) {
             setFormName(userData.name);

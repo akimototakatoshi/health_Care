@@ -3578,13 +3578,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var swr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swr */ "./node_modules/swr/core/dist/index.mjs");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/chart.js");
-/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/chart.js");
+/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var _components_CalorieYear__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/CalorieYear */ "./resources/js/ReactViews/components/CalorieYear.tsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -3626,7 +3627,8 @@ var __awaiter = undefined && undefined.__awaiter || function (thisArg, _argument
 
 
 
-chart_js__WEBPACK_IMPORTED_MODULE_2__.Chart.register(chart_js__WEBPACK_IMPORTED_MODULE_2__.LinearScale, chart_js__WEBPACK_IMPORTED_MODULE_2__.CategoryScale, chart_js__WEBPACK_IMPORTED_MODULE_2__.BarElement, chart_js__WEBPACK_IMPORTED_MODULE_2__.PointElement, chart_js__WEBPACK_IMPORTED_MODULE_2__.LineElement, chart_js__WEBPACK_IMPORTED_MODULE_2__.Legend, chart_js__WEBPACK_IMPORTED_MODULE_2__.Tooltip, chart_js__WEBPACK_IMPORTED_MODULE_2__.LineController, chart_js__WEBPACK_IMPORTED_MODULE_2__.BarController);
+
+chart_js__WEBPACK_IMPORTED_MODULE_3__.Chart.register(chart_js__WEBPACK_IMPORTED_MODULE_3__.LinearScale, chart_js__WEBPACK_IMPORTED_MODULE_3__.CategoryScale, chart_js__WEBPACK_IMPORTED_MODULE_3__.BarElement, chart_js__WEBPACK_IMPORTED_MODULE_3__.PointElement, chart_js__WEBPACK_IMPORTED_MODULE_3__.LineElement, chart_js__WEBPACK_IMPORTED_MODULE_3__.Legend, chart_js__WEBPACK_IMPORTED_MODULE_3__.Tooltip, chart_js__WEBPACK_IMPORTED_MODULE_3__.LineController, chart_js__WEBPACK_IMPORTED_MODULE_3__.BarController);
 var fetcher = function fetcher(url) {
   return fetch(url).then(function (res) {
     return res.json();
@@ -3641,6 +3643,10 @@ var Graph = function Graph() {
     _useState2 = _slicedToArray(_useState, 2),
     userData = _useState2[0],
     setUserData = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    calorieOfYear = _useState4[0],
+    setCalorieOfYear = _useState4[1];
   var labels = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var axiosData = function axiosData() {
@@ -3652,26 +3658,54 @@ var Graph = function Graph() {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("userSetting");
+                return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get("userSetting");
               case 3:
                 response = _context.sent;
-                console.log(response.data);
                 setUserData(response.data.data[0]);
-                _context.next = 11;
+                _context.next = 10;
                 break;
-              case 8:
-                _context.prev = 8;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
                 return _context.abrupt("return");
-              case 11:
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 7]]);
+      }));
+    };
+    var axiosDataOfCalorieYear = function axiosDataOfCalorieYear() {
+      return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var responseData, calorieAndMonthData;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get("calorieYear");
+              case 3:
+                responseData = _context2.sent;
+                calorieAndMonthData = responseData.data.data;
+                setCalorieOfYear(calorieAndMonthData);
+                _context2.next = 11;
+                break;
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                return _context2.abrupt("return");
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8]]);
       }));
     };
     axiosData();
+    axiosDataOfCalorieYear();
   }, []);
   if (error) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "failed to load");
   if (isLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "loading...");
@@ -3786,7 +3820,7 @@ var Graph = function Graph() {
       borderColor: "rgb(255, 99, 132)",
       borderWidth: 2,
       fill: false,
-      data: [caluculateAveCalorie(), caluculateAveCalorie(), caluculateAveCalorie(), caluculateAveCalorie(), caluculateAveCalorie(), caluculateAveCalorie(), caluculateAveCalorie()]
+      data: []
     }, {
       type: "bar",
       label: "あなたの摂取カロリー",
@@ -3796,13 +3830,27 @@ var Graph = function Graph() {
       borderWidth: 2
     }]
   };
+  for (var _i2 = 1; _i2 <= 7; _i2++) {
+    data2.datasets[0].data.push(caluculateAveCalorie());
+  }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "\u30AB\u30ED\u30EA\u30FC\u6442\u53D6\u91CF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_4__.Chart, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "\u30AB\u30ED\u30EA\u30FC\u6442\u53D6\u91CF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h5", {
+    style: {
+      marginTop: "20px"
+    }
+  }, "\uFF11\u9031\u9593\u306E\u30AB\u30ED\u30EA\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_5__.Chart, {
     type: "bar",
     data: data2,
     className: "mt-4"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h5", {
+    style: {
+      marginTop: "20px"
+    }
+  }, "\u6708\u6BCE\u306E\u30AB\u30ED\u30EA\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CalorieYear__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    calorieData: calorieOfYear,
+    userData: userData
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
     to: "/"
   }, "Home\u3078\u623B\u308B"));
 };
@@ -4185,7 +4233,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 // import { useNavigate } from 'react-router-dom';
+var fetcher = function fetcher(url) {
+  return fetch(url).then(function (res) {
+    return res.json();
+  });
+};
 var ShopsRecommend = function ShopsRecommend() {
+  var _useSWR = (0,swr__WEBPACK_IMPORTED_MODULE_1__["default"])("FavoriteStore", fetcher),
+    data = _useSWR.data,
+    error = _useSWR.error,
+    isLoading = _useSWR.isLoading;
   //   var options = {
   //     enableHighAccuracy: true,
   //     maximumAge: 0
@@ -4233,15 +4290,6 @@ var ShopsRecommend = function ShopsRecommend() {
     searchHistory = _useState8[0],
     setSearchHistory = _useState8[1];
   //お気に入りデータ取得
-  var fetcher = function fetcher(url) {
-    return fetch(url).then(function (res) {
-      return res.json();
-    });
-  };
-  var _useSWR = (0,swr__WEBPACK_IMPORTED_MODULE_1__["default"])("FavoriteStore", fetcher),
-    data = _useSWR.data,
-    error = _useSWR.error,
-    isLoading = _useSWR.isLoading;
   var favoriteStore = data === null || data === void 0 ? void 0 : data.data;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (searchHistory.length === 0) {
@@ -4540,6 +4588,211 @@ var Src = function Src() {
 
 /***/ }),
 
+/***/ "./resources/js/ReactViews/components/CalorieYear.tsx":
+/*!************************************************************!*\
+  !*** ./resources/js/ReactViews/components/CalorieYear.tsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/dist/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/chart.js");
+
+
+
+chart_js__WEBPACK_IMPORTED_MODULE_1__.Chart.register(chart_js__WEBPACK_IMPORTED_MODULE_1__.LinearScale, chart_js__WEBPACK_IMPORTED_MODULE_1__.CategoryScale, chart_js__WEBPACK_IMPORTED_MODULE_1__.BarElement, chart_js__WEBPACK_IMPORTED_MODULE_1__.PointElement, chart_js__WEBPACK_IMPORTED_MODULE_1__.LineElement, chart_js__WEBPACK_IMPORTED_MODULE_1__.Legend, chart_js__WEBPACK_IMPORTED_MODULE_1__.Tooltip, chart_js__WEBPACK_IMPORTED_MODULE_1__.LineController, chart_js__WEBPACK_IMPORTED_MODULE_1__.BarController);
+var labels2 = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+var calorieYear = function calorieYear(_ref) {
+  var calorieData = _ref.calorieData,
+    userData = _ref.userData;
+  function janTotal() {
+    var janCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "1") {
+        janCal.push(parseInt(e.calorie));
+      }
+    });
+    var january = janCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return january;
+  }
+  function febTotal() {
+    var febCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "2") {
+        febCal.push(parseInt(e.calorie));
+      }
+    });
+    var february = febCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return february;
+  }
+  function marTotal() {
+    var marCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "3") {
+        marCal.push(parseInt(e.calorie));
+      }
+    });
+    var march = marCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return march;
+  }
+  function aprTotal() {
+    var aprCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "4") {
+        aprCal.push(parseInt(e.calorie));
+      }
+    });
+    var april = aprCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return april;
+  }
+  function mayTotal() {
+    var mayCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "5") {
+        mayCal.push(parseInt(e.calorie));
+      }
+    });
+    var may = mayCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return may;
+  }
+  function junTotal() {
+    var junCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "6") {
+        junCal.push(parseInt(e.calorie));
+      }
+    });
+    var jun = junCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return jun;
+  }
+  function julTotal() {
+    var julCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "7") {
+        julCal.push(parseInt(e.calorie));
+      }
+    });
+    var july = julCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return july;
+  }
+  function augTotal() {
+    var augCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "8") {
+        augCal.push(parseInt(e.calorie));
+      }
+    });
+    var august = augCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return august;
+  }
+  function sepTotal() {
+    var sepCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "9") {
+        sepCal.push(parseInt(e.calorie));
+      }
+    });
+    var september = sepCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return september;
+  }
+  function octTotal() {
+    var octCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "10") {
+        octCal.push(parseInt(e.calorie));
+      }
+    });
+    var october = octCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return october;
+  }
+  function novTotal() {
+    var novCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "11") {
+        novCal.push(parseInt(e.calorie));
+      }
+    });
+    var november = novCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return november;
+  }
+  function decTotal() {
+    var decCal = [];
+    calorieData.map(function (e) {
+      if (e.created_at === "12") {
+        decCal.push(parseInt(e.calorie));
+      }
+    });
+    var december = decCal.reduce(function (a, b) {
+      return Number(a) + Number(b);
+    }, 0);
+    return december;
+  }
+  function AveCalorieOfMonth() {
+    if ((userData === null || userData === void 0 ? void 0 : userData.gender) === 0) {
+      return Math.floor((13.397 * Math.pow((userData === null || userData === void 0 ? void 0 : userData.height) / 100, 2) * 22 + 4.799 * (userData === null || userData === void 0 ? void 0 : userData.height) - 5.677 * (userData === null || userData === void 0 ? void 0 : userData.age) + 88.362) * Number(userData === null || userData === void 0 ? void 0 : userData.physical) * 30);
+    } else if ((userData === null || userData === void 0 ? void 0 : userData.gender) === 1) {
+      return Math.floor((9.247 * Math.pow((userData === null || userData === void 0 ? void 0 : userData.height) / 100, 2) * 22 + 3.098 * (userData === null || userData === void 0 ? void 0 : userData.height) - 4.33 * (userData === null || userData === void 0 ? void 0 : userData.age) + 447.593) * Number(userData === null || userData === void 0 ? void 0 : userData.physical) * 30);
+    }
+  }
+  var data2 = {
+    labels: labels2,
+    datasets: [{
+      type: "line",
+      label: "標準摂取カロリー",
+      borderColor: "rgb(255, 99, 132)",
+      borderWidth: 2,
+      fill: false,
+      data: []
+    }, {
+      type: "bar",
+      label: "あなたの摂取カロリー",
+      backgroundColor: "rgb(75, 192, 192)",
+      data: [janTotal(), febTotal(), marTotal(), aprTotal(), mayTotal(), junTotal(), julTotal(), augTotal(), sepTotal(), octTotal(), novTotal(), decTotal()],
+      borderColor: "white",
+      borderWidth: 2
+    }]
+  };
+  for (var i = 1; i <= 12; i++) {
+    data2.datasets[0].data.push(AveCalorieOfMonth());
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__.Chart, {
+    type: "bar",
+    data: data2,
+    className: "mt-4"
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (calorieYear);
+
+/***/ }),
+
 /***/ "./resources/js/ReactViews/components/CalrieGraph.tsx":
 /*!************************************************************!*\
   !*** ./resources/js/ReactViews/components/CalrieGraph.tsx ***!
@@ -4656,7 +4909,6 @@ var CalrieGraph = function CalrieGraph(_ref) {
                 //     )}kcal`;
                 // },
                 formatter: function formatter() {
-                  // console.log("bnn", val);
                   return "".concat(number, "kcal/").concat(total, "kcal");
                 }
               }
