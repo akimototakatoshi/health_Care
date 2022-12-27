@@ -16,7 +16,7 @@ import {
 import { Chart } from "react-chartjs-2";
 import { Link } from "react-router-dom";
 import { Data, userData } from "./types/user";
-import CalorieYear from "./components/CalorieYear"
+import CalorieYear from "./components/CalorieYear";
 import { CalorieOfYear } from "./types/calorie";
 ChartJS.register(
     LinearScale,
@@ -39,7 +39,6 @@ type Calorie = {
     week: number;
 };
 
-
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Graph = () => {
@@ -60,6 +59,7 @@ const Graph = () => {
         "Thursday",
         "Friday",
         "Saturday",
+        "Sunday"
     ];
 
     useEffect(() => {
@@ -241,19 +241,48 @@ const Graph = () => {
             },
         ],
     };
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 0; i <= 6; i++) {
         data2.datasets[0].data.push(caluculateAveCalorie());
     }
     return (
         <div className="container">
             <h3>カロリー摂取量</h3>
-            <h5 style={{marginTop:"20px"}}>１週間のカロリー</h5>
-            <Chart type="bar" data={data2} className="mt-4" />
-            <br/>
-            <h5 style={{marginTop:"20px"}}>月毎のカロリー</h5>
-            <CalorieYear calorieData={calorieOfYear} userData={userData}/>
-            <Link to="/">Homeへ戻る</Link>
+            <main className="p-3">
+                <ul className="nav nav-tabs p-0 d-flex">
+                    <li className="nav-item col-6">
+                        <a
+                            href="#graph1"
+                            className="nav-link active"
+                            data-bs-toggle="tab"
+                        >
+                            １週間分のカロリー
+                        </a>
+                    </li>
+                    <li className="nav-item col-6">
+                        <a
+                            href="#graph2"
+                            className="nav-link"
+                            data-bs-toggle="tab"
+                        >
+                            月毎のカロリー
+                        </a>
+                    </li>
+                </ul>
 
+                <div className="tab-content">
+                    <div id="graph1" className="tab-pane active">
+                        <Chart type="bar" data={data2} className="mt-4" height={200}/>
+                    </div>
+                    <div id="graph2" className="tab-pane">
+                        <CalorieYear
+                            calorieData={calorieOfYear}
+                            userData={userData}
+                            
+                        />
+                    </div>
+                </div>
+            </main>
+            <Link to="/">Homeへ戻る</Link>
         </div>
     );
 };
