@@ -16,10 +16,8 @@ const EatedList = () => {
     // const [suggestName,setSuggestName]=useState("")
     // const [suggestCal,setSuggestCal]=useState("")
 
-    // const onClickRegister = () => {
-    //     navigate("/");
-    // };
 
+    // 入力した名前と一致するデータを取得
     const onClickSearch = () => {
         if (!eated) {
             return;
@@ -38,23 +36,36 @@ const EatedList = () => {
         setEated("");
     };
 
-    // const selectCalorie = () => {
-    //     axios
-    //     .get("calorieSearch")
-    // }
 
-    // const onClickGetSearch = () => {
-    //     axios
-    //         .get("", {
-    //             search: eated,
-    //         })
-    //         .then((res) => {
-    //             console.log(res);
-    //         })
-    //         .catch((e) => {
-    //             console.log("axiosError");
-    //         })
-    // };
+
+
+    // 直接入力されたデータを保存
+    const today = new Date();
+    const day = today.getDay();
+    const onClickAddText = () => {
+        axios
+            .post("calorieAddText", {
+                food_name: inputFood,
+                calorie: inputFoodCal,
+                week: day,
+            })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((e) => {
+                console.log("axiosError");
+            });
+        setInputFood("");
+        setInputFoodCal("");
+    };
+
+
+    // セレクトしてデータ保存
+    const onClickAddSelect = () => {
+        // setInputFood();
+        // setInputFoodCal();
+        onClickAddText();
+    };
 
     return (
         <div className="container">
@@ -75,6 +86,7 @@ const EatedList = () => {
                     検索
                 </button>
             </div>
+
 
             <h3>食べた物を自分で登録する</h3>
             <div className="row">
@@ -101,7 +113,7 @@ const EatedList = () => {
                 <label htmlFor="floatingInput3">カロリーを入力</label>
             </div>
             </div>
-            <button>登録</button>
+                <button onClick={onClickAddText}>登録</button>
 
             <div>
                 {getData.map((e) => {

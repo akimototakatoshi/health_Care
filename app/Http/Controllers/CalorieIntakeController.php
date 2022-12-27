@@ -111,9 +111,15 @@ class CalorieIntakeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show($foodData)
+    public function eatedTextStore(Request $request)
     {
-        //　
+        //　直接入力でのカロリー追加
+        CalorieIntake::create([
+            'user_id' => Auth::id(),
+            'food_name' => $request->food_name,
+            'calorie' => $request->calorie,
+            'week' => $request->week
+        ]);
     }
 
     /**

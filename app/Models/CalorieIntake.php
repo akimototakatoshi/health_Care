@@ -13,5 +13,6 @@ class CalorieIntake extends Model
         'user_id',
         'food_name',
         'calorie',
+        'week',
     ];
 }
