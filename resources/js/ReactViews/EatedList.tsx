@@ -5,15 +5,15 @@ import { useEffect } from "react";
 
 
 const EatedList= () => {
-    const getUser = async () => {
-        const data = await axios.get("/calorie");
+    // const getUser = async () => {
+    //     const data = await axios.get("/calorie");
 
-        console.log(data.data[1]);
-    };
+    //     console.log(data.data[1]);
+    // };
 
-    useEffect(() => {
-        getUser();
-    }, []);
+    // useEffect(() => {
+    //     getUser();
+    // }, []);
 
     const navigate = useNavigate();
     const [eated, setEated] = useState("");

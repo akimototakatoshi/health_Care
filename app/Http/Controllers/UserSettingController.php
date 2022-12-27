@@ -53,6 +53,7 @@ class UserSettingController extends Controller
         $user->weight = $request->weight;
         $user->physical = $request->physical;
         $user->save();
+        
         //デバック表示(ネットワーク)
         // Log::debug('user', $user);
     }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import SettingGender from "./components/SetteingGender";
 import SettingAge from "./components/SettingAge";
 import SettingPhysical from "./components/SettingPhysical";
@@ -11,20 +11,16 @@ import { Data, userData } from "./types/user";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Setting = () => {
-    const { data, error, isLoading }:{data:Data,error:Error|undefined,isLoading:any} = useSWR("userSetting", fetcher);
+    const {
+        data,
+        error,
+        isLoading,
+    }: { data: Data; error: Error | undefined; isLoading: any } = useSWR(
+        "userSetting",
+        fetcher
+    );
     const navigate = useNavigate();
 
-<<<<<<< HEAD:resources/js/ReactViews/Setting.jsx
-    // 初期データを保管、Ï入力されたデータを保管
-    const [formName, setFormName] = useState("");
-    const [formAge, setFormAge] = useState("");
-    const [formGender, setFormGender] = useState("");
-    const [formHeight, setFormHeight] = useState("");
-    const [formWeight, setFormWeight] = useState("");
-    const [formPhysical, setFormPhysical] = useState("");
-
-    const userData = data?.data[0];
-=======
     // 初期データを保管、入力されたデータを保管
     const [formName, setFormName] = useState<string>("");
     const [formAge, setFormAge] = useState<number>(0);
@@ -39,8 +35,8 @@ const Setting = () => {
     // console.log("phy", formPhysical);
     // console.log("wei", formWeight);
 
-    const userData:userData = data?.data[0];
->>>>>>> 1c3769cfa32679a4f78668eff373e4e09c90bacf:resources/js/ReactViews/Setting.tsx
+    const userData: userData = data?.data[0];
+
     useEffect(() => {
         if (userData) {
             setFormName(userData.name);
@@ -96,9 +92,9 @@ const Setting = () => {
                                         className="form-control"
                                         name="name"
                                         value={formName}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                            setFormName(e.target.value)
-                                        }
+                                        onChange={(
+                                            e: React.ChangeEvent<HTMLInputElement>
+                                        ) => setFormName(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -118,7 +114,9 @@ const Setting = () => {
                                         className="form-control"
                                         name="email"
                                         value={userData.email}
-                                        onChange={()=>{return}}
+                                        onChange={() => {
+                                            return;
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -159,7 +157,9 @@ const Setting = () => {
                                         name="height"
                                         value={formHeight}
                                         onChange={(e) =>
-                                            setFormHeight(Number(e.target.value))
+                                            setFormHeight(
+                                                Number(e.target.value)
+                                            )
                                         }
                                     />
                                 </div>
@@ -181,7 +181,9 @@ const Setting = () => {
                                         name="weight"
                                         value={formWeight}
                                         onChange={(e) =>
-                                            setFormWeight(Number(e.target.value))
+                                            setFormWeight(
+                                                Number(e.target.value)
+                                            )
                                         }
                                     />
                                 </div>
