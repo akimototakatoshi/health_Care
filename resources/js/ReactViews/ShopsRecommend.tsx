@@ -137,44 +137,56 @@ const ShopsRecommend = () => {
 
     return (
         <div className="container">
-            <h3 className="font-monospace">お店を検索</h3>
-            <label htmlFor="search">店名を入力</label>
-            <div className="row">
-                <input
-                    className=" col-4"
-                    type="text"
-                    value={searchName}
-                    onChange={(e) => setSearchName(e.target.value)}
-                    id="search"
-                    placeholder="マクドナルド"
-                />
-                <input
-                    className=" col-4"
-                    type="text"
-                    value={searchPrefecture}
-                    onChange={(e) => setSearchPrefecture(e.target.value)}
-                    id="search"
-                    placeholder="東京都"
-                ></input>
-                <input
-                    className=" col-4"
-                    type="text"
-                    value={searchCity}
-                    onChange={(e) => setSearchCity(e.target.value)}
-                    id="search"
-                    placeholder="新宿"
-                ></input>
-            </div>
-            <div className="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
-                <button className="btn btn-primary" onClick={onClickSearch}>
-                    検索
-                </button>
-                <button className="btn btn-danger" onClick={onClickCancel}>
-                    取消
-                </button>
+            <div className="m-2 mb-5">
+                <label htmlFor="search" className="font-monospace h2">
+                    お店を検索
+                </label>
+                <div
+                    className="row justify-content-center"
+                    style={{ height: "50px" }}
+                >
+                    <input
+                        className="col-4 h-md-100 h-75"
+                        type="text"
+                        value={searchName}
+                        onChange={(e) => setSearchName(e.target.value)}
+                        id="search"
+                        placeholder="マクドナルド"
+                    />
+                    <input
+                        className="col-4 h-md-100 h-75"
+                        type="text"
+                        value={searchPrefecture}
+                        onChange={(e) => setSearchPrefecture(e.target.value)}
+                        id="search"
+                        placeholder="東京都"
+                    ></input>
+                    <input
+                        className=" col-4 h-md-100 h-75"
+                        type="text"
+                        value={searchCity}
+                        onChange={(e) => setSearchCity(e.target.value)}
+                        id="search"
+                        placeholder="新宿"
+                    ></input>
+                </div>
+                <div className="d-grid gap-2 d-md-flex justify-content-md-center mt-2 mt-md-4">
+                    <button
+                        className="btn btn-primary mx-2"
+                        onClick={onClickSearch}
+                    >
+                        検索
+                    </button>
+                    <button
+                        className="btn btn-danger mx-2"
+                        onClick={onClickCancel}
+                    >
+                        取消
+                    </button>
+                </div>
             </div>
             <hr />
-            <div className="accordion" id="accordionExample">
+            <div className="accordion mt-3" id="accordionExample">
                 <div className="accordion-item">
                     <h2 className="accordion-header" id="headingOne">
                         <button
@@ -201,19 +213,30 @@ const ShopsRecommend = () => {
                                         return (
                                             <div
                                                 key={index}
-                                                className="row"
+                                                className="row d-md-flex"
                                                 style={{ margin: "10px" }}
                                             >
-                                                <span className="col-3 d-flex align-items-center justify-content-center">
-                                                    {history.searchName}
-                                                </span>
-                                                <span className="col-3 d-flex align-items-center justify-content-center">
-                                                    {history.searchPrefecture}
-                                                </span>
-                                                <span className="col-3 d-flex align-items-center justify-content-center">
-                                                    {history.searchCity}
-                                                </span>
-                                                <span className="d-grid gap-2 d-md-flex justify-content-md-end col-3">
+                                                <div
+                                                    className="col-md-9 text-center text-md-start d-flex align-items-center justify-content-center"
+                                                    style={{
+                                                        backgroundColor:
+                                                            "#f5f5f5",
+                                                        height: "50px",
+                                                    }}
+                                                >
+                                                    <span className="col-3">
+                                                        {history.searchName}
+                                                    </span>
+                                                    <span className="col-3">
+                                                        {
+                                                            history.searchPrefecture
+                                                        }
+                                                    </span>
+                                                    <span className="col-3">
+                                                        {history.searchCity}
+                                                    </span>
+                                                </div>
+                                                <div className="d-grid gap-2 d-md-flex justify-content-md-end col-md-3">
                                                     <button
                                                         type="button"
                                                         className="btn btn-warning"
@@ -237,13 +260,14 @@ const ShopsRecommend = () => {
                                                     >
                                                         削除
                                                     </button>
-                                                </span>
+                                                </div>
+                                                <hr className="mt-3" />
                                             </div>
                                         );
                                     }
                                 )
                             ) : (
-                                <div>
+                                <div className="d-flex align-items-center justify-content-center">
                                     <p>履歴がありません</p>
                                 </div>
                             )}
@@ -275,20 +299,28 @@ const ShopsRecommend = () => {
                                     return (
                                         <div
                                             key={favorite.id}
-                                            className="row"
+                                            className="row d-md-flex"
                                             style={{ margin: "10px" }}
                                         >
-                                            <span className="col-3 d-flex align-items-center justify-content-center">
-                                                {favorite.name}
-                                            </span>
-                                            <span className="col-3 d-flex align-items-center justify-content-center">
-                                                {favorite.prefecture}
-                                            </span>
-                                            <span className="col-3 d-flex align-items-center justify-content-center">
-                                                {favorite.city}
-                                            </span>
+                                            <div
+                                                className=" col-md-9 text-center text-md-start d-flex align-items-center justify-content-center"
+                                                style={{
+                                                    backgroundColor: "#f5f5f5",
+                                                    height: "50px",
+                                                }}
+                                            >
+                                                <span className="col-3">
+                                                    {favorite.name}
+                                                </span>
+                                                <span className="col-3">
+                                                    {favorite.prefecture}
+                                                </span>
+                                                <span className="col-3">
+                                                    {favorite.city}
+                                                </span>
+                                            </div>
 
-                                            <span className="d-grid gap-2 d-md-flex justify-content-md-end col-3">
+                                            <div className="d-grid gap-2 d-md-flex justify-content-md-end col-md-3">
                                                 <button
                                                     type="button"
                                                     className="btn btn-outline-primary"
@@ -312,12 +344,13 @@ const ShopsRecommend = () => {
                                                 >
                                                     削除
                                                 </button>
-                                            </span>
+                                            </div>
+                                            <hr className="mt-3" />
                                         </div>
                                     );
                                 })
                             ) : (
-                                <div>
+                                <div className="d-flex align-items-center justify-content-center">
                                     <p>お気に入りがありません</p>
                                 </div>
                             )}
