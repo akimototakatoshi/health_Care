@@ -4384,7 +4384,7 @@ var ShopsRecommend = function ShopsRecommend() {
     setSearchCity = _useState6[1];
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
       //ストレージから持ってきたJSONをパースした値を初期値に入れる。何もなかったら空を返す
-      var shopsJson = localStorage.getItem("shops");
+      var shopsJson = sessionStorage.getItem("shops");
       if (shopsJson === null) {
         return [];
       }
@@ -4393,7 +4393,7 @@ var ShopsRecommend = function ShopsRecommend() {
         return listShops;
       } catch (e) {
         console.error(e, shopsJson);
-        localStorage.removeItem("shops");
+        sessionStorage.removeItem("shops");
         return [];
       }
     }),
@@ -4404,7 +4404,7 @@ var ShopsRecommend = function ShopsRecommend() {
   var favoriteStore = data === null || data === void 0 ? void 0 : data.data;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (searchHistory.length === 0) {
-      localStorage.clear();
+      sessionStorage.clear();
     }
   }, [searchHistory]); //searchHistoryが空ならローカルストレージを全て削除する。
   if (error) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "failed to load");
@@ -4418,7 +4418,7 @@ var ShopsRecommend = function ShopsRecommend() {
         searchPrefecture: searchPrefecture,
         searchCity: searchCity
       }]);
-      localStorage.setItem("shops", JSON.stringify(history)); //historyの値をJSON形式に直して、shopsに追加
+      sessionStorage.setItem("shops", JSON.stringify(history)); //historyの値をJSON形式に直して、shopsに追加
       setSearchHistory(history); //historyの値はローカルストレージに保存されているので、ステイトを更新しても値は消えない
       window.open("https://www.google.co.jp/maps/search/".concat(searchPrefecture).concat(searchCity).concat(searchName, "/")); //新しいウィンドウで開く
       setSearchName("");
@@ -4433,9 +4433,9 @@ var ShopsRecommend = function ShopsRecommend() {
   };
   var onClickRemoveHistory = function onClickRemoveHistory(index) {
     //@ts-ignore
-    var storageShops = JSON.parse(localStorage.getItem("shops")); //JSONをパースした値を持ってくる
+    var storageShops = JSON.parse(sessionStorage.getItem("shops")); //JSONをパースした値を持ってくる
     delete storageShops[index]; //"shops"のindex番目を削除
-    localStorage.setItem("shops", JSON.stringify(storageShops)); //ローカルストレージにindex番目を消した値を追加する
+    sessionStorage.setItem("shops", JSON.stringify(storageShops)); //ローカルストレージにindex番目を消した値を追加する
     var history = _toConsumableArray(searchHistory);
     history.splice(index, 1);
     setSearchHistory(history);

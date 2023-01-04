@@ -33,7 +33,7 @@ const ShopsRecommend = () => {
     const [searchCity, setSearchCity] = useState("");
     const [searchHistory, setSearchHistory] = useState(() => {
         //ストレージから持ってきたJSONをパースした値を初期値に入れる。何もなかったら空を返す
-        let shopsJson = localStorage.getItem("shops");
+        let shopsJson = sessionStorage.getItem("shops");
         if (shopsJson === null) {
             return [];
         }
@@ -42,7 +42,7 @@ const ShopsRecommend = () => {
             return listShops;
         } catch (e) {
             console.error(e, shopsJson);
-            localStorage.removeItem("shops");
+            sessionStorage.removeItem("shops");
             return [];
         }
     });
@@ -52,7 +52,7 @@ const ShopsRecommend = () => {
     
     useEffect(() => {
         if (searchHistory.length === 0) {
-            localStorage.clear();
+            sessionStorage.clear();
         }
     }, [searchHistory]); //searchHistoryが空ならローカルストレージを全て削除する。
     if (error) return <div>failed to load</div>;
@@ -66,7 +66,7 @@ const ShopsRecommend = () => {
                 ...searchHistory,
                 { searchName, searchPrefecture, searchCity },
             ];
-            localStorage.setItem("shops", JSON.stringify(history)); //historyの値をJSON形式に直して、shopsに追加
+            sessionStorage.setItem("shops", JSON.stringify(history)); //historyの値をJSON形式に直して、shopsに追加
             setSearchHistory(history); //historyの値はローカルストレージに保存されているので、ステイトを更新しても値は消えない
 
             window.open(
@@ -86,9 +86,9 @@ const ShopsRecommend = () => {
 
     const onClickRemoveHistory = (index: number) => {
         //@ts-ignore
-        const storageShops = JSON.parse(localStorage.getItem("shops")); //JSONをパースした値を持ってくる
+        const storageShops = JSON.parse(sessionStorage.getItem("shops")); //JSONをパースした値を持ってくる
         delete storageShops[index]; //"shops"のindex番目を削除
-        localStorage.setItem("shops", JSON.stringify(storageShops)); //ローカルストレージにindex番目を消した値を追加する
+        sessionStorage.setItem("shops", JSON.stringify(storageShops)); //ローカルストレージにindex番目を消した値を追加する
 
         const history = [...searchHistory];
         history.splice(index, 1);
