@@ -3,31 +3,19 @@ import axios from "axios";
 import useSWR from "swr";
 // import { useNavigate } from 'react-router-dom';
 
+type SearchPlace ={
+    name:string;
+    city:string;
+    prefecture:string;
+    searchName:string;
+    searchPrefecture:string;
+    searchCity:string;
+    id:number;
+}
+
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const ShopsRecommend = () => {
     const { data, error, isLoading } = useSWR("FavoriteStore", fetcher);
-    //   var options = {
-    //     enableHighAccuracy: true,
-    //     maximumAge: 0
-    //   };
-
-    //   function success(pos) {
-    //     var crd = pos.coords;
-
-    //     console.log('Your current position is:');
-    //     console.log(`Latitude : ${crd.latitude}`);//緯度
-    //     console.log(`Longitude: ${crd.longitude}`);//軽度
-    //     console.log(`More or less ${crd.accuracy} meters.`);
-    //   }
-
-    //   function error(err) {
-    //     console.warn(`ERROR(${err.code}): ${err.message}`);
-    //   }
-
-    //   navigator.geolocation.getCurrentPosition(success, error, options);
-
-    // const navigate=useNavigate()
-
     const [searchName, setSearchName] = useState("");
     const [searchPrefecture, setSearchPrefecture] = useState("");
     const [searchCity, setSearchCity] = useState("");
@@ -85,8 +73,11 @@ const ShopsRecommend = () => {
     };
 
     const onClickRemoveHistory = (index: number) => {
-        //@ts-ignore
-        const storageShops = JSON.parse(sessionStorage.getItem("shops")); //JSONをパースした値を持ってくる
+        let storageShops = []
+        const storageData= sessionStorage.getItem("shops")//sessionStorageのデータを取得
+        if(storageData){ //nullを除外する。ここで条件を指定しないと、typeエラーが出る。
+            storageShops = JSON.parse(storageData) //JSONをパースした値を持ってくる
+        }
         delete storageShops[index]; //"shops"のindex番目を削除
         sessionStorage.setItem("shops", JSON.stringify(storageShops)); //ローカルストレージにindex番目を消した値を追加する
 
@@ -114,7 +105,7 @@ const ShopsRecommend = () => {
     };
 
     // お気に入り検索
-    const onClickFavoriteSearch = (favoriteData: any) => {
+    const onClickFavoriteSearch = (favoriteData: SearchPlace) => {
         setSearchName(favoriteData.name);
         setSearchPrefecture(favoriteData.prefecture);
         setSearchCity(favoriteData.city);
@@ -209,7 +200,7 @@ const ShopsRecommend = () => {
                         <div className="accordion-body">
                             {searchHistory.length > 0 ? (
                                 searchHistory.map(
-                                    (history: any, index: number) => {
+                                    (history: SearchPlace, index: number) => {
                                         return (
                                             <div
                                                 key={index}
@@ -295,7 +286,7 @@ const ShopsRecommend = () => {
                     >
                         <div className="accordion-body">
                             {favoriteStore.length > 0 ? (
-                                favoriteStore.map((favorite: any) => {
+                                favoriteStore.map((favorite: SearchPlace) => {
                                     return (
                                         <div
                                             key={favorite.id}
