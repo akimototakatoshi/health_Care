@@ -59,7 +59,7 @@ const Graph = () => {
         "Thursday",
         "Friday",
         "Saturday",
-        "Sunday"
+        "Sunday",
     ];
 
     useEffect(() => {
@@ -83,6 +83,7 @@ const Graph = () => {
         axiosData();
         axiosDataOfCalorieYear();
     }, []);
+
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
 
@@ -271,18 +272,26 @@ const Graph = () => {
 
                 <div className="tab-content">
                     <div id="graph1" className="tab-pane active">
-                        <Chart type="bar" data={data2} className="mt-4" height={200}/>
+                        <Chart
+                            type="bar"
+                            data={data2}
+                            className="mt-4"
+                            height={200}
+                        />
                     </div>
                     <div id="graph2" className="tab-pane">
                         <CalorieYear
                             calorieData={calorieOfYear}
                             userData={userData}
-                            
                         />
                     </div>
                 </div>
             </main>
-            <Link to="/">Homeへ戻る</Link>
+            <Link to="/">
+                <button type="button" className="btn btn-info">
+                    Homeへ戻る{" "}
+                </button>
+            </Link>
         </div>
     );
 };
