@@ -138,7 +138,7 @@ const ShopsRecommend = () => {
     return (
         <div className="container">
             <div className="m-2 mb-5">
-                <label htmlFor="search" className="font-monospace h2">
+                <label htmlFor="search" className="font-monospace h3">
                     お店を検索
                 </label>
                 <div

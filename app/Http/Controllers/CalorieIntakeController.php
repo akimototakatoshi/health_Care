@@ -123,14 +123,20 @@ class CalorieIntakeController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Store a newly created resource in storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function shw($id)
+    public function eatedSelectStore(Request $request)
     {
-        //
+        //　直接入力でのカロリー追加
+        CalorieIntake::create([
+            'user_id' => Auth::id(),
+            'food_name' => $request->food_name,
+            'calorie' => $request->calorie,
+            'week' => $request->week
+        ]);
     }
 
     /**
