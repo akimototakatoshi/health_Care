@@ -42,6 +42,8 @@ Route::controller(CalorieIntakeController::class)->middleware(['api'])
     Route::post('/calorieSearch', 'collation')->name('calorieSearch'); // カロリー検索
     Route::post('/calorieAddText','eatedTextStore')->name('calorieAddText'); // カロリー直接入力
     Route::post('/calorieAddSelect','eatedSelectStore')->name('calorieAddSelect'); // 検索機能でカロリー追加
+    Route::get('/eatedHistory','edit')->name('eatedHistory'); // 
+    Route::post('/eatedDelete','destroy')->name('eatedDelete'); // 
 });
 
 Route::controller(UserSettingController::class)->middleware(['api'])

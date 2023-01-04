@@ -3514,6 +3514,91 @@ function(){function t(t){t.remember("_draggable",this),this.el=t}t.prototype.ini
 
 /***/ }),
 
+/***/ "./resources/js/ReactViews/EatedHistory.tsx":
+/*!**************************************************!*\
+  !*** ./resources/js/ReactViews/EatedHistory.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var swr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swr */ "./node_modules/swr/core/dist/index.mjs");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+
+
+
+
+var EatedHistory = function EatedHistory() {
+  var fetcher = function fetcher(url) {
+    return fetch(url).then(function (res) {
+      return res.json();
+    });
+  };
+  var _useSWR = (0,swr__WEBPACK_IMPORTED_MODULE_1__["default"])("eatedHistory", fetcher),
+    data = _useSWR.data,
+    error = _useSWR.error,
+    isLoading = _useSWR.isLoading;
+  if (error) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "failed to load");
+  if (isLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "loading...");
+  var EatedData = data.data;
+  // 登録したもの削除
+  var onClickFoodDelete = function onClickFoodDelete(foodId) {
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("eatedDelete", {
+      id: foodId
+    }).then(function (res) {
+      console.log(res);
+    })["catch"](function (e) {
+      console.log("axiosError");
+    });
+    location.reload();
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
+    className: "table table-striped text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "col"
+  }, "\u6599\u7406\u540D"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "col"
+  }, "\u30AB\u30ED\u30EA\u30FC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "col"
+  }, "\u767B\u9332\u6642\u9593"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "col"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, EatedData.map(function (e) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+      key: e.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+      className: "mb-0 mt-2"
+    }, e.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+      className: "mb-0 mt-2"
+    }, e.calorie, " kcal")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+      className: "mb-0 mt-2"
+    }, e.created_at)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      type: "button",
+      className: "btn btn-outline-danger",
+      onClick: function onClick() {
+        onClickFoodDelete(e.id);
+      }
+    }, "\u524A\u9664")));
+  }))), EatedData.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-center mt-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "\u672C\u65E5\u767B\u9332\u3057\u305F\u6599\u7406\u306F\u3042\u308A\u307E\u305B\u3093")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/eated-list"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "button",
+    className: "btn btn-info"
+  }, "\u623B\u308B"))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EatedHistory);
+
+/***/ }),
+
 /***/ "./resources/js/ReactViews/EatedList.tsx":
 /*!***********************************************!*\
   !*** ./resources/js/ReactViews/EatedList.tsx ***!
@@ -3528,6 +3613,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3582,37 +3668,47 @@ var EatedList = function EatedList() {
   var day = today.getDay();
   // 直接入力されたデータを保存
   var onClickAddText = function onClickAddText() {
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieAddText", {
-      food_name: inputFood,
-      calorie: inputFoodCal,
-      week: day
-    }).then(function (res) {
-      console.log(res);
-    })["catch"](function (e) {
-      console.log("axiosError");
-    });
-    setInputFood("");
-    setInputFoodCal("");
+    if (!inputFood) {
+      return;
+    } else {
+      axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieAddText", {
+        food_name: inputFood,
+        calorie: inputFoodCal,
+        week: day
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (e) {
+        console.log("axiosError");
+      });
+      setInputFood("");
+      setInputFoodCal("");
+      alert("登録しました");
+    }
   };
   // セレクトしてデータ保存
   var onClickAddSelect = function onClickAddSelect(name, calorie) {
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieAddSelect", {
-      food_name: name,
-      calorie: String(calorie),
-      week: day
-    }).then(function (res) {
-      console.log(res);
-    })["catch"](function (e) {
-      console.log("axiosError");
-    });
-    setGetData([]);
+    if (!name) {
+      return;
+    } else {
+      axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieAddSelect", {
+        food_name: name,
+        calorie: String(calorie),
+        week: day
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (e) {
+        console.log("axiosError");
+      });
+      setGetData([]);
+      alert("登録しました");
+    }
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "font-monospace h4"
-  }, "\u98DF\u3079\u305F\u7269\u3092\u691C\u7D22\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-floating mb-4"
+  }, "\u6599\u7406\u3092\u691C\u7D22"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-floating mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
     className: "form-control",
@@ -3633,45 +3729,9 @@ var EatedList = function EatedList() {
   }, "\u691C\u7D22"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "btn btn-outline-danger mx-2",
     onClick: onClickCancel
-  }, "\u53D6\u6D88"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "font-monospace h4"
-  }, "\u98DF\u3079\u305F\u7269\u3092\u81EA\u5206\u3067\u767B\u9332\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "row mb-5"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-floating col-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    type: "text",
-    className: "form-control",
-    id: "floatingInput2",
-    placeholder: "\u98DF\u3079\u305F\u7269\u3092\u5165\u529B",
-    value: inputFood,
-    onChange: function onChange(e) {
-      return setInputFood(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    htmlFor: "floatingInput2"
-  }, "\u98DF\u3079\u305F\u7269\u3092\u5165\u529B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-floating col-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    type: "text",
-    className: "form-control",
-    id: "floatingInput3",
-    placeholder: "\u30AB\u30ED\u30EA\u30FC\u3092\u5165\u529B",
-    value: inputFoodCal,
-    onChange: function onChange(e) {
-      return setInputFoodCal(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    htmlFor: "floatingInput3"
-  }, "\u30AB\u30ED\u30EA\u30FC\u3092\u5165\u529B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "d-grid gap-2 d-md-flex justify-content-md-center mt-2 mt-md-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-outline-primary mx-2",
-    onClick: onClickAddText
-  }, "\u767B\u9332"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-outline-danger mx-2",
-    onClick: onClickCancel
-  }, "\u53D6\u6D88"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, getData.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  }, "\u53D6\u6D88"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "mb-5"
+  }, getData.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "font-monospace h6"
   }, "\uFF1C\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\uFF1E") : "", getData.map(function (e) {
     var splitName = e.name.split("/");
@@ -3696,7 +3756,55 @@ var EatedList = function EatedList() {
         return onClickAddSelect(arrayLastData, e.calorie);
       }
     }, "\u767B\u9332"))))));
-  })));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "font-monospace h4"
+  }, "\u30AB\u30ED\u30EA\u30FC\u3092\u767B\u9332\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "row mb-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-floating col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "text",
+    className: "form-control",
+    id: "floatingInput2",
+    placeholder: "\u98DF\u3079\u305F\u7269\u3092\u5165\u529B",
+    value: inputFood,
+    onChange: function onChange(e) {
+      return setInputFood(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "floatingInput2",
+    style: {
+      marginLeft: "10px"
+    }
+  }, "\u98DF\u3079\u305F\u7269\u3092\u5165\u529B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-floating col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "text",
+    className: "form-control",
+    id: "floatingInput3",
+    placeholder: "\u30AB\u30ED\u30EA\u30FC\u3092\u5165\u529B",
+    value: inputFoodCal,
+    onChange: function onChange(e) {
+      return setInputFoodCal(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "floatingInput3",
+    style: {
+      marginLeft: "10px"
+    }
+  }, "\u30AB\u30ED\u30EA\u30FC\u3092\u5165\u529B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "d-grid gap-2 d-md-flex justify-content-md-center mt-2 mt-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "btn btn-outline-primary mx-2",
+    onClick: onClickAddText
+  }, "\u767B\u9332"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "btn btn-outline-danger mx-2",
+    onClick: onClickCancel
+  }, "\u53D6\u6D88"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/eated-list/eatedHistory"
+  }, "\u767B\u9332\u3057\u305F\u98DF\u3079\u7269\u4E00\u89A7")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EatedList);
 
@@ -4004,7 +4112,10 @@ var Graph = function Graph() {
     userData: userData
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
     to: "/"
-  }, "Home\u3078\u623B\u308B"));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "button",
+    className: "btn btn-info"
+  }, "Home\u3078\u623B\u308B", " ")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Graph);
 
@@ -4702,14 +4813,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _EatedList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EatedList */ "./resources/js/ReactViews/EatedList.tsx");
 /* harmony import */ var _Graph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Graph */ "./resources/js/ReactViews/Graph.tsx");
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Home */ "./resources/js/ReactViews/Home.tsx");
 /* harmony import */ var _Notfound__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Notfound */ "./resources/js/ReactViews/Notfound.tsx");
 /* harmony import */ var _ShopsRecommend__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ShopsRecommend */ "./resources/js/ReactViews/ShopsRecommend.tsx");
 /* harmony import */ var _Setting__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Setting */ "./resources/js/ReactViews/Setting.tsx");
+/* harmony import */ var _EatedHistory__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EatedHistory */ "./resources/js/ReactViews/EatedHistory.tsx");
+
 
 
 
@@ -4719,24 +4832,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Src = function Src() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     index: true,
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Home__WEBPACK_IMPORTED_MODULE_3__["default"], null)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     path: "/graph",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Graph__WEBPACK_IMPORTED_MODULE_2__["default"], null)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     path: "/shops-recommend",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ShopsRecommend__WEBPACK_IMPORTED_MODULE_5__["default"], null)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     path: "/eated-list",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_EatedList__WEBPACK_IMPORTED_MODULE_1__["default"], null)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     path: "/setting",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Setting__WEBPACK_IMPORTED_MODULE_6__["default"], null)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     path: "*",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notfound__WEBPACK_IMPORTED_MODULE_4__["default"], null)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+    path: "/eated-list/eatedHistory",
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_EatedHistory__WEBPACK_IMPORTED_MODULE_7__["default"], null)
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Src);
@@ -4769,7 +4885,7 @@ var calorieYear = function calorieYear(_ref) {
   function janTotal() {
     var janCal = [];
     calorieData.map(function (e) {
-      if (e.created_at === "1") {
+      if (e.created_at === "01") {
         janCal.push(parseInt(e.calorie));
       }
     });
@@ -4781,7 +4897,7 @@ var calorieYear = function calorieYear(_ref) {
   function febTotal() {
     var febCal = [];
     calorieData.map(function (e) {
-      if (e.created_at === "2") {
+      if (e.created_at === "02") {
         febCal.push(parseInt(e.calorie));
       }
     });
@@ -4793,7 +4909,7 @@ var calorieYear = function calorieYear(_ref) {
   function marTotal() {
     var marCal = [];
     calorieData.map(function (e) {
-      if (e.created_at === "3") {
+      if (e.created_at === "03") {
         marCal.push(parseInt(e.calorie));
       }
     });
@@ -4805,7 +4921,7 @@ var calorieYear = function calorieYear(_ref) {
   function aprTotal() {
     var aprCal = [];
     calorieData.map(function (e) {
-      if (e.created_at === "4") {
+      if (e.created_at === "04") {
         aprCal.push(parseInt(e.calorie));
       }
     });
@@ -4817,7 +4933,7 @@ var calorieYear = function calorieYear(_ref) {
   function mayTotal() {
     var mayCal = [];
     calorieData.map(function (e) {
-      if (e.created_at === "5") {
+      if (e.created_at === "05") {
         mayCal.push(parseInt(e.calorie));
       }
     });
@@ -4829,7 +4945,7 @@ var calorieYear = function calorieYear(_ref) {
   function junTotal() {
     var junCal = [];
     calorieData.map(function (e) {
-      if (e.created_at === "6") {
+      if (e.created_at === "06") {
         junCal.push(parseInt(e.calorie));
       }
     });
@@ -4841,7 +4957,7 @@ var calorieYear = function calorieYear(_ref) {
   function julTotal() {
     var julCal = [];
     calorieData.map(function (e) {
-      if (e.created_at === "7") {
+      if (e.created_at === "07") {
         julCal.push(parseInt(e.calorie));
       }
     });
@@ -4853,7 +4969,7 @@ var calorieYear = function calorieYear(_ref) {
   function augTotal() {
     var augCal = [];
     calorieData.map(function (e) {
-      if (e.created_at === "8") {
+      if (e.created_at === "08") {
         augCal.push(parseInt(e.calorie));
       }
     });
@@ -4865,7 +4981,7 @@ var calorieYear = function calorieYear(_ref) {
   function sepTotal() {
     var sepCal = [];
     calorieData.map(function (e) {
-      if (e.created_at === "9") {
+      if (e.created_at === "09") {
         sepCal.push(parseInt(e.calorie));
       }
     });

@@ -10,6 +10,7 @@ use App\Http\Resources\CalorieWeekResource;
 use App\Http\Resources\CalorieMonthResource;
 use App\Http\Resources\CalorieYearResource;
 use App\Http\Resources\EatedSelectResource;
+use App\Http\Resources\EatedHistoryResource;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Carbon\Carbon;
@@ -145,21 +146,13 @@ class CalorieIntakeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
         //
-    }
+        $today = Carbon::today();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return EatedHistoryResource::collection(CalorieIntake::whereDate('created_at', $today)
+        ->where('user_id', '=', Auth::id())->get());
     }
 
     /**
@@ -168,8 +161,11 @@ class CalorieIntakeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        // DBのdata削除
+        $EatedDelete = CalorieIntake::where('id', $request->id);
+        
+        $EatedDelete->delete();
     }
 }

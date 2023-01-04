@@ -6,6 +6,7 @@ import Home from "./Home";
 import Notfound from "./Notfound";
 import ShopsRecommend from "./ShopsRecommend";
 import Setting from "./Setting"
+import EatedHistory from "./EatedHistory";
 const Src = () => {
 
     return (
@@ -18,6 +19,7 @@ const Src = () => {
                     <Route path={"/eated-list"} element={<EatedList />} />
                     <Route path={"/setting"} element={<Setting />} />
                     <Route path="*" element={<Notfound />} />
+                    <Route path={"/eated-list/eatedHistory"} element={<EatedHistory/>} />
                 </Routes>
             </HashRouter>
         </div>

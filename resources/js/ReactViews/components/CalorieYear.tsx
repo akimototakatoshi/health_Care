@@ -49,7 +49,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
         let janCal: number[] = [];
 
         calorieData.map((e) => {
-            if (e.created_at === "1") {
+            if (e.created_at === "01") {
                 janCal.push(parseInt(e.calorie));
             }
         });
@@ -63,7 +63,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
         let febCal: number[] = [];
 
         calorieData.map((e) => {
-            if (e.created_at === "2") {
+            if (e.created_at === "02") {
                 febCal.push(parseInt(e.calorie));
             }
         });
@@ -77,7 +77,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
         let marCal: number[] = [];
 
         calorieData.map((e) => {
-            if (e.created_at === "3") {
+            if (e.created_at === "03") {
                 marCal.push(parseInt(e.calorie));
             }
         });
@@ -90,7 +90,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
         let aprCal: number[] = [];
 
         calorieData.map((e) => {
-            if (e.created_at === "4") {
+            if (e.created_at === "04") {
                 aprCal.push(parseInt(e.calorie));
             }
         });
@@ -103,7 +103,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
         let mayCal: number[] = [];
 
         calorieData.map((e) => {
-            if (e.created_at === "5") {
+            if (e.created_at === "05") {
                 mayCal.push(parseInt(e.calorie));
             }
         });
@@ -116,7 +116,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
         let junCal: number[] = [];
 
         calorieData.map((e) => {
-            if (e.created_at === "6") {
+            if (e.created_at === "06") {
                 junCal.push(parseInt(e.calorie));
             }
         });
@@ -130,7 +130,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
         let julCal: number[] = [];
 
         calorieData.map((e) => {
-            if (e.created_at === "7") {
+            if (e.created_at === "07") {
                 julCal.push(parseInt(e.calorie));
             }
         });
@@ -143,7 +143,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
         let augCal: number[] = [];
 
         calorieData.map((e) => {
-            if (e.created_at === "8") {
+            if (e.created_at === "08") {
                 augCal.push(parseInt(e.calorie));
             }
         });
@@ -156,7 +156,7 @@ const calorieYear: FC<CalorieProps> = ({ calorieData, userData }) => {
         let sepCal: number[] = [];
 
         calorieData.map((e) => {
-            if (e.created_at === "9") {
+            if (e.created_at === "09") {
                 sepCal.push(parseInt(e.calorie));
             }
         });
