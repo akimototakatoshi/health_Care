@@ -40,7 +40,8 @@ Route::controller(CalorieIntakeController::class)->middleware(['api'])
     Route::get('/calorieMonth', 'monthGraph')->name('calorieMonth'); // 月毎のグラフ
     Route::get('/calorieYear', 'yearGraph')->name('calorieYear'); // 一年分のグラフ
     Route::post('/calorieSearch', 'collation')->name('calorieSearch'); // カロリー検索
-    Route::post('/calorieAddText','eatedTextStore')->name('calorieAddText');
+    Route::post('/calorieAddText','eatedTextStore')->name('calorieAddText'); // カロリー直接入力
+    Route::post('/calorieAddSelect','eatedSelectStore')->name('calorieAddSelect'); // 検索機能でカロリー追加
 });
 
 Route::controller(UserSettingController::class)->middleware(['api'])

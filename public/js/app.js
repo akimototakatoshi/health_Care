@@ -3539,9 +3539,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var EatedList = function EatedList() {
-  // useEffect(() => {
-  //     getUser();
-  // }, []);
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState2 = _slicedToArray(_useState, 2),
@@ -3561,6 +3558,11 @@ var EatedList = function EatedList() {
     setInputFoodCal = _useState8[1];
   // const [suggestName,setSuggestName]=useState("")
   // const [suggestCal,setSuggestCal]=useState("")
+  var onClickCancel = function onClickCancel() {
+    setEated("");
+    setInputFood("");
+    setInputFoodCal("");
+  };
   // 入力した名前と一致するデータを取得
   var onClickSearch = function onClickSearch() {
     if (!eated) {
@@ -3576,9 +3578,9 @@ var EatedList = function EatedList() {
     }
     setEated("");
   };
-  // 直接入力されたデータを保存
   var today = new Date();
   var day = today.getDay();
+  // 直接入力されたデータを保存
   var onClickAddText = function onClickAddText() {
     axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieAddText", {
       food_name: inputFood,
@@ -3593,15 +3595,24 @@ var EatedList = function EatedList() {
     setInputFoodCal("");
   };
   // セレクトしてデータ保存
-  var onClickAddSelect = function onClickAddSelect() {
-    // setInputFood();
-    // setInputFoodCal();
-    onClickAddText();
+  var onClickAddSelect = function onClickAddSelect(name, calorie) {
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieAddSelect", {
+      food_name: name,
+      calorie: String(calorie),
+      week: day
+    }).then(function (res) {
+      console.log(res);
+    })["catch"](function (e) {
+      console.log("axiosError");
+    });
+    setGetData([]);
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "\u98DF\u3079\u305F\u3082\u306E\u3092\u691C\u7D22\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-floating mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "font-monospace h4"
+  }, "\u98DF\u3079\u305F\u7269\u3092\u691C\u7D22\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-floating mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
     className: "form-control",
@@ -3613,11 +3624,19 @@ var EatedList = function EatedList() {
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     htmlFor: "floatingInput"
-  }, "\u98DF\u3079\u305F\u7269\u3092\u5165\u529B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "\u98DF\u3079\u305F\u7269\u3092\u5165\u529B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "d-grid gap-2 d-md-flex justify-content-md-center mt-2 mt-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     name: "add",
-    onClick: onClickSearch
-  }, "\u691C\u7D22")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "\u98DF\u3079\u305F\u7269\u3092\u81EA\u5206\u3067\u767B\u9332\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "row"
+    onClick: onClickSearch,
+    className: "btn btn-outline-primary mx-2"
+  }, "\u691C\u7D22"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "btn btn-outline-danger mx-2",
+    onClick: onClickCancel
+  }, "\u53D6\u6D88"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "font-monospace h4"
+  }, "\u98DF\u3079\u305F\u7269\u3092\u81EA\u5206\u3067\u767B\u9332\u3059\u308B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "row mb-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "form-floating col-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -3644,14 +3663,39 @@ var EatedList = function EatedList() {
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     htmlFor: "floatingInput3"
-  }, "\u30AB\u30ED\u30EA\u30FC\u3092\u5165\u529B"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "\u30AB\u30ED\u30EA\u30FC\u3092\u5165\u529B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "d-grid gap-2 d-md-flex justify-content-md-center mt-2 mt-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "btn btn-outline-primary mx-2",
     onClick: onClickAddText
-  }, "\u767B\u9332"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, getData.map(function (e) {
+  }, "\u767B\u9332"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "btn btn-outline-danger mx-2",
+    onClick: onClickCancel
+  }, "\u53D6\u6D88"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, getData.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "font-monospace h6"
+  }, "\uFF1C\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\uFF1E") : "", getData.map(function (e) {
     var splitName = e.name.split("/");
     var arrayLastData = splitName.slice(-1)[0];
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       key: e.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "\u540D\u524D\uFF1A", arrayLastData, " \u30AB\u30ED\u30EA\u30FC\uFF1A", e.calorie), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "\u767B\u9332")));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
+      className: "list-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+      className: "list-group-item"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "col d-flex align-items-center justify-content-center"
+    }, "\u5546\u54C1\u540D\uFF1A", arrayLastData), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "col d-flex align-items-center justify-content-center"
+    }, "\u30AB\u30ED\u30EA\u30FC\uFF1A", e.calorie, " kcal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "col d-flex align-items-center justify-content-center"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      className: "btn btn-outline-primary",
+      onClick: function onClick() {
+        return onClickAddSelect(arrayLastData, e.calorie);
+      }
+    }, "\u767B\u9332"))))));
   })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EatedList);
@@ -4477,7 +4521,7 @@ var ShopsRecommend = function ShopsRecommend() {
     className: "m-2 mb-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     htmlFor: "search",
-    className: "font-monospace h2"
+    className: "font-monospace h3"
   }, "\u304A\u5E97\u3092\u691C\u7D22"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "row justify-content-center",
     style: {
