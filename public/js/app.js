@@ -3612,9 +3612,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -3625,7 +3624,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var EatedList = function EatedList() {
-  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState2 = _slicedToArray(_useState, 2),
     eated = _useState2[0],
@@ -3642,8 +3640,6 @@ var EatedList = function EatedList() {
     _useState8 = _slicedToArray(_useState7, 2),
     inputFoodCal = _useState8[0],
     setInputFoodCal = _useState8[1];
-  // const [suggestName,setSuggestName]=useState("")
-  // const [suggestCal,setSuggestCal]=useState("")
   var onClickCancel = function onClickCancel() {
     setEated("");
     setInputFood("");
@@ -3654,7 +3650,7 @@ var EatedList = function EatedList() {
     if (!eated) {
       return;
     } else {
-      axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieSearch", {
+      axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("calorieSearch", {
         search: eated
       }).then(function (res) {
         setGetData(res.data.data);
@@ -3671,7 +3667,7 @@ var EatedList = function EatedList() {
     if (!inputFood) {
       return;
     } else {
-      axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieAddText", {
+      axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("calorieAddText", {
         food_name: inputFood,
         calorie: inputFoodCal,
         week: day
@@ -3690,7 +3686,7 @@ var EatedList = function EatedList() {
     if (!name) {
       return;
     } else {
-      axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("calorieAddSelect", {
+      axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("calorieAddSelect", {
         food_name: name,
         calorie: String(calorie),
         week: day
@@ -3802,7 +3798,7 @@ var EatedList = function EatedList() {
     onClick: onClickCancel
   }, "\u53D6\u6D88"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "text-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
     to: "/eated-list/eatedHistory"
   }, "\u767B\u9332\u3057\u305F\u98DF\u3079\u7269\u4E00\u89A7")));
 };
@@ -4498,7 +4494,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-// import { useNavigate } from 'react-router-dom';
 var fetcher = function fetcher(url) {
   return fetch(url).then(function (res) {
     return res.json();
@@ -4509,22 +4504,6 @@ var ShopsRecommend = function ShopsRecommend() {
     data = _useSWR.data,
     error = _useSWR.error,
     isLoading = _useSWR.isLoading;
-  //   var options = {
-  //     enableHighAccuracy: true,
-  //     maximumAge: 0
-  //   };
-  //   function success(pos) {
-  //     var crd = pos.coords;
-  //     console.log('Your current position is:');
-  //     console.log(`Latitude : ${crd.latitude}`);//緯度
-  //     console.log(`Longitude: ${crd.longitude}`);//軽度
-  //     console.log(`More or less ${crd.accuracy} meters.`);
-  //   }
-  //   function error(err) {
-  //     console.warn(`ERROR(${err.code}): ${err.message}`);
-  //   }
-  //   navigator.geolocation.getCurrentPosition(success, error, options);
-  // const navigate=useNavigate()
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState2 = _slicedToArray(_useState, 2),
     searchName = _useState2[0],
@@ -4587,8 +4566,13 @@ var ShopsRecommend = function ShopsRecommend() {
     setSearchCity("");
   };
   var onClickRemoveHistory = function onClickRemoveHistory(index) {
-    //@ts-ignore
-    var storageShops = JSON.parse(sessionStorage.getItem("shops")); //JSONをパースした値を持ってくる
+    var storageShops = [];
+    var storageData = sessionStorage.getItem("shops"); //sessionStorageのデータを取得
+    if (storageData) {
+      //nullを除外する。ここで条件を指定しないと、typeエラーが出る。
+      storageShops = JSON.parse(storageData); //JSONをパースした値を持ってくる
+    }
+
     delete storageShops[index]; //"shops"のindex番目を削除
     sessionStorage.setItem("shops", JSON.stringify(storageShops)); //ローカルストレージにindex番目を消した値を追加する
     var history = _toConsumableArray(searchHistory);
@@ -5170,16 +5154,7 @@ var CalrieGraph = function CalrieGraph(_ref) {
               show: true,
               total: {
                 show: true,
-                // showAlways: true,
                 label: "総摂取カロリー",
-                // formatter: function () {
-                //     // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                //     return `${calorie.reduce(
-                //         (prev, current) =>
-                //             prev + Number(current),
-                //         0
-                //     )}kcal`;
-                // },
                 formatter: function formatter() {
                   return "".concat(number, "kcal/").concat(total, "kcal");
                 }

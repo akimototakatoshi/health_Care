@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactApexChart from "react-apexcharts";
 import useSWR from "swr";
 import { Data, userData } from "../types/user";
@@ -116,16 +116,7 @@ const CalrieGraph = ({ userData }: { userData: Data }) => {
                             show: true,
                             total: {
                                 show: true,
-                                // showAlways: true,
                                 label: "総摂取カロリー",
-                                // formatter: function () {
-                                //     // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                                //     return `${calorie.reduce(
-                                //         (prev, current) =>
-                                //             prev + Number(current),
-                                //         0
-                                //     )}kcal`;
-                                // },
                                 formatter: function () {
                                     return `${number}kcal/${total}kcal`;
                                 },

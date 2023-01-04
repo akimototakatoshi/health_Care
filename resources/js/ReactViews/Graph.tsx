@@ -213,7 +213,7 @@ const Graph = () => {
         }
     }
 
-    const data2: any = {
+    const data2:any= {
         labels,
         datasets: [
             {

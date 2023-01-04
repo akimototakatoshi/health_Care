@@ -2,6 +2,7 @@ import React from "react";
 import useSWR from "swr";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { CalorieOfYear } from "./types/calorie";
 
 const EatedHistory = () => {
     const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -38,7 +39,7 @@ const EatedHistory = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {EatedData.map((e: any) => {
+                    {EatedData.map((e: CalorieOfYear) => {
                         return (
                             <tr key={e.id}>
                                 <td>

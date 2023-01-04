@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
+import { CalorieOfYear } from "./types/calorie";
+
 
 const EatedList = () => {
-    const navigate = useNavigate();
     const [eated, setEated] = useState("");
-    const [getData, setGetData] = useState<any[]>([]);
+    const [getData, setGetData] = useState<CalorieOfYear[]>([]);
     const [inputFood, setInputFood] = useState("");
     const [inputFoodCal, setInputFoodCal] = useState("");
-    // const [suggestName,setSuggestName]=useState("")
-    // const [suggestCal,setSuggestCal]=useState("")
 
     const onClickCancel = () => {
         setEated("");
@@ -64,7 +62,7 @@ const EatedList = () => {
     };
 
     // セレクトしてデータ保存
-    const onClickAddSelect = (name: any, calorie: any) => {
+    const onClickAddSelect = (name: string, calorie: string) => {
         if (!name) {
             return;
         } else {
