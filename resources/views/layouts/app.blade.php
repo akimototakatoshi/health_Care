@@ -23,10 +23,25 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+
+    <style>
+        .height{
+            position: relative;
+            padding-bottom: 60px;
+            box-sizing: border-box;
+            min-height: 100vh;
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width:100%;
+        }
+    </style>
+
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="height">
         <nav class="navbar navbar-expand-md navbar-light bg-info shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" >
@@ -81,9 +96,17 @@
                 </div>
             </div>
         </nav>
+
         <main class="py-4">
             @yield('content')
         </main>
+
+        <?php $year = date('Y');?>
+        <footer class="footer py-3 bg-light ">
+            <div class="text-center text-dark">
+                <p class="text-muted">©︎<?php echo $year;?> health care</p>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

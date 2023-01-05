@@ -35,7 +35,7 @@ const EatedHistory = () => {
                         <th scope="col">料理名</th>
                         <th scope="col">カロリー</th>
                         <th scope="col">登録時間</th>
-                        <th scope="col"></th>
+                        <th scope="col">削除</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,15 +55,15 @@ const EatedHistory = () => {
                                     <p className="mb-0 mt-2">{e.created_at}</p>
                                 </td>
                                 <td>
-                                    <button
-                                        type="button"
-                                        className="btn btn-outline-danger"
+                                    <a
                                         onClick={() => {
                                             onClickFoodDelete(e.id);
                                         }}
                                     >
-                                        削除
-                                    </button>
+                                        <span className="material-symbols-rounded delete">
+                                            delete
+                                        </span>
+                                    </a>
                                 </td>
                             </tr>
                         );
@@ -77,9 +77,9 @@ const EatedHistory = () => {
             )}
             <div>
                 <Link to="/eated-list">
-                    <button type="button" className="btn btn-info">
-                        戻る
-                    </button>
+                    <span className="material-symbols-outlined back mt-5 mx-3">
+                        undo
+                    </span>
                 </Link>
             </div>
         </div>

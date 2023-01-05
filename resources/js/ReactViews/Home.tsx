@@ -24,7 +24,7 @@ const Home = () => {
             <div className="container justify-content-sm-center">
                 <div className="card">
                     <div className="row">
-                        <div className=" col-auto justify-content-sm-center justify-content-md-start">
+                        <div className="col justify-content-sm-center justify-content-md-start">
                             <CalrieGraph userData={data} />
                         </div>
                         <div className="col mt-5 wf-roundedmplus1c" style={{margin:"20px 20px 20px 20px"}}>

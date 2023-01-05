@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { CalorieOfYear } from "./types/calorie";
-
+import "../modules/home.css";
 
 const EatedList = () => {
     const [eated, setEated] = useState("");
@@ -98,6 +98,7 @@ const EatedList = () => {
                 <label htmlFor="floatingInput">食べた物を入力</label>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-center mt-2 mt-md-4">
                     <button
+                        type="button"
                         name="add"
                         onClick={onClickSearch}
                         className="btn btn-outline-primary mx-2"
@@ -105,6 +106,7 @@ const EatedList = () => {
                         検索
                     </button>
                     <button
+                        type="button"
                         className="btn btn-outline-danger mx-2"
                         onClick={onClickCancel}
                     >

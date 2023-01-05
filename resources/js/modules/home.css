@@ -32,3 +32,66 @@
 .wf-roundedmplus1c {
     font-family: "M PLUS Rounded 1c";
 }
+
+
+.material-symbols-rounded {
+    font-size: 45px;
+    line-height: 45px;
+    color: gainsboro;
+    margin-right: 5px;
+}
+
+.material-symbols-rounded:hover {
+    font-size: 45px;
+    line-height: 45px;
+    cursor: pointer;
+    color: red;
+}
+
+.delete {
+    font-size: 40px;
+    line-height: 40px;
+    color: gainsboro;
+    margin-left: 5px;
+}
+
+.delete:hover {
+    font-size: 40px;
+    line-height: 40px;
+    color: gray;
+}
+
+.add {
+    color: skyblue;
+    font-size: 45px;
+    line-height: 45px;
+    border: none
+}
+
+.add:hover {
+    color: skyblue;
+    font-size: 45px;
+    line-height: 45px;
+    border: none
+}
+
+.createIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.back {
+    color: skyblue;
+    font-size: 35px;
+    line-height: 35px;
+    border: 3px solid skyblue;
+}
+
+.back:hover {
+    cursor: pointer;
+    color: white;
+    border: 3px solid skyblue;
+    background-color: skyblue;
+}

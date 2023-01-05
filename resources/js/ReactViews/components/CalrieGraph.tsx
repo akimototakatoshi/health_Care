@@ -54,7 +54,8 @@ const CalrieGraph = ({ userData }: { userData: Data }) => {
         number += parseInt(data.data[i].calorie);
     }
     const total: number = kisotaisya()!;
-    console.log("bbb", total);
+    // console.log("bbb", total);
+
     const state = {
         series: [number, total! - number],
         options: {
@@ -118,7 +119,7 @@ const CalrieGraph = ({ userData }: { userData: Data }) => {
                                 show: true,
                                 label: "総摂取カロリー",
                                 formatter: function () {
-                                    return `${number}kcal/${total}kcal`;
+                                    return `${number.toLocaleString()}kcal / ${total.toLocaleString()}kcal`;
                                 },
                             },
                         },
@@ -139,14 +140,14 @@ const CalrieGraph = ({ userData }: { userData: Data }) => {
                 onClick={() => {
                     onClickReload();
                 }}
-                >
+            >
                 グラフの更新
             </button>
-                {number > total && (
-                    <h3 style={{ color: "red", marginLeft: "140px" }}>
-                        {number - total}kcalオーバーしています。
-                    </h3>
-                )}
+            {number > total && (
+                <h3 className="text-center" style={{ color: "red" }}>
+                    {(number - total).toLocaleString()}kcalオーバーしています。
+                </h3>
+            )}
             <ReactApexChart
                 options={state.options}
                 series={state.series}
