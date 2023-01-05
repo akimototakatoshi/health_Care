@@ -213,7 +213,7 @@ const Graph = () => {
         }
     }
 
-    const data2:any= {
+    const data2: any = {
         labels,
         datasets: [
             {
@@ -288,9 +288,9 @@ const Graph = () => {
                 </div>
             </main>
             <Link to="/">
-                <button type="button" className="btn btn-info">
-                    Homeへ戻る{" "}
-                </button>
+                <span className="material-symbols-outlined back mt-5 mx-5">
+                    undo
+                </span>
             </Link>
         </div>
     );

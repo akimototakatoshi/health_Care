@@ -3,15 +3,15 @@ import axios from "axios";
 import useSWR from "swr";
 // import { useNavigate } from 'react-router-dom';
 
-type SearchPlace ={
-    name:string;
-    city:string;
-    prefecture:string;
-    searchName:string;
-    searchPrefecture:string;
-    searchCity:string;
-    id:number;
-}
+type SearchPlace = {
+    name: string;
+    city: string;
+    prefecture: string;
+    searchName: string;
+    searchPrefecture: string;
+    searchCity: string;
+    id: number;
+};
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const ShopsRecommend = () => {
@@ -37,7 +37,7 @@ const ShopsRecommend = () => {
 
     //お気に入りデータ取得
     const favoriteStore = data?.data;
-    
+
     useEffect(() => {
         if (searchHistory.length === 0) {
             sessionStorage.clear();
@@ -45,7 +45,7 @@ const ShopsRecommend = () => {
     }, [searchHistory]); //searchHistoryが空ならローカルストレージを全て削除する。
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
-    
+
     const onClickSearch = () => {
         if (!searchName && !searchPrefecture && !searchCity) {
             return;
@@ -73,10 +73,11 @@ const ShopsRecommend = () => {
     };
 
     const onClickRemoveHistory = (index: number) => {
-        let storageShops = []
-        const storageData= sessionStorage.getItem("shops")//sessionStorageのデータを取得
-        if(storageData){ //nullを除外する。ここで条件を指定しないと、typeエラーが出る。
-            storageShops = JSON.parse(storageData) //JSONをパースした値を持ってくる
+        let storageShops = [];
+        const storageData = sessionStorage.getItem("shops"); //sessionStorageのデータを取得
+        if (storageData) {
+            //nullを除外する。ここで条件を指定しないと、typeエラーが出る。
+            storageShops = JSON.parse(storageData); //JSONをパースした値を持ってくる
         }
         delete storageShops[index]; //"shops"のindex番目を削除
         sessionStorage.setItem("shops", JSON.stringify(storageShops)); //ローカルストレージにindex番目を消した値を追加する
@@ -227,30 +228,32 @@ const ShopsRecommend = () => {
                                                         {history.searchCity}
                                                     </span>
                                                 </div>
-                                                <div className="d-grid gap-2 d-md-flex justify-content-md-end col-md-3">
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-warning"
+                                                <div className="d-grid gap-2 d-flex justify-content-center justify-content-md-end col-md-3">
+                                                    <a
+                                                        className="createIcon"
                                                         onClick={() => {
                                                             onClickFavorite(
                                                                 index
                                                             );
                                                         }}
                                                     >
-                                                        お気に入り
-                                                    </button>
+                                                        <span className="material-symbols-rounded">
+                                                            favorite
+                                                        </span>
+                                                    </a>
 
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-outline-danger"
+                                                    <a
+                                                        className="createIcon"
                                                         onClick={() => {
                                                             onClickRemoveHistory(
                                                                 index
                                                             );
                                                         }}
                                                     >
-                                                        削除
-                                                    </button>
+                                                        <span className="material-symbols-rounded delete">
+                                                            delete
+                                                        </span>
+                                                    </a>
                                                 </div>
                                                 <hr className="mt-3" />
                                             </div>
@@ -311,30 +314,32 @@ const ShopsRecommend = () => {
                                                 </span>
                                             </div>
 
-                                            <div className="d-grid gap-2 d-md-flex justify-content-md-end col-md-3">
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-outline-primary"
+                                            <div className="d-grid gap-2 d-flex justify-content-center justify-content-md-end col-md-3">
+                                                <a
+                                                    className="createIcon"
                                                     onClick={() => {
                                                         onClickFavoriteSearch(
                                                             favorite
                                                         );
                                                     }}
                                                 >
-                                                    入力
-                                                </button>
+                                                    <span className="material-symbols-outlined add">
+                                                        add_box
+                                                    </span>
+                                                </a>
 
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-outline-danger"
+                                                <a
+                                                    className="createIcon"
                                                     onClick={() => {
                                                         onClickFavoriteDelete(
                                                             favorite.id
                                                         );
                                                     }}
                                                 >
-                                                    削除
-                                                </button>
+                                                    <span className="material-symbols-rounded delete">
+                                                        delete
+                                                    </span>
+                                                </a>
                                             </div>
                                             <hr className="mt-3" />
                                         </div>
