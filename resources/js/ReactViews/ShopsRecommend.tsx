@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
-// import { useNavigate } from 'react-router-dom';
+import PrimaryButton from "./components/atoms/button/PrimaryButton";
+import DeleteButton from "./components/atoms/button/DeleteButton";
+import TrashButton from "./components/atoms/button/TrashButton";
+import AddButton from "./components/atoms/button/AddButton";
+import FavoriteButton from "./components/atoms/button/FavoriteButton";
 
 type SearchPlace = {
     name: string;
@@ -19,6 +23,7 @@ const ShopsRecommend = () => {
     const [searchName, setSearchName] = useState("");
     const [searchPrefecture, setSearchPrefecture] = useState("");
     const [searchCity, setSearchCity] = useState("");
+    const [errorShow, setErrorShow] = useState(false);
     const [searchHistory, setSearchHistory] = useState(() => {
         //ストレージから持ってきたJSONをパースした値を初期値に入れる。何もなかったら空を返す
         let shopsJson = sessionStorage.getItem("shops");
@@ -47,7 +52,8 @@ const ShopsRecommend = () => {
     if (isLoading) return <div>loading...</div>;
 
     const onClickSearch = () => {
-        if (!searchName && !searchPrefecture && !searchCity) {
+        if (!searchName || !searchPrefecture || !searchCity) {
+            setErrorShow(true);
             return;
         } else {
             let history = [
@@ -63,6 +69,7 @@ const ShopsRecommend = () => {
             setSearchName("");
             setSearchPrefecture("");
             setSearchCity("");
+            setErrorShow(false);
         }
     };
 
@@ -162,19 +169,20 @@ const ShopsRecommend = () => {
                         placeholder="新宿"
                     ></input>
                 </div>
+                {errorShow && (
+                    <p
+                        style={{
+                            fontSize: "10px",
+                            color: "red",
+                            textAlign: "center",
+                        }}
+                    >
+                        全て入力してください
+                    </p>
+                )}
                 <div className="d-grid gap-2 d-md-flex justify-content-md-center mt-2 mt-md-4">
-                    <button
-                        className="btn btn-primary mx-2"
-                        onClick={onClickSearch}
-                    >
-                        検索
-                    </button>
-                    <button
-                        className="btn btn-danger mx-2"
-                        onClick={onClickCancel}
-                    >
-                        取消
-                    </button>
+                    <PrimaryButton onClick={onClickSearch}>検索</PrimaryButton>
+                    <DeleteButton onClick={onClickCancel}>取消</DeleteButton>
                 </div>
             </div>
             <hr />
@@ -229,31 +237,17 @@ const ShopsRecommend = () => {
                                                     </span>
                                                 </div>
                                                 <div className="d-grid gap-2 d-flex justify-content-center justify-content-md-end col-md-3">
-                                                    <a
-                                                        className="createIcon"
-                                                        onClick={() => {
+                                                   <FavoriteButton onClick={() => {
                                                             onClickFavorite(
                                                                 index
                                                             );
-                                                        }}
-                                                    >
-                                                        <span className="material-symbols-rounded">
-                                                            favorite
-                                                        </span>
-                                                    </a>
+                                                        }}/>
 
-                                                    <a
-                                                        className="createIcon"
-                                                        onClick={() => {
+                                                    <TrashButton onClick={() => {
                                                             onClickRemoveHistory(
                                                                 index
                                                             );
-                                                        }}
-                                                    >
-                                                        <span className="material-symbols-rounded delete">
-                                                            delete
-                                                        </span>
-                                                    </a>
+                                                        }}/>
                                                 </div>
                                                 <hr className="mt-3" />
                                             </div>
@@ -315,31 +309,18 @@ const ShopsRecommend = () => {
                                             </div>
 
                                             <div className="d-grid gap-2 d-flex justify-content-center justify-content-md-end col-md-3">
-                                                <a
-                                                    className="createIcon"
-                                                    onClick={() => {
+                                               <AddButton onClick={() => {
                                                         onClickFavoriteSearch(
                                                             favorite
                                                         );
-                                                    }}
-                                                >
-                                                    <span className="material-symbols-outlined add">
-                                                        add_box
-                                                    </span>
-                                                </a>
-
-                                                <a
-                                                    className="createIcon"
+                                                    }}/>
+                                                <TrashButton
                                                     onClick={() => {
                                                         onClickFavoriteDelete(
                                                             favorite.id
                                                         );
                                                     }}
-                                                >
-                                                    <span className="material-symbols-rounded delete">
-                                                        delete
-                                                    </span>
-                                                </a>
+                                                />
                                             </div>
                                             <hr className="mt-3" />
                                         </div>

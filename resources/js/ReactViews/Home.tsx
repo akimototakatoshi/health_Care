@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import "../modules/home.css";
 import useSWR from "swr";
 import CalrieGraph from "./components/CalrieGraph";
 import Exercise from "./components/Exercise";
 import { Data } from "./types/user";
+import RouteButton from "./components/atoms/button/RouteButton";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Home = () => {
@@ -37,33 +37,25 @@ const Home = () => {
                 <ul className="nav-list p-0 d-flex justify-content-between flex-wrap">
                     <li className="col-6 col-md-3">
                         <Link to="/eated-list" className="nav-text">
-                            <button className="material-symbols-outlined btn btn-info btn-lg">
-                                restaurant
-                            </button>
+                            <RouteButton>restaurant</RouteButton>
                             <p>食事を登録する</p>
                         </Link>
                     </li>
                     <li className="col-6 col-md-3">
                         <Link to="/shops-recommend" className="nav-text">
-                            <button className="material-symbols-outlined btn btn-info btn-lg">
-                                storefront
-                            </button>
+                            <RouteButton>storefront</RouteButton>
                             <p>お店を検索する</p>
                         </Link>
                     </li>
                     <li className="col-6 col-md-3">
                         <Link to="/graph" className="nav-text">
-                            <button className="material-symbols-outlined btn btn-info btn-lg">
-                                show_chart
-                            </button>
+                            <RouteButton>show_chart</RouteButton>
                             <p>グラフを見る</p>
                         </Link>
                     </li>
                     <li className="col-6 col-md-3">
                         <Link to="/setting" className="nav-text">
-                            <button className="material-symbols-outlined btn btn-info btn-lg">
-                                settings
-                            </button>
+                            <RouteButton>settings</RouteButton>
                             <p>設定</p>
                         </Link>
                     </li>

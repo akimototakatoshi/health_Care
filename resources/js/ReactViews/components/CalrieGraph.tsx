@@ -2,32 +2,16 @@ import React from "react";
 import ReactApexChart from "react-apexcharts";
 import useSWR from "swr";
 import { Data, userData } from "../types/user";
+import PrimaryButton from "./atoms/button/PrimaryButton";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const CalrieGraph = ({ userData }: { userData: Data }) => {
     const { data, error, isLoading } = useSWR("calorieIntake", fetcher);
 
     let userdata: userData = userData.data[0];
-    // const [userdata, setUserData] = useState<userData>({
-    //     id: userData.data[0].id,
-    //     name: userData.data[0].name,
-    //     email: userData.data[0].email,
-    //     age: userData.data[0].age,
-    //     gender: userData.data[0].gender,
-    //     height: userData.data[0].height,
-    //     weight: userData.data[0].weight,
-    //     physical: userData.data[0].physical,
-    //     week: userData.data[0].week,
-    // });
-
-    // useEffect(() => {
-    //     const user = userData.data[0];
-    //     setUserData(user);
-    // }, []);
 
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
-    // console.log("iii",userData)
 
     function kisotaisya() {
         if (userdata.gender === 0) {
@@ -54,7 +38,6 @@ const CalrieGraph = ({ userData }: { userData: Data }) => {
         number += parseInt(data.data[i].calorie);
     }
     const total: number = kisotaisya()!;
-    // console.log("bbb", total);
 
     const state = {
         series: [number, total! - number],
@@ -135,14 +118,13 @@ const CalrieGraph = ({ userData }: { userData: Data }) => {
 
     return (
         <div>
-            <button
-                className="btn btn-outline-primary m-2"
+            <PrimaryButton
                 onClick={() => {
                     onClickReload();
                 }}
             >
                 グラフの更新
-            </button>
+            </PrimaryButton>
             {number > total && (
                 <h3 className="text-center" style={{ color: "red" }}>
                     {(number - total).toLocaleString()}kcalオーバーしています。

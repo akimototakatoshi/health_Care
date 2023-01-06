@@ -7,6 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Data, userData } from "./types/user";
+import PrimaryButton from "./components/atoms/button/PrimaryButton";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -203,13 +204,7 @@ const Setting = () => {
 
                             <div className="row mb-0">
                                 <div className="col-md-6 offset-md-4">
-                                    <button
-                                        type="button"
-                                        className="btn btn-primary"
-                                        onClick={userUpdate}
-                                    >
-                                        更新
-                                    </button>
+                                    <PrimaryButton onClick={userUpdate}>更新</PrimaryButton>
                                 </div>
                             </div>
                         </div>

@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import { Data, userData } from "./types/user";
 import CalorieYear from "./components/CalorieYear";
 import { CalorieOfYear } from "./types/calorie";
+import BackButton from "./components/atoms/button/BackButton";
 ChartJS.register(
     LinearScale,
     CategoryScale,
@@ -288,9 +289,7 @@ const Graph = () => {
                 </div>
             </main>
             <Link to="/">
-                <span className="material-symbols-outlined back mt-5 mx-5">
-                    undo
-                </span>
+              <BackButton>undo</BackButton>
             </Link>
         </div>
     );
