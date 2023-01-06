@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Data } from "../types/user";
 
 const Exercise = ({ userData }:{userData:Data}) => {
-    const[reduceCalorie,setReduceCalorie] = useState<string>("")
+    const[reduceCalorie,setReduceCalorie] = useState<string>("100")
     const userWeight = userData.data[0].weight;
 
     //    消費カロリー（kcal）＝METs×体重（kg）×運動時間（h）×1.05

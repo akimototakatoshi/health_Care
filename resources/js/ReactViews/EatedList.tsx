@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { CalorieOfYear } from "./types/calorie";
 import "../modules/home.css";
+import PrimaryButton from "./components/atoms/button/PrimaryButton";
+import DeleteButton from "./components/atoms/button/DeleteButton";
 
 const EatedList = () => {
     const [eated, setEated] = useState("");
@@ -97,21 +99,8 @@ const EatedList = () => {
                 />
                 <label htmlFor="floatingInput">食べた物を入力</label>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-center mt-2 mt-md-4">
-                    <button
-                        type="button"
-                        name="add"
-                        onClick={onClickSearch}
-                        className="btn btn-outline-primary mx-2"
-                    >
-                        検索
-                    </button>
-                    <button
-                        type="button"
-                        className="btn btn-outline-danger mx-2"
-                        onClick={onClickCancel}
-                    >
-                        取消
-                    </button>
+                    <PrimaryButton onClick={onClickSearch}>検索</PrimaryButton>
+                    <DeleteButton onClick={onClickCancel}>取消</DeleteButton>
                 </div>
             </div>
 
@@ -136,17 +125,7 @@ const EatedList = () => {
                                             カロリー：{e.calorie} kcal
                                         </div>
                                         <div className="col d-flex align-items-center justify-content-center">
-                                            <button
-                                                className="btn btn-outline-primary"
-                                                onClick={() =>
-                                                    onClickAddSelect(
-                                                        arrayLastData,
-                                                        e.calorie
-                                                    )
-                                                }
-                                            >
-                                                登録
-                                            </button>
+                                            <PrimaryButton onClick={() => onClickAddSelect(arrayLastData, e.calorie)}>登録</PrimaryButton>
                                         </div>
                                     </div>
                                 </li>
@@ -191,19 +170,8 @@ const EatedList = () => {
                     </label>
                 </div>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-center mt-2 mt-md-4">
-                    <button
-                        className="btn btn-outline-primary mx-2"
-                        onClick={onClickAddText}
-                    >
-                        登録
-                    </button>
-
-                    <button
-                        className="btn btn-outline-danger mx-2"
-                        onClick={onClickCancel}
-                    >
-                        取消
-                    </button>
+                    <PrimaryButton onClick={onClickAddText}>登録</PrimaryButton>
+                    <DeleteButton onClick={onClickCancel}>取消</DeleteButton>
                 </div>
             </div>
 

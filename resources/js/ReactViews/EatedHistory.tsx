@@ -3,6 +3,8 @@ import useSWR from "swr";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { CalorieOfYear } from "./types/calorie";
+import BackButton from "./components/atoms/button/BackButton";
+import TrashButton from "./components/atoms/button/TrashButton";
 
 const EatedHistory = () => {
     const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -55,15 +57,9 @@ const EatedHistory = () => {
                                     <p className="mb-0 mt-2">{e.created_at}</p>
                                 </td>
                                 <td>
-                                    <a
-                                        onClick={() => {
+                                    <TrashButton onClick={() => {
                                             onClickFoodDelete(e.id);
-                                        }}
-                                    >
-                                        <span className="material-symbols-rounded delete">
-                                            delete
-                                        </span>
-                                    </a>
+                                        }}/>
                                 </td>
                             </tr>
                         );
@@ -77,9 +73,7 @@ const EatedHistory = () => {
             )}
             <div>
                 <Link to="/eated-list">
-                    <span className="material-symbols-outlined back mt-5 mx-3">
-                        undo
-                    </span>
+                    <BackButton>undo</BackButton>
                 </Link>
             </div>
         </div>
